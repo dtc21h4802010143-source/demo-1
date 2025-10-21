@@ -1,0 +1,576 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Admission System API",
+    "description": "API documentation for University Admission System with AI Chatbot",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Admission System Team",
+      "email": "support@admission.edu.vn"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:5000",
+      "description": "Development server"
+    },
+    {
+      "url": "https://admission.edu.vn",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "User authentication and authorization"
+    },
+    {
+      "name": "Profile",
+      "description": "User profile management"
+    },
+    {
+      "name": "Wishes",
+      "description": "Application wishes (nguyện vọng)"
+    },
+    {
+      "name": "Chatbot",
+      "description": "AI chatbot with RAG"
+    },
+    {
+      "name": "Notifications",
+      "description": "User notifications system"
+    },
+    {
+      "name": "Admin",
+      "description": "Admin management endpoints"
+    },
+    {
+      "name": "Public",
+      "description": "Public information endpoints"
+    }
+  ],
+  "paths": {
+    "/register": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Register new user",
+        "description": "Create a new user account",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": ["username", "email", "password", "confirm_password"],
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "johndoe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "john@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "SecurePass123"
+                  },
+                  "confirm_password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "SecurePass123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "302": {
+            "description": "Redirect to login page after successful registration"
+          },
+          "400": {
+            "description": "Validation error"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Login user",
+        "description": "Authenticate user and create session",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": ["username", "password"],
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "johndoe"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "SecurePass123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "302": {
+            "description": "Redirect to homepage after successful login"
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "tags": ["Authentication"],
+        "summary": "Logout user",
+        "description": "End user session",
+        "security": [{"cookieAuth": []}],
+        "responses": {
+          "302": {
+            "description": "Redirect to homepage"
+          }
+        }
+      }
+    },
+    "/profile": {
+      "get": {
+        "tags": ["Profile"],
+        "summary": "View profile",
+        "description": "View user's application profile",
+        "security": [{"cookieAuth": []}],
+        "responses": {
+          "200": {
+            "description": "Profile page rendered"
+          },
+          "401": {
+            "description": "Not authenticated"
+          }
+        }
+      }
+    },
+    "/profile/edit": {
+      "get": {
+        "tags": ["Profile"],
+        "summary": "Edit profile page",
+        "security": [{"cookieAuth": []}],
+        "responses": {
+          "200": {
+            "description": "Edit profile form"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Profile"],
+        "summary": "Update profile",
+        "description": "Update user's application profile information",
+        "security": [{"cookieAuth": []}],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "full_name": {"type": "string", "example": "Nguyễn Văn A"},
+                  "phone": {"type": "string", "example": "0912345678"},
+                  "date_of_birth": {"type": "string", "format": "date", "example": "2000-01-15"},
+                  "address": {"type": "string", "example": "123 Đường ABC, TP.HCM"},
+                  "high_school": {"type": "string", "example": "THPT Nguyễn Huệ"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "302": {
+            "description": "Redirect to profile view"
+          }
+        }
+      }
+    },
+    "/wishes": {
+      "get": {
+        "tags": ["Wishes"],
+        "summary": "View wishes",
+        "description": "View all application wishes (nguyện vọng)",
+        "security": [{"cookieAuth": []}],
+        "responses": {
+          "200": {
+            "description": "Wishes list page"
+          }
+        }
+      }
+    },
+    "/wishes/add": {
+      "get": {
+        "tags": ["Wishes"],
+        "summary": "Add wish page",
+        "security": [{"cookieAuth": []}],
+        "responses": {
+          "200": {
+            "description": "Add wish form"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Wishes"],
+        "summary": "Submit wish",
+        "description": "Submit a new application wish",
+        "security": [{"cookieAuth": []}],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": ["program_id"],
+                "properties": {
+                  "program_id": {
+                    "type": "integer",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "302": {
+            "description": "Redirect to wishes list"
+          }
+        }
+      }
+    },
+    "/wishes/delete/{wish_id}": {
+      "post": {
+        "tags": ["Wishes"],
+        "summary": "Delete wish",
+        "description": "Delete an application wish",
+        "security": [{"cookieAuth": []}],
+        "parameters": [
+          {
+            "name": "wish_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Redirect to wishes list"
+          }
+        }
+      }
+    },
+    "/api/chat": {
+      "post": {
+        "tags": ["Chatbot"],
+        "summary": "Chat with AI",
+        "description": "Send message to AI chatbot with RAG",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message"],
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Cho tôi biết về ngành Công nghệ thông tin?"
+                  },
+                  "session_id": {
+                    "type": "string",
+                    "example": "sess_abc123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Chatbot response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "example": "Ngành Công nghệ thông tin là..."
+                    },
+                    "session_id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          }
+        }
+      }
+    },
+    "/api/notifications": {
+      "get": {
+        "tags": ["Notifications"],
+        "summary": "Get notifications",
+        "description": "Get all notifications for current user",
+        "security": [{"cookieAuth": []}],
+        "responses": {
+          "200": {
+            "description": "Notifications list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "notifications": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Notification"
+                      }
+                    },
+                    "unread_count": {
+                      "type": "integer",
+                      "example": 5
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/notifications/{notification_id}/read": {
+      "post": {
+        "tags": ["Notifications"],
+        "summary": "Mark as read",
+        "description": "Mark a notification as read",
+        "security": [{"cookieAuth": []}],
+        "parameters": [
+          {
+            "name": "notification_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/notifications/mark-all-read": {
+      "post": {
+        "tags": ["Notifications"],
+        "summary": "Mark all as read",
+        "description": "Mark all notifications as read",
+        "security": [{"cookieAuth": []}],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/programs": {
+      "get": {
+        "tags": ["Public"],
+        "summary": "List programs",
+        "description": "Get all available academic programs",
+        "responses": {
+          "200": {
+            "description": "Programs list page"
+          }
+        }
+      }
+    },
+    "/departments": {
+      "get": {
+        "tags": ["Public"],
+        "summary": "List departments",
+        "description": "Get all departments",
+        "responses": {
+          "200": {
+            "description": "Departments list page"
+          }
+        }
+      }
+    },
+    "/admin/dashboard": {
+      "get": {
+        "tags": ["Admin"],
+        "summary": "Admin dashboard",
+        "description": "Admin control panel",
+        "security": [{"cookieAuth": []}],
+        "responses": {
+          "200": {
+            "description": "Dashboard page"
+          },
+          "403": {
+            "description": "Forbidden - Admin role required"
+          }
+        }
+      }
+    },
+    "/admin/programs": {
+      "get": {
+        "tags": ["Admin"],
+        "summary": "Manage programs",
+        "security": [{"cookieAuth": []}],
+        "responses": {
+          "200": {
+            "description": "Programs management page"
+          }
+        }
+      }
+    },
+    "/admin/applications": {
+      "get": {
+        "tags": ["Admin"],
+        "summary": "View applications",
+        "description": "View all user applications",
+        "security": [{"cookieAuth": []}],
+        "responses": {
+          "200": {
+            "description": "Applications list"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "session"
+      }
+    },
+    "schemas": {
+      "Notification": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "example": "Nguyện vọng đã được duyệt"
+          },
+          "message": {
+            "type": "string",
+            "example": "Nguyện vọng Công nghệ thông tin của bạn đã được duyệt"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["info", "success", "warning", "error"],
+            "example": "success"
+          },
+          "is_read": {
+            "type": "boolean",
+            "example": false
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-01-23T10:30:00Z"
+          },
+          "link": {
+            "type": "string",
+            "nullable": true,
+            "example": "/wishes"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["user", "admin"]
+          },
+          "email_verified": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Program": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string",
+            "example": "Công nghệ thông tin"
+          },
+          "code": {
+            "type": "string",
+            "example": "IT01"
+          },
+          "department_id": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "string"
+          },
+          "tuition_fee": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      }
+    }
+  }
+}

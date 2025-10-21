@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Quản lý khoa/viện{% endblock %}
+{% block content %}
+<div class="flex min-h-[70vh] items-center justify-center py-8">
+    <div class="w-full max-w-5xl bg-white rounded-2xl shadow-xl p-8">
+        <div class="flex items-center gap-3 mb-6">
+            <i class="fa-solid fa-building-columns text-2xl text-pink-500"></i>
+            <h2 class="text-2xl font-bold">Quản lý khoa/viện</h2>
+        </div>
+        <a href="{{ url_for('admin_add_department') }}" class="mb-4 inline-block px-4 py-2 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition"><i class="fa-solid fa-plus mr-1"></i> Thêm khoa/viện mới</a>
+        <div class="overflow-x-auto">
+            <table class="min-w-full border rounded-lg text-sm">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="py-2 px-4 text-left font-medium">STT</th>
+                        <th class="py-2 px-4 text-left font-medium">Tên khoa/viện</th>
+                        <th class="py-2 px-4 text-left font-medium">Trưởng khoa/viện</th>
+                        <th class="py-2 px-4 text-left font-medium">Email liên hệ</th>
+                        <th class="py-2 px-4 text-left font-medium">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dept in departments %}
+                    <tr class="border-b">
+                        <td class="py-2 px-4">{{ loop.index }}</td>
+                        <td class="py-2 px-4">{{ dept.name }}</td>
+                        <td class="py-2 px-4">{{ dept.head }}</td>
+                        <td class="py-2 px-4">{{ dept.contact_email }}</td>
+                        <td class="py-2 px-4">
+                            <a href="{{ url_for('admin_edit_department', dept_id=dept.id) }}" class="px-3 py-1 bg-yellow-400 text-white rounded hover:bg-yellow-500 transition text-xs font-semibold"><i class="fa-solid fa-pen-to-square"></i> Sửa</a>
+                            <form action="{{ url_for('admin_delete_department', dept_id=dept.id) }}" method="post" class="inline" onsubmit="return confirm('Bạn có chắc muốn xóa khoa/viện này?');">
+                                <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition text-xs font-semibold"><i class="fa-solid fa-trash"></i> Xóa</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

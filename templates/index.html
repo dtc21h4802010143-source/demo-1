@@ -1,0 +1,364 @@
+
+{% extends "base.html" %}
+{% block title %}Trang chủ - Cổng thông tin Tuyển sinh AI{% endblock %}
+
+{% block content %}
+<!-- Hero Section - Enhanced -->
+<section class="relative rounded-2xl bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white py-20 px-8 mb-12 shadow-2xl overflow-hidden">
+  <!-- Animated Background -->
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute top-0 left-0 w-72 h-72 bg-white rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse delay-1000"></div>
+  </div>
+  
+  <div class="relative z-10 text-center max-w-4xl mx-auto">
+    <div class="inline-block mb-4 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium">
+      <i class="fa-solid fa-sparkles mr-2"></i>Hệ thống tuyển sinh thông minh với AI
+    </div>
+    <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+      Chào mừng đến với<br>
+      <span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-200 to-pink-200">
+        Tuyển sinh AI 2025
+      </span>
+    </h1>
+    <p class="text-lg md:text-xl mb-8 text-white/90 max-w-2xl mx-auto">
+      Khám phá tương lai của bạn với các chương trình đào tạo chất lượng cao, 
+      được tư vấn bởi AI 24/7 và đội ngũ chuyên gia hàng đầu.
+    </p>
+    
+    <!-- Quick Actions -->
+    <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+      <a href="{{ url_for('register') }}" class="group px-8 py-4 bg-white text-indigo-700 font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+        <i class="fa-solid fa-user-plus group-hover:rotate-12 transition-transform"></i> 
+        Đăng ký ngay
+      </a>
+      <a href="{{ url_for('programs') }}" class="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-bold rounded-xl shadow-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2 border-2 border-white/30">
+        <i class="fa-solid fa-book"></i> 
+        Xem ngành học
+      </a>
+      <a href="{{ url_for('chatbot_page') }}" class="px-8 py-4 bg-gradient-to-r from-green-400 to-emerald-500 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+        <i class="fa-solid fa-robot animate-bounce"></i> 
+        Tư vấn AI
+      </a>
+      <a href="{{ url_for('view_results') }}" class="px-8 py-4 bg-gradient-to-r from-yellow-300 to-orange-400 text-gray-900 font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        Tra cứu kết quả
+      </a>
+    </div>
+    
+    <!-- User Status Quick View -->
+    {% if current_user.is_authenticated %}
+    <div class="inline-flex items-center gap-3 px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full text-sm">
+      <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+      <span>Xin chào, <strong>{{ current_user.full_name or current_user.username }}</strong>!</span>
+      <a href="{{ url_for('view_profile') }}" class="ml-2 px-3 py-1 bg-white/30 hover:bg-white/40 rounded-full transition">
+        Hồ sơ của tôi <i class="fa-solid fa-arrow-right ml-1"></i>
+      </a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Stats Section - Enhanced with Icons and Animation -->
+<section class="mb-12">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+    <i class="fa-solid fa-chart-line text-indigo-600 mr-2"></i>
+    Con số ấn tượng
+  </h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+    <!-- Stat Card 1 -->
+    <div class="group bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-lg hover:shadow-2xl p-6 text-center transform hover:scale-105 transition-all duration-300">
+      <div class="bg-white/20 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="fa-solid fa-graduation-cap text-3xl text-white"></i>
+      </div>
+      <div class="text-4xl font-extrabold text-white mb-2 counter" data-target="50">0</div>
+      <div class="text-white/90 font-medium">Ngành đào tạo</div>
+      <div class="mt-2 text-xs text-white/70">Đa dạng chương trình</div>
+    </div>
+    
+    <!-- Stat Card 2 -->
+    <div class="group bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl shadow-lg hover:shadow-2xl p-6 text-center transform hover:scale-105 transition-all duration-300">
+      <div class="bg-white/20 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="fa-solid fa-building-columns text-3xl text-white"></i>
+      </div>
+      <div class="text-4xl font-extrabold text-white mb-2 counter" data-target="15">0</div>
+      <div class="text-white/90 font-medium">Khoa/Viện</div>
+      <div class="mt-2 text-xs text-white/70">Cơ sở vật chất hiện đại</div>
+    </div>
+    
+    <!-- Stat Card 3 -->
+    <div class="group bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl shadow-lg hover:shadow-2xl p-6 text-center transform hover:scale-105 transition-all duration-300">
+      <div class="bg-white/20 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="fa-solid fa-briefcase text-3xl text-white"></i>
+      </div>
+      <div class="text-4xl font-extrabold text-white mb-2">
+        <span class="counter" data-target="95">0</span>%
+      </div>
+      <div class="text-white/90 font-medium">Tỷ lệ có việc làm</div>
+      <div class="mt-2 text-xs text-white/70">Sau 6 tháng tốt nghiệp</div>
+    </div>
+    
+    <!-- Stat Card 4 -->
+    <div class="group bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl shadow-lg hover:shadow-2xl p-6 text-center transform hover:scale-105 transition-all duration-300">
+      <div class="bg-white/20 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="fa-solid fa-users text-3xl text-white"></i>
+      </div>
+      <div class="text-4xl font-extrabold text-white mb-2">10K+</div>
+      <div class="text-white/90 font-medium">Sinh viên</div>
+      <div class="mt-2 text-xs text-white/70">Đang theo học</div>
+    </div>
+  </div>
+</section>
+
+<!-- News & Events Preview -->
+<section class="mb-12">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-2xl font-bold text-gray-800">
+      <i class="fa-solid fa-newspaper text-indigo-600 mr-2"></i>
+      Tin tức & Sự kiện
+    </h2>
+    <a href="{{ url_for('news_list') }}" class="text-indigo-600 hover:underline">Xem tất cả</a>
+  </div>
+  <div class="grid md:grid-cols-3 gap-6">
+    {% if news_list %}
+    {% for n in news_list %}
+    <a href="{{ url_for('news_detail', news_id=n.id) }}" class="block bg-white rounded-xl shadow hover:shadow-lg transition-all p-5">
+      <div class="text-sm text-gray-500 mb-2">{{ n.created_at.strftime('%d/%m/%Y') }}</div>
+      <h3 class="font-bold text-lg text-indigo-700 mb-2 line-clamp-2">{{ n.title }}</h3>
+      <p class="text-gray-700 line-clamp-3">{{ n.content[:120] }}...</p>
+    </a>
+    {% endfor %}
+    {% else %}
+    <div class="col-span-3 text-gray-500">Chưa có tin tức nào.</div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Quick Access Cards for Users -->
+{% if current_user.is_authenticated %}
+<section class="mb-12">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6">
+    <i class="fa-solid fa-bolt text-yellow-500 mr-2"></i>
+    Truy cập nhanh
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- My Profile Quick Access -->
+    <a href="{{ url_for('view_profile') }}" class="group bg-white rounded-xl shadow-lg hover:shadow-2xl p-6 transition-all duration-300 border-2 border-transparent hover:border-indigo-500">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center group-hover:bg-indigo-200 transition">
+          <i class="fa-solid fa-user text-2xl text-indigo-600"></i>
+        </div>
+        <i class="fa-solid fa-arrow-right text-gray-400 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all"></i>
+      </div>
+      <h3 class="text-lg font-bold text-gray-800 mb-2">Hồ sơ của tôi</h3>
+      <p class="text-sm text-gray-600">Xem và cập nhật thông tin cá nhân</p>
+    </a>
+    
+    <!-- My Wishes Quick Access -->
+    <a href="{{ url_for('view_wishes') }}" class="group bg-white rounded-xl shadow-lg hover:shadow-2xl p-6 transition-all duration-300 border-2 border-transparent hover:border-purple-500">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center group-hover:bg-purple-200 transition">
+          <i class="fa-solid fa-heart text-2xl text-purple-600"></i>
+        </div>
+        <i class="fa-solid fa-arrow-right text-gray-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all"></i>
+      </div>
+      <h3 class="text-lg font-bold text-gray-800 mb-2">Nguyện vọng</h3>
+      <p class="text-sm text-gray-600">Quản lý nguyện vọng xét tuyển</p>
+    </a>
+    
+    <!-- Chatbot Quick Access -->
+    <a href="{{ url_for('chatbot_page') }}" class="group bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl shadow-lg hover:shadow-2xl p-6 transition-all duration-300 text-white">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
+          <i class="fa-solid fa-robot text-2xl text-white"></i>
+        </div>
+        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-all"></i>
+      </div>
+      <h3 class="text-lg font-bold mb-2">Tư vấn AI</h3>
+      <p class="text-sm text-white/80">Hỏi đáp với chatbot 24/7</p>
+    </a>
+  </div>
+</section>
+{% endif %}
+
+<!-- Features Section -->
+<section class="mb-12">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+    <i class="fa-solid fa-star text-yellow-500 mr-2"></i>
+    Tại sao chọn chúng tôi?
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition">
+      <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="fa-solid fa-robot text-3xl text-blue-600"></i>
+      </div>
+      <h3 class="font-bold text-gray-800 mb-2">Tư vấn AI 24/7</h3>
+      <p class="text-sm text-gray-600">Chatbot thông minh hỗ trợ mọi thắc mắc</p>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition">
+      <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="fa-solid fa-laptop-code text-3xl text-purple-600"></i>
+      </div>
+      <h3 class="font-bold text-gray-800 mb-2">Hệ thống hiện đại</h3>
+      <p class="text-sm text-gray-600">Giao diện thân thiện, dễ sử dụng</p>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition">
+      <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="fa-solid fa-shield-halved text-3xl text-green-600"></i>
+      </div>
+      <h3 class="font-bold text-gray-800 mb-2">An toàn & Bảo mật</h3>
+      <p class="text-sm text-gray-600">Thông tin được mã hóa và bảo vệ</p>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition">
+      <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="fa-solid fa-headset text-3xl text-pink-600"></i>
+      </div>
+      <h3 class="font-bold text-gray-800 mb-2">Hỗ trợ nhiệt tình</h3>
+      <p class="text-sm text-gray-600">Đội ngũ tư vấn chuyên nghiệp</p>
+    </div>
+  </div>
+</section>
+
+<!-- News & Events - Removed (feature not implemented) -->
+<!-- TODO: Add News model and news_detail route if needed in future -->
+
+<!-- Testimonials Section - NEW -->
+<section class="mb-16">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+    <i class="fa-solid fa-quote-left text-indigo-600 mr-2"></i>
+    Sinh viên nói gì về chúng tôi
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+          NV
+        </div>
+        <div>
+          <div class="font-bold text-gray-800">Nguyễn Văn A</div>
+          <div class="text-sm text-gray-500">Công nghệ thông tin K19</div>
+        </div>
+      </div>
+      <div class="text-yellow-400 mb-3">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+      </div>
+      <p class="text-gray-600 text-sm italic">"Hệ thống tuyển sinh rất dễ sử dụng, chatbot AI hỗ trợ nhiệt tình 24/7. Tôi đã tìm được ngành học phù hợp nhờ tư vấn của chatbot!"</p>
+    </div>
+    
+    <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+          TL
+        </div>
+        <div>
+          <div class="font-bold text-gray-800">Trần Thị B</div>
+          <div class="text-sm text-gray-500">Kinh tế K20</div>
+        </div>
+      </div>
+      <div class="text-yellow-400 mb-3">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+      </div>
+      <p class="text-gray-600 text-sm italic">"Giao diện đẹp, thao tác nhanh chóng. Tôi đã nộp hồ sơ và theo dõi kết quả rất thuận tiện. Cảm ơn nhà trường!"</p>
+    </div>
+    
+    <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="w-12 h-12 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+          LM
+        </div>
+        <div>
+          <div class="font-bold text-gray-800">Lê Minh C</div>
+          <div class="text-sm text-gray-500">Kỹ thuật K21</div>
+        </div>
+      </div>
+      <div class="text-yellow-400 mb-3">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star-half-stroke"></i>
+      </div>
+      <p class="text-gray-600 text-sm italic">"Hệ thống hiện đại, dễ sử dụng. Đặc biệt là chatbot AI rất thông minh, trả lời chính xác và nhanh chóng!"</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section - Enhanced -->
+<section class="relative rounded-2xl bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500 text-white py-16 px-8 text-center shadow-2xl overflow-hidden">
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+  </div>
+  
+  <div class="relative z-10 max-w-3xl mx-auto">
+    <div class="inline-block mb-4">
+      <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto">
+        <i class="fa-solid fa-robot text-4xl animate-bounce"></i>
+      </div>
+    </div>
+    <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Bạn cần tư vấn thêm?</h2>
+    <p class="text-lg mb-8 text-white/90">
+      Chatbot tư vấn tuyển sinh AI 24/7 của chúng tôi sẽ giúp bạn giải đáp mọi thắc mắc 
+      về ngành học, điều kiện tuyển sinh, học phí và nhiều hơn nữa!
+    </p>
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <a href="{{ url_for('chatbot_page') }}" class="group px-8 py-4 bg-white text-emerald-700 font-bold rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+        <i class="fa-solid fa-robot group-hover:rotate-12 transition-transform"></i> 
+        Tư vấn ngay
+      </a>
+      <a href="{{ url_for('contact') }}" class="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-bold rounded-xl shadow-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2 border-2 border-white/30">
+        <i class="fa-solid fa-phone"></i> 
+        Liên hệ trực tiếp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Counter Animation Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Counter Animation
+  const counters = document.querySelectorAll('.counter');
+  const speed = 200; // Animation speed
+  
+  counters.forEach(counter => {
+    const target = +counter.getAttribute('data-target');
+    const updateCount = () => {
+      const count = +counter.innerText;
+      const increment = target / speed;
+      
+      if (count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(updateCount, 10);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    
+    // Start animation when element is in viewport
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          updateCount();
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+    
+    observer.observe(counter);
+  });
+});
+</script>
+{% endblock %}

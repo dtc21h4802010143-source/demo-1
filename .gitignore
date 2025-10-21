@@ -1,0 +1,55 @@
+# Environment variables (chứa API keys nhạy cảm)
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+instance/*.db
+backend/instance/*.db
+data/*.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# RAG cache
+data/.rag_cache/
+.rag_cache/
+
+# Uploads
+static/uploads/*
+!static/uploads/.gitkeep
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/

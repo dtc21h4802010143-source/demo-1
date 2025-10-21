@@ -1,0 +1,65 @@
+program_name,year,quota,minimum_score,note
+Khoa học máy tính (AI),2025,120,18.50,Yêu cầu Toán >= 7.0
+Khoa học máy tính (AI),2024,100,18.75,Yêu cầu Toán >= 7.0
+Khoa học máy tính (AI),2023,90,18.50,Yêu cầu Toán >= 7.0
+Kỹ thuật phần mềm,2025,150,21.25,Yêu cầu Toán >= 7.5
+Kỹ thuật phần mềm,2024,140,20.50,Yêu cầu Toán >= 7.5
+Kỹ thuật phần mềm,2023,130,20.00,Yêu cầu Toán >= 7.0
+Kỹ thuật máy tính,2025,100,19.50,
+Kỹ thuật máy tính,2024,90,19.25,
+Kỹ thuật máy tính,2023,85,19.00,
+An toàn thông tin,2025,80,19.50,Ưu tiên Toán cao
+An toàn thông tin,2024,75,19.25,Ưu tiên Toán cao
+An toàn thông tin,2023,70,19.00,
+Mạng máy tính,2025,90,18.75,
+Mạng máy tính,2024,85,18.50,
+Mạng máy tính,2023,80,18.25,
+Hệ thống thông tin,2025,100,19.00,
+Hệ thống thông tin,2024,95,18.75,
+Hệ thống thông tin,2023,90,18.50,
+Công nghệ thông tin,2025,200,19.25,
+Công nghệ thông tin,2024,190,19.00,
+Công nghệ thông tin,2023,180,18.75,
+Quản trị kinh doanh,2025,150,18.50,
+Quản trị kinh doanh,2024,145,18.25,
+Quản trị kinh doanh,2023,140,18.00,
+Kế toán,2025,120,18.75,
+Kế toán,2024,115,18.50,
+Kế toán,2023,110,18.25,
+Tài chính ngân hàng,2025,100,19.00,
+Tài chính ngân hàng,2024,95,18.75,
+Tài chính ngân hàng,2023,90,18.50,
+Marketing,2025,80,18.50,
+Marketing,2024,75,18.25,
+Marketing,2023,70,18.00,
+Điện tử viễn thông,2025,90,21.25,Yêu cầu Lý >= 7.0
+Điện tử viễn thông,2024,85,21.00,Yêu cầu Lý >= 7.0
+Điện tử viễn thông,2023,80,20.75,
+Nghệ thuật số,2025,60,23.00,Portfolio bắt buộc
+Nghệ thuật số,2024,55,22.50,Portfolio bắt buộc
+Nghệ thuật số,2023,50,22.00,
+Thiết kế đồ họa,2025,70,20.50,Portfolio khuyến khích
+Thiết kế đồ họa,2024,65,20.25,
+Thiết kế đồ họa,2023,60,20.00,
+Tiếng Anh truyền thông,2025,80,22.00,IELTS 5.5 trở lên
+Tiếng Anh truyền thông,2024,75,21.75,IELTS 5.5 trở lên
+Tiếng Anh truyền thông,2023,70,21.50,
+Ngôn ngữ Anh,2025,100,20.50,
+Ngôn ngữ Anh,2024,95,20.25,
+Ngôn ngữ Anh,2023,90,20.00,
+Vi mạch bán dẫn,2025,50,21.75,Yêu cầu Toán >= 8.0
+Vi mạch bán dẫn,2024,45,21.50,Yêu cầu Toán >= 8.0
+Truyền thông đa phương tiện,2025,85,19.50,
+Truyền thông đa phương tiện,2024,80,19.25,
+Truyền thông đa phương tiện,2023,75,19.00,
+Khoa học dữ liệu,2025,70,20.50,Yêu cầu Toán >= 7.5
+Khoa học dữ liệu,2024,65,20.25,
+Công nghệ đa phương tiện,2025,60,19.00,
+Công nghệ đa phương tiện,2024,55,18.75,
+Công nghệ đa phương tiện,2023,50,18.50,
+Thương mại điện tử,2025,90,18.75,
+Thương mại điện tử,2024,85,18.50,
+Thương mại điện tử,2023,80,18.25,
+Quản lý logistics và chuỗi cung ứng,2025,75,18.50,
+Quản lý logistics và chuỗi cung ứng,2024,70,18.25,
+Quản lý logistics và chuỗi cung ứng,2023,65,18.00,

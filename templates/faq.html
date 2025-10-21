@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Câu hỏi thường gặp{% endblock %}
+{% block content %}
+<div class="flex min-h-[70vh] items-center justify-center py-8">
+  <div class="w-full max-w-2xl bg-white rounded-2xl shadow-xl p-8">
+    <div class="flex items-center gap-3 mb-4">
+      <i class="fa-solid fa-circle-question text-2xl text-sky-500"></i>
+      <h1 class="text-2xl font-bold">Câu hỏi thường gặp (FAQ)</h1>
+    </div>
+    <div class="space-y-4" id="faqAcc">
+      <div class="border rounded-lg">
+        <button type="button" class="w-full flex justify-between items-center px-4 py-3 text-left font-medium text-gray-800 focus:outline-none faq-toggle" data-target="faq1">
+          Đăng ký xét tuyển như thế nào?
+          <i class="fa-solid fa-chevron-down transition-transform"></i>
+        </button>
+        <div id="faq1" class="faq-content px-4 pb-4 text-gray-600 block">
+          Bạn cần tạo tài khoản, cập nhật hồ sơ và nộp nguyện vọng.
+        </div>
+      </div>
+      <div class="border rounded-lg">
+        <button type="button" class="w-full flex justify-between items-center px-4 py-3 text-left font-medium text-gray-800 focus:outline-none faq-toggle" data-target="faq2">
+          Có các phương thức xét tuyển nào?
+          <i class="fa-solid fa-chevron-down transition-transform"></i>
+        </button>
+        <div id="faq2" class="faq-content px-4 pb-4 text-gray-600 hidden">
+          THPT, học bạ, năng lực, tuyển thẳng theo quy định.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.querySelectorAll('.faq-toggle').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const target = document.getElementById(this.dataset.target);
+      const icon = this.querySelector('i');
+      if (target.classList.contains('hidden')) {
+        document.querySelectorAll('.faq-content').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.faq-toggle i').forEach(ic => ic.classList.remove('rotate-180'));
+        target.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+      } else {
+        target.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+      }
+    });
+  });
+</script>
+{% endblock %}

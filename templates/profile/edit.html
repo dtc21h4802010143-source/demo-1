@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+{% block title %}Cập nhật hồ sơ{% endblock %}
+{% block content %}
+<div class="flex min-h-[70vh] items-center justify-center py-8 px-4">
+    <div class="w-full max-w-3xl">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 rounded-2xl shadow-xl p-8 mb-6 text-white">
+            <div class="flex items-center gap-3 mb-4">
+                <i class="fa-solid fa-user-pen text-4xl"></i>
+                <div>
+                    <h2 class="text-3xl font-bold">Cập nhật hồ sơ</h2>
+                    <p class="text-emerald-100 text-sm">Hoàn thiện thông tin để tăng cơ hội trúng tuyển</p>
+                </div>
+            </div>
+            
+            <!-- Step Indicator -->
+            <div class="flex items-center justify-between mt-6">
+                <div class="flex-1 text-center">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-white text-emerald-600 flex items-center justify-center font-bold mb-2 step-circle" data-step="1">1</div>
+                    <div class="text-xs font-semibold">Cơ bản</div>
+                </div>
+                <div class="flex-1 h-1 bg-white/30 mx-2"></div>
+                <div class="flex-1 text-center">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-white/30 text-white flex items-center justify-center font-bold mb-2 step-circle" data-step="2">2</div>
+                    <div class="text-xs font-semibold">Liên hệ</div>
+                </div>
+                <div class="flex-1 h-1 bg-white/30 mx-2"></div>
+                <div class="flex-1 text-center">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-white/30 text-white flex items-center justify-center font-bold mb-2 step-circle" data-step="3">3</div>
+                    <div class="text-xs font-semibold">Học vấn</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Card -->
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+            <form method="POST" id="profileForm" class="space-y-6">
+                <!-- Step 1: Thông tin cơ bản -->
+                <div class="form-step" data-step="1">
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-user text-emerald-500"></i>
+                        Thông tin cơ bản
+                    </h3>
+                    <div class="space-y-5">
+                        <div>
+                            <label for="full_name" class="block text-sm font-medium mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-signature text-emerald-500"></i>
+                                Họ và tên <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="full_name" name="full_name" 
+                                   value="{{ applicant.full_name if applicant else '' }}" 
+                                   required 
+                                   class="w-full border-2 rounded-lg py-3 px-4 text-sm focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none transition"
+                                   placeholder="Nguyễn Văn A">
+                            <div class="validation-message text-xs mt-1 hidden">
+                                <i class="fa-solid fa-circle-check text-green-500"></i>
+                                <span class="text-green-600 ml-1">Tên hợp lệ!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Thông tin liên hệ -->
+                <div class="form-step hidden" data-step="2">
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-address-book text-emerald-500"></i>
+                        Thông tin liên hệ
+                    </h3>
+                    <div class="space-y-5">
+                        <div>
+                            <label for="phone" class="block text-sm font-medium mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-phone text-emerald-500"></i>
+                                Số điện thoại
+                            </label>
+                            <input type="tel" id="phone" name="phone" 
+                                   value="{{ applicant.phone if applicant else '' }}" 
+                                   class="w-full border-2 rounded-lg py-3 px-4 text-sm focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none transition"
+                                   placeholder="0912345678"
+                                   pattern="[0-9]{10,11}">
+                            <div class="validation-message text-xs mt-1 hidden">
+                                <i class="fa-solid fa-circle-check text-green-500"></i>
+                                <span class="text-green-600 ml-1">Số điện thoại hợp lệ!</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="date_of_birth" class="block text-sm font-medium mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-cake-candles text-emerald-500"></i>
+                                Ngày sinh
+                            </label>
+                            <input type="date" id="date_of_birth" name="date_of_birth" 
+                                   value="{{ applicant.date_of_birth if applicant and applicant.date_of_birth else '' }}" 
+                                   class="w-full border-2 rounded-lg py-3 px-4 text-sm focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none transition">
+                            <div class="validation-message text-xs mt-1 hidden">
+                                <i class="fa-solid fa-circle-check text-green-500"></i>
+                                <span class="text-green-600 ml-1">Ngày sinh đã nhập!</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="address" class="block text-sm font-medium mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-location-dot text-emerald-500"></i>
+                                Địa chỉ
+                            </label>
+                            <input type="text" id="address" name="address" 
+                                   value="{{ applicant.address if applicant else '' }}" 
+                                   class="w-full border-2 rounded-lg py-3 px-4 text-sm focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none transition"
+                                   placeholder="123 Đường ABC, Quận XYZ, TP.HCM">
+                            <div class="validation-message text-xs mt-1 hidden">
+                                <i class="fa-solid fa-circle-check text-green-500"></i>
+                                <span class="text-green-600 ml-1">Địa chỉ đã nhập!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Học vấn -->
+                <div class="form-step hidden" data-step="3">
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-graduation-cap text-emerald-500"></i>
+                        Thông tin học vấn
+                    </h3>
+                    <div class="space-y-5">
+                        <div>
+                            <label for="high_school" class="block text-sm font-medium mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-school text-emerald-500"></i>
+                                Trường THPT
+                            </label>
+                            <input type="text" id="high_school" name="high_school" 
+                                   value="{{ applicant.high_school if applicant else '' }}" 
+                                   class="w-full border-2 rounded-lg py-3 px-4 text-sm focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none transition"
+                                   placeholder="THPT Nguyễn Huệ">
+                            <div class="validation-message text-xs mt-1 hidden">
+                                <i class="fa-solid fa-circle-check text-green-500"></i>
+                                <span class="text-green-600 ml-1">Trường đã nhập!</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Summary Review -->
+                        <div class="bg-emerald-50 border-2 border-emerald-200 rounded-lg p-6 mt-6">
+                            <h4 class="font-bold text-emerald-700 mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-clipboard-check"></i>
+                                Xem lại thông tin
+                            </h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Họ tên:</span>
+                                    <span class="font-semibold" id="review_name">—</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Điện thoại:</span>
+                                    <span class="font-semibold" id="review_phone">—</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Ngày sinh:</span>
+                                    <span class="font-semibold" id="review_dob">—</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Địa chỉ:</span>
+                                    <span class="font-semibold" id="review_address">—</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Trường THPT:</span>
+                                    <span class="font-semibold" id="review_school">—</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="flex justify-between gap-4 pt-6 border-t">
+                    <button type="button" id="prevBtn" 
+                            class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition hidden">
+                        <i class="fa-solid fa-arrow-left mr-2"></i>Quay lại
+                    </button>
+                    <div class="flex gap-3 ml-auto">
+                        <a href="{{ url_for('view_profile') }}" 
+                           class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition flex items-center gap-2">
+                            <i class="fa-solid fa-xmark"></i> Hủy
+                        </a>
+                        <button type="button" id="nextBtn" 
+                                class="px-6 py-3 bg-gradient-to-r from-emerald-500 to-green-500 text-white rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all">
+                            Tiếp tục <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                        <button type="submit" id="submitBtn" 
+                                class="px-6 py-3 bg-gradient-to-r from-emerald-500 to-green-500 text-white rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all hidden">
+                            <i class="fa-solid fa-floppy-disk mr-2"></i>Lưu hồ sơ
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+let currentStep = 1;
+const totalSteps = 3;
+
+function showStep(step) {
+    // Hide all steps
+    document.querySelectorAll('.form-step').forEach(s => s.classList.add('hidden'));
+    
+    // Show current step
+    const currentStepEl = document.querySelector(`.form-step[data-step="${step}"]`);
+    if (currentStepEl) {
+        currentStepEl.classList.remove('hidden');
+    }
+    
+    // Update step circles
+    document.querySelectorAll('.step-circle').forEach(circle => {
+        const stepNum = parseInt(circle.dataset.step);
+        if (stepNum < step) {
+            circle.classList.remove('bg-white/30', 'text-white');
+            circle.classList.add('bg-white', 'text-emerald-600');
+            circle.innerHTML = '<i class="fa-solid fa-check"></i>';
+        } else if (stepNum === step) {
+            circle.classList.remove('bg-white/30', 'text-white');
+            circle.classList.add('bg-white', 'text-emerald-600');
+            circle.textContent = stepNum;
+        } else {
+            circle.classList.remove('bg-white', 'text-emerald-600');
+            circle.classList.add('bg-white/30', 'text-white');
+            circle.textContent = stepNum;
+        }
+    });
+    
+    // Update buttons
+    document.getElementById('prevBtn').classList.toggle('hidden', step === 1);
+    document.getElementById('nextBtn').classList.toggle('hidden', step === totalSteps);
+    document.getElementById('submitBtn').classList.toggle('hidden', step !== totalSteps);
+    
+    // Update review if on last step
+    if (step === totalSteps) {
+        updateReview();
+    }
+}
+
+function updateReview() {
+    document.getElementById('review_name').textContent = document.getElementById('full_name').value || '—';
+    document.getElementById('review_phone').textContent = document.getElementById('phone').value || '—';
+    document.getElementById('review_dob').textContent = document.getElementById('date_of_birth').value || '—';
+    document.getElementById('review_address').textContent = document.getElementById('address').value || '—';
+    document.getElementById('review_school').textContent = document.getElementById('high_school').value || '—';
+}
+
+// Validation feedback
+function validateInput(input) {
+    const validationMsg = input.parentElement.querySelector('.validation-message');
+    if (!validationMsg) return;
+    
+    if (input.value.trim()) {
+        if (input.checkValidity()) {
+            validationMsg.classList.remove('hidden');
+            input.classList.add('border-green-500');
+        } else {
+            input.classList.remove('border-green-500');
+        }
+    } else {
+        validationMsg.classList.add('hidden');
+        input.classList.remove('border-green-500');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    showStep(currentStep);
+    
+    // Add input validation
+    document.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', () => validateInput(input));
+        input.addEventListener('blur', () => validateInput(input));
+    });
+    
+    // Navigation
+    document.getElementById('nextBtn').addEventListener('click', () => {
+        if (currentStep < totalSteps) {
+            currentStep++;
+            showStep(currentStep);
+        }
+    });
+    
+    document.getElementById('prevBtn').addEventListener('click', () => {
+        if (currentStep > 1) {
+            currentStep--;
+            showStep(currentStep);
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Tài liệu hồ sơ{% endblock %}
+{% block content %}
+<div class="flex min-h-[70vh] items-center justify-center py-8">
+  <div class="w-full max-w-3xl bg-white rounded-2xl shadow-xl p-8">
+    <div class="flex items-center gap-3 mb-4">
+      <i class="fa-solid fa-folder-open text-2xl text-emerald-500"></i>
+      <h2 class="text-2xl font-bold">Tài liệu hồ sơ của bạn</h2>
+    </div>
+    <form method="post" enctype="multipart/form-data" class="mb-6">
+      <div>
+        <label for="document" class="block text-sm font-medium mb-1">Chọn tệp tài liệu (PDF, JPG, PNG, DOCX, tối đa 5MB):</label>
+        <input type="file" id="document" name="document" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required class="w-full border rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-emerald-400 outline-none" />
+      </div>
+      <button type="submit" class="mt-4 px-4 py-2 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition flex items-center gap-2"><i class="fa-solid fa-upload"></i> Tải lên</button>
+    </form>
+    {% if documents %}
+    <div class="overflow-x-auto">
+      <table class="min-w-full border rounded-lg text-sm">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="py-2 px-4 text-left font-medium">Tên tệp</th>
+            <th class="py-2 px-4 text-left font-medium">Loại</th>
+            <th class="py-2 px-4 text-left font-medium">Kích thước</th>
+            <th class="py-2 px-4 text-left font-medium">Ngày tải lên</th>
+            <th class="py-2 px-4"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for doc in documents %}
+          <tr class="border-b">
+            <td class="py-2 px-4"><a href="{{ url_for('static', filename=doc.file_path) }}" target="_blank" class="text-sky-600 hover:underline">{{ doc.filename }}</a></td>
+            <td class="py-2 px-4">{{ doc.file_type }}</td>
+            <td class="py-2 px-4">{{ (doc.file_size / 1024)|round(1) }} KB</td>
+            <td class="py-2 px-4">{{ doc.uploaded_at.strftime('%d/%m/%Y %H:%M') }}</td>
+            <td class="py-2 px-4">
+              <form method="post" action="{{ url_for('delete_document', doc_id=doc.id) }}" onsubmit="return confirm('Xóa tài liệu này?')">
+                <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition flex items-center gap-1"><i class="fa-solid fa-trash"></i></button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded text-blue-900 mt-4">Chưa có tài liệu nào.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

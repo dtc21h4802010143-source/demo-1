@@ -1,0 +1,101 @@
+
+{% extends "base.html" %}
+{% block title %}Đăng ký tài khoản{% endblock %}
+{% block content %}
+<div class="flex min-h-[80vh] items-center justify-center py-8">
+    <div class="w-full max-w-lg bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div class="bg-gradient-to-br from-emerald-500 to-emerald-400 text-white text-center py-8 px-6">
+            <i class="fa-solid fa-user-plus text-4xl"></i>
+            <h2 class="text-2xl font-bold mt-2 mb-1">Đăng ký tài khoản</h2>
+            <p class="text-white/90 mb-0">Tạo tài khoản để bắt đầu hành trình tuyển sinh</p>
+        </div>
+        <div class="py-8 px-6">
+            <form method="POST" id="registerForm" class="space-y-5">
+                <div>
+                    <label for="username" class="block text-sm font-medium mb-1">Tên đăng nhập <span class="text-red-500">*</span></label>
+                    <div class="flex items-center border rounded-lg overflow-hidden bg-gray-50">
+                        <span class="px-3 text-gray-400"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" id="username" name="username" class="flex-1 py-2 px-2 bg-transparent outline-none text-sm" placeholder="Chọn tên đăng nhập" required minlength="3">
+                    </div>
+                    <small class="text-gray-400">Tối thiểu 3 ký tự</small>
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium mb-1">Email <span class="text-red-500">*</span></label>
+                    <div class="flex items-center border rounded-lg overflow-hidden bg-gray-50">
+                        <span class="px-3 text-gray-400"><i class="fa-solid fa-envelope"></i></span>
+                        <input type="email" id="email" name="email" class="flex-1 py-2 px-2 bg-transparent outline-none text-sm" placeholder="example@email.com" required>
+                    </div>
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium mb-1">Mật khẩu <span class="text-red-500">*</span></label>
+                    <div class="flex items-center border rounded-lg overflow-hidden bg-gray-50">
+                        <span class="px-3 text-gray-400"><i class="fa-solid fa-lock"></i></span>
+                        <input type="password" id="password" name="password" class="flex-1 py-2 px-2 bg-transparent outline-none text-sm" placeholder="Tạo mật khẩu mạnh" required minlength="6">
+                        <button type="button" id="togglePassword" class="px-3 text-gray-400 focus:outline-none"><i class="fa-solid fa-eye"></i></button>
+                    </div>
+                    <div class="w-full h-1 bg-gray-200 rounded mt-2 overflow-hidden">
+                        <div class="h-full transition-all" id="strengthBar"></div>
+                    </div>
+                    <small class="text-gray-400">Tối thiểu 6 ký tự</small>
+                </div>
+                <div class="flex items-center gap-2 mb-2">
+                    <input type="checkbox" id="terms" required class="rounded">
+                    <label for="terms" class="text-sm">Tôi đồng ý với <a href="{{ url_for('terms') }}" class="text-sky-600 hover:underline">Điều khoản dịch vụ</a> và <a href="{{ url_for('privacy') }}" class="text-sky-600 hover:underline">Chính sách bảo mật</a></label>
+                </div>
+                {% if recaptcha_site_key %}
+                <div class="flex justify-center">
+                    <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div>
+                </div>
+                {% endif %}
+                <button type="submit" class="w-full py-2 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-circle-check"></i> Đăng ký
+                </button>
+            </form>
+            <hr class="my-6">
+            <div class="text-center">
+                <p class="text-gray-500 text-sm mb-2">Đã có tài khoản?</p>
+                <a href="{{ url_for('login') }}" class="inline-block px-4 py-2 border border-sky-600 text-sky-700 rounded-lg font-medium hover:bg-sky-50 transition"><i class="fa-solid fa-arrow-right-to-bracket mr-1"></i>Đăng nhập</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const password = document.getElementById('password');
+        const icon = this.querySelector('i');
+        if (password.type === 'password') {
+            password.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            password.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    });
+    document.getElementById('password').addEventListener('input', function() {
+        const password = this.value;
+        const strengthBar = document.getElementById('strengthBar');
+        let strength = 0;
+        if (password.length >= 6) strength += 25;
+        if (password.length >= 10) strength += 25;
+        if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength += 25;
+        if (/\d/.test(password)) strength += 15;
+        if (/[@$!%*?&]/.test(password)) strength += 10;
+        strengthBar.style.width = strength + '%';
+        if (strength < 40) {
+            strengthBar.style.background = '#dc3545';
+        } else if (strength < 70) {
+            strengthBar.style.background = '#ffc107';
+        } else {
+            strengthBar.style.background = '#28a745';
+        }
+    });
+</script>
+{% endblock %}
+{% block extra_js %}
+    {{ super() }}
+    {% if recaptcha_site_key %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    {% endif %}
+{% endblock %}

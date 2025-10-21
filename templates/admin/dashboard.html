@@ -1,0 +1,316 @@
+{% extends "base.html" %}
+{% block title %}Quản trị viên{% endblock %}
+{% block content %}
+
+<!-- Admin Header with Quick Actions -->
+<div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl shadow-2xl p-8 mb-8 text-white">
+  <div class="flex flex-col md:flex-row items-center justify-between">
+    <div>
+      <div class="flex items-center gap-3 mb-2">
+        <i class="fa-solid fa-shield-halved text-3xl"></i>
+        <h1 class="text-3xl font-extrabold">Bảng điều khiển Admin</h1>
+      </div>
+      <p class="text-white/80">Chào mừng quay trở lại! Quản lý hệ thống tuyển sinh</p>
+    </div>
+    <div class="mt-4 md:mt-0 flex gap-3">
+      <button onclick="location.reload()" class="px-4 py-2 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-lg transition flex items-center gap-2">
+        <i class="fa-solid fa-rotate-right"></i> Làm mới
+      </button>
+      <a href="{{ url_for('admin_email_test') }}" class="px-4 py-2 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-lg transition flex items-center gap-2">
+        <i class="fa-solid fa-envelope"></i> Email
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Stats Cards - Enhanced -->
+{% if stats %}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+  <!-- Applications Card -->
+  <div class="group bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-lg hover:shadow-2xl p-6 text-white transform hover:scale-105 transition-all duration-300">
+    <div class="flex items-center justify-between mb-4">
+      <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+        <i class="fa-solid fa-file-lines text-3xl"></i>
+      </div>
+      <div class="text-right">
+        <div class="text-sm text-white/80">Tổng hồ sơ</div>
+        <div class="text-4xl font-extrabold counter" data-target="{{ stats.total_applications }}">0</div>
+      </div>
+    </div>
+    <div class="flex items-center justify-between text-sm">
+      <span class="text-white/80">Xem chi tiết</span>
+      <a href="{{ url_for('admin_applications') }}" class="hover:translate-x-1 transition-transform">
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+  
+  <!-- Programs Card -->
+  <div class="group bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl shadow-lg hover:shadow-2xl p-6 text-white transform hover:scale-105 transition-all duration-300">
+    <div class="flex items-center justify-between mb-4">
+      <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+        <i class="fa-solid fa-graduation-cap text-3xl"></i>
+      </div>
+      <div class="text-right">
+        <div class="text-sm text-white/80">Ngành đào tạo</div>
+        <div class="text-4xl font-extrabold counter" data-target="{{ stats.total_programs }}">0</div>
+      </div>
+    </div>
+    <div class="flex items-center justify-between text-sm">
+      <span class="text-white/80">Quản lý ngành</span>
+      <a href="{{ url_for('admin_programs') }}" class="hover:translate-x-1 transition-transform">
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+  
+  <!-- Departments Card -->
+  <div class="group bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl shadow-lg hover:shadow-2xl p-6 text-white transform hover:scale-105 transition-all duration-300">
+    <div class="flex items-center justify-between mb-4">
+      <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+        <i class="fa-solid fa-building-columns text-3xl"></i>
+      </div>
+      <div class="text-right">
+        <div class="text-sm text-white/80">Khoa/Viện</div>
+        <div class="text-4xl font-extrabold counter" data-target="{{ stats.total_departments }}">0</div>
+      </div>
+    </div>
+    <div class="flex items-center justify-between text-sm">
+      <span class="text-white/80">Quản lý khoa</span>
+      <a href="{{ url_for('admin_departments') }}" class="hover:translate-x-1 transition-transform">
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+  
+  <!-- Recent Card -->
+  <div class="group bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl shadow-lg hover:shadow-2xl p-6 text-white transform hover:scale-105 transition-all duration-300">
+    <div class="flex items-center justify-between mb-4">
+      <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center animate-pulse">
+        <i class="fa-solid fa-clock-rotate-left text-3xl"></i>
+      </div>
+      <div class="text-right">
+        <div class="text-sm text-white/80">Hồ sơ mới</div>
+        <div class="text-4xl font-extrabold">{{ stats.recent_applications|length }}</div>
+      </div>
+    </div>
+    <div class="flex items-center justify-between text-sm">
+      <span class="text-white/80">Hôm nay</span>
+      <span class="px-2 py-1 bg-white/20 rounded-full text-xs">Live</span>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Quick Action Buttons - Enhanced Grid -->
+<div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+  <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+    <i class="fa-solid fa-bolt text-yellow-500"></i>
+    Thao tác nhanh
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <!-- Quick Action 1 -->
+    <a href="{{ url_for('admin_programs') }}" class="group flex items-center gap-4 p-4 bg-gradient-to-r from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 rounded-xl border-2 border-blue-200 hover:border-blue-400 transition-all">
+      <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white text-xl group-hover:scale-110 transition-transform">
+        <i class="fa-solid fa-graduation-cap"></i>
+      </div>
+      <div class="flex-1">
+        <div class="font-bold text-gray-800">Quản lý ngành</div>
+        <div class="text-sm text-gray-600">Thêm/Sửa/Xóa ngành học</div>
+      </div>
+      <i class="fa-solid fa-arrow-right text-blue-500 group-hover:translate-x-1 transition-transform"></i>
+    </a>
+    
+    <!-- Quick Action 2 -->
+    <a href="{{ url_for('admin_departments') }}" class="group flex items-center gap-4 p-4 bg-gradient-to-r from-pink-50 to-pink-100 hover:from-pink-100 hover:to-pink-200 rounded-xl border-2 border-pink-200 hover:border-pink-400 transition-all">
+      <div class="w-12 h-12 bg-pink-500 rounded-lg flex items-center justify-center text-white text-xl group-hover:scale-110 transition-transform">
+        <i class="fa-solid fa-building-columns"></i>
+      </div>
+      <div class="flex-1">
+        <div class="font-bold text-gray-800">Quản lý khoa</div>
+        <div class="text-sm text-gray-600">Danh sách khoa/viện</div>
+      </div>
+      <i class="fa-solid fa-arrow-right text-pink-500 group-hover:translate-x-1 transition-transform"></i>
+    </a>
+    
+    <!-- Quick Action 3 -->
+    <a href="{{ url_for('admin_applications') }}" class="group flex items-center gap-4 p-4 bg-gradient-to-r from-green-50 to-green-100 hover:from-green-100 hover:to-green-200 rounded-xl border-2 border-green-200 hover:border-green-400 transition-all">
+      <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center text-white text-xl group-hover:scale-110 transition-transform">
+        <i class="fa-solid fa-user-check"></i>
+      </div>
+      <div class="flex-1">
+        <div class="font-bold text-gray-800">Duyệt hồ sơ</div>
+        <div class="text-sm text-gray-600">Xét duyệt đơn ứng tuyển</div>
+      </div>
+      <i class="fa-solid fa-arrow-right text-green-500 group-hover:translate-x-1 transition-transform"></i>
+    </a>
+    
+    <!-- Quick Action 4 -->
+    <a href="{{ url_for('admin_statistics') }}" class="group flex items-center gap-4 p-4 bg-gradient-to-r from-purple-50 to-purple-100 hover:from-purple-100 hover:to-purple-200 rounded-xl border-2 border-purple-200 hover:border-purple-400 transition-all">
+      <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center text-white text-xl group-hover:scale-110 transition-transform">
+        <i class="fa-solid fa-chart-column"></i>
+      </div>
+      <div class="flex-1">
+        <div class="font-bold text-gray-800">Thống kê</div>
+        <div class="text-sm text-gray-600">Báo cáo & phân tích</div>
+      </div>
+      <i class="fa-solid fa-arrow-right text-purple-500 group-hover:translate-x-1 transition-transform"></i>
+    </a>
+    
+    <!-- Quick Action 5 -->
+    <a href="{{ url_for('admin_contact') }}" class="group flex items-center gap-4 p-4 bg-gradient-to-r from-yellow-50 to-yellow-100 hover:from-yellow-100 hover:to-yellow-200 rounded-xl border-2 border-yellow-200 hover:border-yellow-400 transition-all">
+      <div class="w-12 h-12 bg-yellow-500 rounded-lg flex items-center justify-center text-white text-xl group-hover:scale-110 transition-transform">
+        <i class="fa-solid fa-cog"></i>
+      </div>
+      <div class="flex-1">
+        <div class="font-bold text-gray-800">Cấu hình</div>
+        <div class="text-sm text-gray-600">Thiết lập hệ thống</div>
+      </div>
+      <i class="fa-solid fa-arrow-right text-yellow-500 group-hover:translate-x-1 transition-transform"></i>
+    </a>
+    
+    <!-- Quick Action 6 -->
+    <a href="{{ url_for('admin_export_csv') }}" class="group flex items-center gap-4 p-4 bg-gradient-to-r from-indigo-50 to-indigo-100 hover:from-indigo-100 hover:to-indigo-200 rounded-xl border-2 border-indigo-200 hover:border-indigo-400 transition-all">
+      <div class="w-12 h-12 bg-indigo-500 rounded-lg flex items-center justify-center text-white text-xl group-hover:scale-110 transition-transform">
+        <i class="fa-solid fa-file-export"></i>
+      </div>
+      <div class="flex-1">
+        <div class="font-bold text-gray-800">Xuất dữ liệu</div>
+        <div class="text-sm text-gray-600">Export CSV/Excel</div>
+      </div>
+      <i class="fa-solid fa-arrow-right text-indigo-500 group-hover:translate-x-1 transition-transform"></i>
+    </a>
+  </div>
+</div>
+
+<!-- Recent Applications Table - Enhanced -->
+{% if stats and stats.recent_applications %}
+<div class="bg-white rounded-2xl shadow-lg p-6">
+  <div class="flex items-center justify-between mb-6">
+    <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+      <i class="fa-solid fa-clock-rotate-left text-green-500"></i>
+      Hồ sơ mới nhất
+      <span class="ml-2 px-3 py-1 bg-green-100 text-green-700 text-sm font-bold rounded-full">
+        {{ stats.recent_applications|length }} mới
+      </span>
+    </h3>
+    <div class="flex gap-2">
+      <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition flex items-center gap-2">
+        <i class="fa-solid fa-filter"></i> Lọc
+      </button>
+      <a href="{{ url_for('admin_applications') }}" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium transition flex items-center gap-2">
+        Xem tất cả <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+  
+  <div class="overflow-x-auto">
+    <table class="min-w-full">
+      <thead>
+        <tr class="border-b-2 border-gray-200">
+          <th class="py-3 px-4 text-left text-sm font-bold text-gray-700 bg-gray-50 rounded-tl-lg">
+            <i class="fa-solid fa-user mr-2 text-gray-400"></i>Thí sinh
+          </th>
+          <th class="py-3 px-4 text-left text-sm font-bold text-gray-700 bg-gray-50">
+            <i class="fa-solid fa-envelope mr-2 text-gray-400"></i>Email
+          </th>
+          <th class="py-3 px-4 text-left text-sm font-bold text-gray-700 bg-gray-50">
+            <i class="fa-solid fa-graduation-cap mr-2 text-gray-400"></i>Ngành
+          </th>
+          <th class="py-3 px-4 text-left text-sm font-bold text-gray-700 bg-gray-50">
+            <i class="fa-solid fa-calendar mr-2 text-gray-400"></i>Ngày nộp
+          </th>
+          <th class="py-3 px-4 text-left text-sm font-bold text-gray-700 bg-gray-50 rounded-tr-lg">
+            <i class="fa-solid fa-flag mr-2 text-gray-400"></i>Trạng thái
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        {% for ap in stats.recent_applications %}
+        <tr class="hover:bg-gray-50 transition-colors">
+          <td class="py-4 px-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                {{ ap.applicant.full_name[0] if ap.applicant.full_name else 'U' }}
+              </div>
+              <div>
+                <div class="font-semibold text-gray-800">{{ ap.applicant.full_name }}</div>
+                <div class="text-xs text-gray-500">ID: #{{ ap.id }}</div>
+              </div>
+            </div>
+          </td>
+          <td class="py-4 px-4">
+            <div class="text-sm text-gray-700">{{ ap.applicant.email }}</div>
+          </td>
+          <td class="py-4 px-4">
+            <div class="text-sm font-medium text-gray-800">{{ ap.program.name }}</div>
+            <div class="text-xs text-gray-500">{{ ap.program.department.name if ap.program.department else '' }}</div>
+          </td>
+          <td class="py-4 px-4">
+            <div class="text-sm text-gray-700">{{ ap.application_date.strftime('%d/%m/%Y') }}</div>
+            <div class="text-xs text-gray-500">{{ ap.application_date.strftime('%H:%M') }}</div>
+          </td>
+          <td class="py-4 px-4">
+            {% if ap.status == 'pending' %}
+            <span class="px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full">
+              <i class="fa-solid fa-clock mr-1"></i>Chờ duyệt
+            </span>
+            {% elif ap.status == 'approved' %}
+            <span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">
+              <i class="fa-solid fa-check mr-1"></i>Đã duyệt
+            </span>
+            {% elif ap.status == 'rejected' %}
+            <span class="px-3 py-1 bg-red-100 text-red-700 text-xs font-bold rounded-full">
+              <i class="fa-solid fa-times mr-1"></i>Từ chối
+            </span>
+            {% else %}
+            <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs font-bold rounded-full">
+              {{ ap.status }}
+            </span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
+
+<!-- Counter Animation Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Counter Animation
+  const counters = document.querySelectorAll('.counter');
+  const speed = 200;
+  
+  counters.forEach(counter => {
+    const target = +counter.getAttribute('data-target');
+    const updateCount = () => {
+      const count = +counter.innerText;
+      const increment = target / speed;
+      
+      if (count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(updateCount, 10);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          updateCount();
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+    
+    observer.observe(counter);
+  });
+});
+</script>
+    </div>
+</div>
+{% endblock %}

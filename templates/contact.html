@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Liên hệ{% endblock %}
+{% block content %}
+<div class="flex min-h-[70vh] items-center justify-center py-8">
+    <div class="w-full max-w-xl bg-white rounded-2xl shadow-xl p-8">
+        <div class="flex items-center gap-3 mb-4">
+            <i class="fa-solid fa-envelope-circle-check text-2xl text-emerald-500"></i>
+            <h2 class="text-2xl font-bold">Liên hệ</h2>
+        </div>
+        <p class="mb-4 text-gray-700">Nếu bạn có thắc mắc về tuyển sinh, vui lòng liên hệ:</p>
+        <ul class="mb-4 space-y-2">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-sky-600"></i> <span>Email: <span class="font-medium">{{ contact_info.email }}</span></span></li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-emerald-600"></i> <span>Hotline: <span class="font-medium">{{ contact_info.hotline }}</span></span></li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-pink-500"></i> <span>Địa chỉ: <span class="font-medium">{{ contact_info.address }}</span></span></li>
+        </ul>
+        <div class="bg-emerald-50 border-l-4 border-emerald-400 p-4 rounded text-emerald-900 flex items-center gap-2">
+            <i class="fa-solid fa-robot"></i>
+            <span>Hoặc gửi câu hỏi nhanh qua chatbot ở góc phải dưới màn hình.</span>
+        </div>
+    </div>
+</div>
+{% endblock %}

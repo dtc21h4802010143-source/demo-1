@@ -1,0 +1,12 @@
+STT,Họ và Tên,Email,Số điện thoại,Ngành học,Phương thức xét tuyển,Điểm,Trạng thái,Ngày nộp
+1,ba,baccamngoc2002@gmail.com,0869294703,Khoa học máy tính (chuyên ngành Trí tuệ nhân tạo và Dữ liệu lớn),Xét theo điểm ĐGNL / đánh giá năng lực,1000.0,Draft,21/10/2025 07:22
+2,Nguyễn Văn An,an.nguyen@example.com,0901234567,Công nghệ thông tin,Xét điểm thi THPT,21.509999999999998,Submitted,21/10/2025 07:44
+3,Trần Thị Bích,bich.tran@example.com,0912345678,Khoa học máy tính,Xét học bạ THPT,24.75,Submitted,21/10/2025 07:44
+4,Lê Minh Cường,cuong.le@example.com,0987654321,Kỹ thuật phần mềm,Xét điểm thi THPT,18.21,Submitted,21/10/2025 07:44
+5,Phạm Ngọc Dung,dung.pham@example.com,0381234567,Truyền thông đa phương tiện,Xét học bạ THPT,27.81,Submitted,21/10/2025 07:44
+6,Hoàng Tuấn Em,em.hoang@example.com,0398765432,Thương mại điện tử,Xét điểm thi ĐGNL,22.0,Submitted,21/10/2025 07:44
+7,Huỳnh Anh Hà,ha.huynh@example.com,0701234567,Marketing số,Xét học bạ THPT,25.14,Submitted,21/10/2025 07:44
+8,Phan Đức Hùng,hung.phan@example.com,0867654321,Công nghệ ô tô,Xét điểm thi THPT,17.490000000000002,Submitted,21/10/2025 07:44
+9,Vũ Thị Lan,lan.vu@example.com,0934567890,Thiết kế đồ họa,Xét học bạ THPT,26.910000000000004,Submitted,21/10/2025 07:44
+10,Võ Minh Long,long.vo@example.com,0945678901,An ninh mạng,Xét điểm thi THPT,23.46,Submitted,21/10/2025 07:44
+11,Đặng Ngọc Mai,mai.dang@example.com,0831234567,Quản lý logistics và chuỗi cung ứng,Xét học bạ THPT,20.85,Submitted,21/10/2025 07:44

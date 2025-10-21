@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Thống kê tuyển sinh{% endblock %}
+{% block content %}
+<div class="flex min-h-[70vh] items-center justify-center py-8">
+    <div class="w-full max-w-6xl bg-white rounded-2xl shadow-xl p-8">
+        <div class="flex items-center gap-3 mb-6">
+            <i class="fa-solid fa-chart-column text-2xl text-gray-600"></i>
+            <h2 class="text-2xl font-bold">Thống kê tuyển sinh</h2>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-sky-500 text-white rounded-xl p-5 flex flex-col items-center">
+                <i class="fa-solid fa-users text-2xl mb-2"></i>
+                <div class="text-lg font-semibold">Tổng thí sinh</div>
+                <div class="text-2xl font-bold">{{ total_applicants }}</div>
+            </div>
+            <div class="bg-emerald-500 text-white rounded-xl p-5 flex flex-col items-center">
+                <i class="fa-solid fa-list-check text-2xl mb-2"></i>
+                <div class="text-lg font-semibold">Tổng nguyện vọng</div>
+                <div class="text-2xl font-bold">{{ total_applications }}</div>
+            </div>
+            <div class="bg-pink-500 text-white rounded-xl p-5 flex flex-col items-center">
+                <i class="fa-solid fa-circle-check text-2xl mb-2"></i>
+                <div class="text-lg font-semibold">Đã đỗ</div>
+                <div class="text-2xl font-bold">{{ total_accepted }}</div>
+            </div>
+            <div class="bg-red-500 text-white rounded-xl p-5 flex flex-col items-center">
+                <i class="fa-solid fa-circle-xmark text-2xl mb-2"></i>
+                <div class="text-lg font-semibold">Trượt</div>
+                <div class="text-2xl font-bold">{{ total_rejected }}</div>
+            </div>
+        </div>
+        <h4 class="text-lg font-semibold mb-3">Thống kê theo ngành</h4>
+        <div class="overflow-x-auto">
+            <table class="min-w-full border rounded-lg text-sm">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="py-2 px-4 text-left font-medium">Ngành</th>
+                        <th class="py-2 px-4 text-left font-medium">Tổng nguyện vọng</th>
+                        <th class="py-2 px-4 text-left font-medium">Đã đỗ</th>
+                        <th class="py-2 px-4 text-left font-medium">Trượt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for name, total, accepted, rejected in stats_by_program %}
+                    <tr class="border-b">
+                        <td class="py-2 px-4">{{ name }}</td>
+                        <td class="py-2 px-4">{{ total or 0 }}</td>
+                        <td class="py-2 px-4">{{ accepted or 0 }}</td>
+                        <td class="py-2 px-4">{{ rejected or 0 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

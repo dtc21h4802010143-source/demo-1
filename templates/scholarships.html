@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Học bổng{% endblock %}
+{% block content %}
+<div class="flex min-h-[70vh] items-center justify-center py-8">
+  <div class="w-full max-w-xl bg-white rounded-2xl shadow-xl p-8">
+    <div class="flex items-center gap-3 mb-4">
+      <i class="fa-solid fa-graduation-cap text-2xl text-emerald-500"></i>
+      <h1 class="text-2xl font-bold">Chính sách học bổng</h1>
+    </div>
+    <ul class="space-y-3 text-gray-700">
+      <li class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-400"></i> Học bổng tài năng: <span class="font-medium">đến 100% học phí</span>.</li>
+      <li class="flex items-center gap-2"><i class="fa-solid fa-certificate text-sky-500"></i> Học bổng đầu vào: <span class="font-medium">30-70% học phí</span>.</li>
+      <li class="flex items-center gap-2"><i class="fa-solid fa-award text-pink-500"></i> Học bổng khuyến khích học tập.</li>
+    </ul>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+{% block title %}Chatbot Tư vấn - Hệ thống Tuyển sinh{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
+<style>
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+    .message-animation {
+        animation: slideInUp 0.3s ease-out;
+    }
+    .typing-indicator {
+        animation: pulse 1.5s ease-in-out infinite;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Chat Container -->
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+        
+        <!-- Chat Header -->
+        <div class="bg-white rounded-t-3xl shadow-xl p-6 border-b border-gray-100">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <!-- Avatar -->
+                    <div class="relative">
+                        <div class="w-14 h-14 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center shadow-lg">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <span class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></span>
+                    </div>
+                    
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">Trợ lý AI Tuyển sinh</h1>
+                        <p class="text-sm text-gray-500 flex items-center">
+                            <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                            Đang online - Trả lời tức thì
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="flex items-center space-x-2">
+                    <button onclick="clearChat()" 
+                            class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                            title="Xóa lịch sử chat">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                        </svg>
+                    </button>
+                    <button onclick="toggleInfo()" 
+                            class="p-2 text-gray-400 hover:text-primary-500 hover:bg-primary-50 rounded-lg transition-colors"
+                            title="Thông tin">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chat Messages -->
+        <div id="chatMessages" class="bg-white shadow-xl overflow-y-auto" style="height: 600px; max-height: 70vh;">
+            <div class="p-6 space-y-4">
+                <!-- Welcome Message -->
+                <div class="flex items-start space-x-3 message-animation">
+                    <div class="flex-shrink-0">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl rounded-tl-none p-4 border border-primary-100">
+                            <p class="text-gray-800 leading-relaxed">
+                                👋 Xin chào! Tôi là trợ lý AI tuyển sinh. Tôi có thể giúp bạn:
+                            </p>
+                            <ul class="mt-3 space-y-2 text-sm text-gray-700">
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Thông tin về các ngành học
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Điểm chuẩn và học phí
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Cơ hội nghề nghiệp
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Quy trình đăng ký
+                                </li>
+                            </ul>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">Vừa xong</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Suggested Questions -->
+        <div id="suggestedQuestions" class="bg-gradient-to-r from-gray-50 to-gray-100 p-4 border-t border-gray-200">
+            <p class="text-sm text-gray-600 mb-3 font-semibold">💡 Câu hỏi gợi ý:</p>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="sendMessage('Điểm chuẩn ngành Khoa học máy tính 2024 là bao nhiêu?')" 
+                        class="px-4 py-2 bg-white text-gray-700 rounded-full text-sm border border-gray-200 hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700 transition-all shadow-sm">
+                    📊 Điểm chuẩn KHMT 2024
+                </button>
+                <button onclick="sendMessage('Học phí của trường là bao nhiêu?')" 
+                        class="px-4 py-2 bg-white text-gray-700 rounded-full text-sm border border-gray-200 hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700 transition-all shadow-sm">
+                    💰 Học phí
+                </button>
+                <button onclick="sendMessage('Các ngành đào tạo của trường?')" 
+                        class="px-4 py-2 bg-white text-gray-700 rounded-full text-sm border border-gray-200 hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700 transition-all shadow-sm">
+                    📚 Các ngành đào tạo
+                </button>
+                <button onclick="sendMessage('Cơ hội việc làm sau tốt nghiệp?')" 
+                        class="px-4 py-2 bg-white text-gray-700 rounded-full text-sm border border-gray-200 hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700 transition-all shadow-sm">
+                    💼 Cơ hội việc làm
+                </button>
+            </div>
+        </div>
+        
+        <!-- Chat Input -->
+        <div class="bg-white rounded-b-3xl shadow-xl p-4 border-t border-gray-100">
+            <form id="chatForm" class="flex items-end space-x-3">
+                <div class="flex-1">
+                    <textarea id="messageInput" 
+                              rows="1" 
+                              placeholder="Nhập câu hỏi của bạn..." 
+                              class="w-full px-4 py-3 rounded-2xl border-2 border-gray-200 focus:border-primary-500 focus:ring-4 focus:ring-primary-100 transition-all outline-none resize-none"
+                              style="max-height: 120px;"></textarea>
+                </div>
+                <button type="submit" 
+                        id="sendButton"
+                        class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 text-white rounded-2xl hover:shadow-lg transition-all hover:scale-105 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                    </svg>
+                </button>
+            </form>
+            <p class="text-xs text-gray-400 mt-2 text-center">
+                Được hỗ trợ bởi AI • Độ chính xác 95%+ • Dữ liệu cập nhật 2024
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Info Modal (Hidden by default) -->
+<div id="infoModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl transform transition-all">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-gray-900">Thông tin Chatbot</h3>
+            <button onclick="toggleInfo()" class="text-gray-400 hover:text-gray-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="space-y-4 text-gray-600">
+            <div class="flex items-start space-x-3">
+                <svg class="w-6 h-6 text-primary-500 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                </svg>
+                <div>
+                    <p class="font-semibold text-gray-900">Công nghệ AI tiên tiến</p>
+                    <p class="text-sm">Sử dụng Groq Llama 3.3 70B với RAG (Retrieval-Augmented Generation)</p>
+                </div>
+            </div>
+            <div class="flex items-start space-x-3">
+                <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <div>
+                    <p class="font-semibold text-gray-900">Độ chính xác cao</p>
+                    <p class="text-sm">95%+ độ chính xác dựa trên cơ sở dữ liệu tuyển sinh chính thức</p>
+                </div>
+            </div>
+            <div class="flex items-start space-x-3">
+                <svg class="w-6 h-6 text-blue-500 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                </svg>
+                <div>
+                    <p class="font-semibold text-gray-900">Phản hồi tức thì</p>
+                    <p class="text-sm">Thời gian phản hồi trung bình < 2 giây</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+<script>
+    // Auto-resize textarea
+    const messageInput = document.getElementById('messageInput');
+    messageInput.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+    
+    // Toggle info modal
+    function toggleInfo() {
+        const modal = document.getElementById('infoModal');
+        modal.classList.toggle('hidden');
+    }
+    
+    // Clear chat
+    function clearChat() {
+        if (confirm('Bạn có chắc muốn xóa toàn bộ lịch sử chat?')) {
+            const chatMessages = document.getElementById('chatMessages');
+            const firstMessage = chatMessages.querySelector('.message-animation');
+            chatMessages.innerHTML = '';
+            chatMessages.appendChild(firstMessage.parentElement);
+            
+            // Show suggested questions again
+            document.getElementById('suggestedQuestions').classList.remove('hidden');
+        }
+    }
+    
+    // Send message from suggested questions
+    function sendMessage(text) {
+        messageInput.value = text;
+        document.getElementById('chatForm').dispatchEvent(new Event('submit'));
+    }
+    
+    // Hide suggested questions after first message
+    const chatForm = document.getElementById('chatForm');
+    chatForm.addEventListener('submit', function() {
+        document.getElementById('suggestedQuestions').classList.add('hidden');
+    });
+</script>
+{% endblock %}

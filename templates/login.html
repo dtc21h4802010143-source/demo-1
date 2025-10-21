@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Đăng nhập{% endblock %}
+{% block content %}
+<div class="flex min-h-[80vh] items-center justify-center py-8">
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div class="bg-gradient-to-br from-sky-600 to-sky-400 text-white text-center py-8 px-6">
+            <i class="fa-solid fa-user-circle text-4xl"></i>
+            <h2 class="text-2xl font-bold mt-2 mb-1">Đăng nhập</h2>
+            <p class="text-white/90 mb-0">Chào mừng bạn trở lại!</p>
+        </div>
+        <div class="py-8 px-6">
+            <form method="POST" class="space-y-5">
+                <div>
+                    <label for="username_or_email" class="block text-sm font-medium mb-1">Tên đăng nhập hoặc Email</label>
+                    <div class="flex items-center border rounded-lg overflow-hidden bg-gray-50">
+                        <span class="px-3 text-gray-400"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" id="username_or_email" name="username_or_email" class="flex-1 py-2 px-2 bg-transparent outline-none text-sm" placeholder="Nhập tên đăng nhập hoặc email" required>
+                    </div>
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium mb-1">Mật khẩu</label>
+                    <div class="flex items-center border rounded-lg overflow-hidden bg-gray-50">
+                        <span class="px-3 text-gray-400"><i class="fa-solid fa-lock"></i></span>
+                        <input type="password" id="password" name="password" class="flex-1 py-2 px-2 bg-transparent outline-none text-sm" placeholder="Nhập mật khẩu" required>
+                    </div>
+                </div>
+                {% if recaptcha_site_key %}
+                <div class="flex justify-center">
+                    <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div>
+                </div>
+                {% endif %}
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" id="remember" name="remember" class="rounded">
+                        Ghi nhớ đăng nhập
+                    </label>
+                    <a href="{{ url_for('forgot_password') }}" class="text-sky-600 text-sm hover:underline">Quên mật khẩu?</a>
+                </div>
+                <button type="submit" class="w-full py-2 bg-sky-600 text-white rounded-lg font-semibold hover:bg-sky-700 transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i> Đăng nhập
+                </button>
+            </form>
+            <!-- Social Login -->
+            <div class="relative my-6">
+                <hr>
+                <span class="absolute left-1/2 -translate-x-1/2 -top-3 bg-white px-3 text-gray-400 text-xs">Hoặc đăng nhập với</span>
+            </div>
+            <div class="flex gap-3 mb-4">
+                <button class="flex-1 py-2 border border-gray-200 rounded-lg flex items-center justify-center gap-2 text-red-600 hover:bg-red-50" onclick="alert('Tính năng Google Login đang phát triển!')">
+                    <i class="fa-brands fa-google"></i> Google
+                </button>
+                <button class="flex-1 py-2 border border-gray-200 rounded-lg flex items-center justify-center gap-2 text-blue-700 hover:bg-blue-50" onclick="alert('Tính năng Facebook Login đang phát triển!')">
+                    <i class="fa-brands fa-facebook"></i> Facebook
+                </button>
+            </div>
+            <div class="text-center mt-2">
+                <p class="text-gray-500 text-sm mb-2">Chưa có tài khoản?</p>
+                <a href="{{ url_for('register') }}" class="inline-block px-4 py-2 border border-sky-600 text-sky-700 rounded-lg font-medium hover:bg-sky-50 transition"><i class="fa-solid fa-user-plus mr-1"></i>Đăng ký ngay</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+    {{ super() }}
+    {% if recaptcha_site_key %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    {% endif %}
+{% endblock %}

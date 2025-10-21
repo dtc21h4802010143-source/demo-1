@@ -1,0 +1,194 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Xin chào",
+        "Chào bạn",
+        "Hi",
+        "Hello",
+        "Chào",
+        "Hey"
+      ],
+      "responses": [
+        "Xin chào! Tôi là trợ lý AI tư vấn tuyển sinh. Bạn muốn tư vấn về ngành học nào?",
+        "Chào bạn! Tôi có thể giúp bạn gợi ý ngành học phù hợp dựa trên điểm số và sở thích. Bạn cần hỗ trợ gì?",
+        "Rất vui được gặp bạn! Tôi có thể tư vấn ngành học, điểm chuẩn và xác suất đỗ. Bạn quan tâm điều gì?"
+      ]
+    },
+    {
+      "tag": "recommend_by_score",
+      "patterns": [
+        "Gợi ý ngành học cho tôi",
+        "Tôi nên chọn ngành gì",
+        "Điểm của tôi là",
+        "Tôi có điểm",
+        "Với điểm này tôi học được ngành gì",
+        "Ngành nào phù hợp với điểm của tôi",
+        "Tư vấn ngành học theo điểm",
+        "Gợi ý theo điểm số"
+      ],
+      "responses": [
+        "Để gợi ý ngành học phù hợp, bạn vui lòng cho tôi biết:\n1. Tổng điểm 3 môn của bạn\n2. Sở thích của bạn (công nghệ, kinh tế, y tế, nghệ thuật...)\n3. Kỹ năng mạnh của bạn (toán, lý, hóa, ngoại ngữ...)\n\nBạn cũng có thể sử dụng form 'Gợi ý ngành bằng AI' trên trang hồ sơ để nhận kết quả chi tiết!",
+        "Tuyệt vời! Tôi sẽ giúp bạn tìm ngành phù hợp. Hãy cho tôi biết:\n- Tổng điểm 3 môn: ?\n- Sở thích: ?\n- Điểm Toán (nếu có): ?\n\nHoặc bạn có thể dùng công cụ gợi ý AI trên trang /advisor để nhận phân tích chi tiết!",
+        "Để tư vấn chính xác nhất, tôi cần biết điểm số và sở thích của bạn. Bạn có thể:\n1. Sử dụng form 'Gợi ý AI' trên trang hồ sơ\n2. Hoặc cho tôi biết tổng điểm 3 môn và ngành bạn quan tâm"
+      ]
+    },
+    {
+      "tag": "admission_scores",
+      "patterns": [
+        "Điểm chuẩn",
+        "Điểm chuẩn năm nay",
+        "Điểm chuẩn 2025",
+        "Điểm chuẩn ngành",
+        "Xem điểm chuẩn",
+        "Điểm sàn",
+        "Điểm tối thiểu"
+      ],
+      "responses": [
+        "Điểm chuẩn năm 2025:\n- Nghệ thuật số: 23.00 điểm (cao nhất)\n- Tiếng Anh truyền thông: 22.00 điểm\n- Vi mạch bán dẫn: 21.75 điểm (Toán ≥ 8.0)\n- Kỹ thuật phần mềm: 21.25 điểm\n- Khoa học máy tính: 19.50 điểm\n\nBạn muốn xem điểm chuẩn ngành nào cụ thể?",
+        "Hệ thống có 86 điểm chuẩn từ năm 2022-2025. Điểm chuẩn trung bình năm 2025 là 19.53 điểm.\n\nTop 5 ngành cao nhất:\n1. Nghệ thuật số - 23.00\n2. Tiếng Anh TT - 22.00\n3. Vi mạch bán dẫn - 21.75\n4. KTPM (Liên kết) - 21.25\n5. Điện tử viễn thông - 21.25\n\nBạn muốn biết thêm về ngành nào?",
+        "Điểm chuẩn được cập nhật hàng năm. Năm 2025:\n- Điểm cao nhất: 23.00 (Nghệ thuật số)\n- Điểm thấp nhất: 18.00\n- Điểm TB: 19.53\n\nBạn có thể xem chi tiết tại trang /advisor hoặc hỏi tôi về ngành cụ thể!"
+      ]
+    },
+    {
+      "tag": "programs_info",
+      "patterns": [
+        "Ngành học",
+        "Có những ngành nào",
+        "Chương trình đào tạo",
+        "Các ngành đào tạo",
+        "Ngành gì có",
+        "Danh sách ngành"
+      ],
+      "responses": [
+        "Trường có nhiều ngành đào tạo thuộc các khối:\n\n🖥️ CÔNG NGHỆ THÔNG TIN:\n- Khoa học máy tính (AI)\n- Kỹ thuật máy tính\n- Kỹ thuật phần mềm\n- An toàn thông tin\n- Mạng máy tính\n\n💼 KINH TẾ:\n- Quản trị kinh doanh\n- Kế toán\n- Tài chính ngân hàng\n\n🎨 NGHỆ THUẬT:\n- Nghệ thuật số\n- Thiết kế đồ họa\n\nBạn muốn biết thêm về ngành nào?",
+        "Hiện có 27 ngành đào tạo chính. Một số ngành nổi bật:\n- Khoa học máy tính (AI) - Hot 🔥\n- Vi mạch bán dẫn - Mới\n- Kỹ thuật phần mềm\n- An toàn thông tin\n- Điện tử viễn thông\n- Quản trị kinh doanh\n- Nghệ thuật số\n\nBạn quan tâm khối ngành nào: Công nghệ, Kinh tế hay Nghệ thuật?",
+        "Các ngành phổ biến:\n\n🌟 Top ngành có điểm cao:\n1. Nghệ thuật số (23.0)\n2. Tiếng Anh truyền thông (22.0)\n3. Vi mạch bán dẫn (21.75)\n\n🔥 Ngành hot hiện nay:\n- AI & Machine Learning\n- An toàn thông tin\n- Dữ liệu lớn (Big Data)\n\nBạn muốn tìm hiểu chi tiết ngành nào?"
+      ]
+    },
+    {
+      "tag": "interests_tech",
+      "patterns": [
+        "Tôi thích công nghệ",
+        "Tôi thích lập trình",
+        "Thích máy tính",
+        "Quan tâm đến AI",
+        "Thích code",
+        "Muốn làm IT"
+      ],
+      "responses": [
+        "Tuyệt vời! Bạn phù hợp với các ngành CNTT:\n\n🎯 Gợi ý TOP:\n1. Khoa học máy tính (AI) - 18.50 điểm 2023\n2. Kỹ thuật phần mềm - 21.25 điểm 2025\n3. An toàn thông tin - 19.50 điểm\n4. Mạng máy tính - 18.75 điểm\n\n💡 Bạn có điểm bao nhiêu? Tôi sẽ gợi ý chính xác hơn!",
+        "Với sở thích công nghệ, bạn có thể xem xét:\n\n⭐ Khoa học máy tính (AI):\n- Học về: ML, Deep Learning, Data Science\n- Triển vọng: Rất cao, lương khởi điểm 15-25 triệu\n- Điểm chuẩn: 18.50 (2023)\n\n⭐ Kỹ thuật phần mềm:\n- Học về: Dev, Testing, DevOps\n- Triển vọng: Xuất sắc\n- Điểm chuẩn: 21.25 (2025)\n\nBạn muốn biết thêm về ngành nào?",
+        "Ngành công nghệ rất phù hợp với bạn! Nếu bạn:\n- Thích giải quyết vấn đề → Kỹ thuật phần mềm\n- Thích toán + thuật toán → Khoa học máy tính\n- Quan tâm bảo mật → An toàn thông tin\n- Thích hardware → Kỹ thuật máy tính\n\nCho tôi biết điểm của bạn để gợi ý cụ thể hơn!"
+      ]
+    },
+    {
+      "tag": "interests_business",
+      "patterns": [
+        "Tôi thích kinh doanh",
+        "Thích quản lý",
+        "Quan tâm kinh tế",
+        "Muốn làm marketing",
+        "Thích bán hàng"
+      ],
+      "responses": [
+        "Với sở thích kinh doanh, bạn nên xem xét:\n\n💼 Quản trị kinh doanh:\n- Điểm chuẩn: 18.50 điểm\n- Học về: Quản lý, Marketing, Khởi nghiệp\n- Triển vọng: Quản lý doanh nghiệp, CEO\n\n💰 Tài chính ngân hàng:\n- Cơ hội việc làm rộng mở\n- Lương ổn định\n\nBạn có điểm bao nhiêu?",
+        "Ngành kinh tế rất phù hợp! Một số lựa chọn:\n\n1. Quản trị kinh doanh - Toàn diện\n2. Marketing - Sáng tạo\n3. Tài chính - Phân tích\n4. Kế toán - Chính xác\n\nBạn thiên về phân tích hay sáng tạo?",
+        "Tốt! Ngành kinh doanh có nhiều cơ hội:\n- Startup\n- Doanh nghiệp lớn\n- Tư vấn\n- Marketing Agency\n\nĐể tư vấn chi tiết, bạn cho tôi biết điểm số nhé!"
+      ]
+    },
+    {
+      "tag": "probability_high",
+      "patterns": [
+        "Xác suất đỗ",
+        "Tôi có đỗ không",
+        "Khả năng trúng tuyển",
+        "Điểm tôi cao hơn",
+        "Tôi an toàn không"
+      ],
+      "responses": [
+        "Xác suất đỗ phụ thuộc vào chênh lệch điểm:\n\n✅ Rất cao (95-100%): Điểm cao hơn chuẩn ≥ 3 điểm\n✅ Cao (80-95%): Điểm cao hơn 1.5-3 điểm\n⚠️ Trung bình (60-80%): Điểm cao hơn 0.5-1.5 điểm\n⚠️ Thấp (40-60%): Điểm cao hơn 0-0.5 điểm\n❌ Rất thấp (<40%): Điểm thấp hơn điểm chuẩn\n\nBạn có điểm bao nhiêu so với ngành muốn học?",
+        "Để đánh giá xác suất, hãy so sánh điểm của bạn với điểm chuẩn:\n\nVD: Nếu điểm bạn 21.5, ngành có điểm chuẩn 18.5:\n→ Chênh lệch: +3.0 điểm\n→ Xác suất: Rất cao (95-100%)\n→ Đánh giá: An toàn ✅\n\nBạn cho tôi biết điểm của bạn và ngành muốn học?",
+        "Công cụ 'Gợi ý AI' trên trang /advisor có thể tính chính xác xác suất đỗ cho bạn!\n\nNó phân tích:\n- Điểm số của bạn\n- Điểm chuẩn các năm\n- Sở thích và kỹ năng\n- Độ phù hợp ngành\n\nKết quả: Top 10 ngành + xác suất đỗ từng ngành!"
+      ]
+    },
+    {
+      "tag": "subject_combination",
+      "patterns": [
+        "Tổ hợp môn",
+        "Khối xét tuyển",
+        "A00",
+        "D01",
+        "Xét tuyển khối nào",
+        "Tổ hợp A",
+        "Tổ hợp D"
+      ],
+      "responses": [
+        "Các tổ hợp môn phổ biến:\n\n📚 Khối A (Toán - Lý - Hóa):\n- Phù hợp: CNTT, Kỹ thuật, Khoa học\n- Ngành: KTPM, AI, Điện tử...\n\n📚 Khối A01 (Toán - Lý - Anh):\n- Phù hợp: CNTT, Công nghệ\n- Ngành: KTPM, Mạng, An ninh...\n\n📚 Khối D (Toán - Văn - Anh):\n- Phù hợp: Kinh tế, Ngôn ngữ\n- Ngành: QTKD, Marketing, Tiếng Anh...\n\nBạn học tổ hợp nào?",
+        "Tổ hợp môn ảnh hưởng đến lựa chọn ngành:\n\nA00, A01 → CNTT, Kỹ thuật\nD01, D07 → Kinh tế, Quản trị\nC00 → Xã hội, Nhân văn\n\nMỗi ngành có thể nhận nhiều tổ hợp khác nhau. Bạn đang học tổ hợp gì?",
+        "Về tổ hợp xét tuyển:\n\n✅ Hầu hết ngành CNTT nhận: A00, A01, D01\n✅ Ngành Kinh tế nhận: A00, A01, D01, D07\n✅ Một số ngành đặc biệt có yêu cầu riêng\n\nBạn muốn biết ngành nào nhận tổ hợp của bạn?"
+      ]
+    },
+    {
+      "tag": "career_prospects",
+      "patterns": [
+        "Triển vọng nghề nghiệp",
+        "Ra trường làm gì",
+        "Cơ hội việc làm",
+        "Lương bao nhiêu",
+        "Công việc sau khi tốt nghiệp"
+      ],
+      "responses": [
+        "Triển vọng nghề nghiệp theo ngành:\n\n💻 CNTT/AI:\n- Lương khởi điểm: 15-25 triệu\n- Vị trí: Dev, AI Engineer, Data Scientist\n- Nhu cầu: Rất cao ⭐⭐⭐⭐⭐\n\n💼 Kinh tế/QTKD:\n- Lương khởi điểm: 10-15 triệu\n- Vị trí: Marketing, Sales, Quản lý\n- Nhu cầu: Cao ⭐⭐⭐⭐\n\n🔧 Kỹ thuật:\n- Lương: 12-20 triệu\n- Vị trí: Kỹ sư, Chuyên viên\n- Nhu cầu: Ổn định ⭐⭐⭐⭐\n\nBạn quan tâm ngành nào?",
+        "Thị trường lao động hiện nay:\n\n🔥 HOT nhất:\n1. AI/Machine Learning\n2. An toàn thông tin\n3. Data Science\n4. Cloud Computing\n5. DevOps\n\n💡 Ổn định:\n- Kế toán\n- Quản trị\n- Giáo dục\n\n📈 Đang phát triển:\n- Marketing số\n- E-commerce\n- FinTech\n\nBạn muốn tìm hiểu chi tiết ngành nào?",
+        "Về lương và cơ hội:\n\n🎯 Lương cao:\n- AI Engineer: 20-40 triệu (1-2 năm exp)\n- Senior Dev: 30-60 triệu\n- Data Scientist: 25-45 triệu\n\n🎯 Lương trung bình:\n- Junior Dev: 10-15 triệu\n- Kế toán: 8-12 triệu\n- Marketing: 10-18 triệu\n\nLương phụ thuộc vào kỹ năng và kinh nghiệm!"
+      ]
+    },
+    {
+      "tag": "how_to_use",
+      "patterns": [
+        "Hướng dẫn sử dụng",
+        "Cách dùng",
+        "Làm sao để",
+        "Sử dụng thế nào",
+        "Hướng dẫn"
+      ],
+      "responses": [
+        "Hướng dẫn sử dụng hệ thống:\n\n1️⃣ Tạo hồ sơ:\n- Vào /profile → Điền thông tin cá nhân\n\n2️⃣ Nhận gợi ý AI:\n- Vào /advisor hoặc /profile\n- Tìm form 'Gợi ý ngành bằng AI'\n- Nhập: Tổng điểm, sở thích\n- Click 'Nhận gợi ý'\n\n3️⃣ Xem kết quả:\n- Top 10 ngành phù hợp\n- Xác suất đỗ từng ngành\n- Thông tin chi tiết\n\nBạn cần hỗ trợ bước nào?",
+        "Các tính năng chính:\n\n🎯 Gợi ý ngành AI:\n- Form trên /advisor\n- Phân tích điểm + sở thích\n- Kết quả: Top 10 ngành + xác suất\n\n📊 Xem điểm chuẩn:\n- API: /api/admission-scores\n- 86 ngành, 4 năm (2022-2025)\n\n💬 Chat với tôi:\n- Hỏi bất cứ điều gì về tuyển sinh\n- Tôi sẽ tư vấn ngay!\n\nBạn muốn thử tính năng nào?",
+        "Để nhận gợi ý ngành học:\n\n✅ Cách 1: Dùng form (Khuyến nghị):\n- Vào http://localhost:5000/advisor\n- Scroll xuống 'Gợi ý ngành bằng AI'\n- Điền điểm và sở thích\n- Nhận kết quả chi tiết\n\n✅ Cách 2: Chat với tôi:\n- Cho tôi biết điểm và sở thích\n- Tôi sẽ tư vấn nhanh\n\nCách nào bạn thích hơn?"
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "Cảm ơn",
+        "Thanks",
+        "Thank you",
+        "Cám ơn",
+        "Cảm ơn nhiều"
+      ],
+      "responses": [
+        "Rất vui được giúp bạn! Chúc bạn lựa chọn được ngành học phù hợp và đạt kết quả tốt! 🎓",
+        "Không có gì! Nếu cần thêm thông tin, đừng ngại hỏi tôi nhé. Chúc bạn thành công! 🌟",
+        "Hân hạnh được hỗ trợ! Chúc bạn may mắn trong kỳ tuyển sinh. Hãy nhớ dùng công cụ gợi ý AI nhé! 🚀"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Tạm biệt",
+        "Bye",
+        "Goodbye",
+        "Hẹn gặp lại",
+        "Thôi đủ rồi"
+      ],
+      "responses": [
+        "Tạm biệt! Chúc bạn một ngày tốt lành và may mắn với việc chọn ngành! 👋",
+        "Hẹn gặp lại bạn! Nếu cần tư vấn thêm, hãy quay lại nhé. Chúc thành công! 🎯",
+        "Bye bye! Nhớ ghé thăm trang /advisor để nhận gợi ý AI nhé. Chúc may mắn! 🍀"
+      ]
+    }
+  ]
+}

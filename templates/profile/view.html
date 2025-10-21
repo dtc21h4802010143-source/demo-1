@@ -1,0 +1,364 @@
+{% extends "base.html" %}
+{% block title %}Hồ sơ cá nhân{% endblock %}
+{% block content %}
+<div class="flex min-h-[70vh] items-center justify-center py-8 px-4">
+    <div class="w-full max-w-4xl">
+        <!-- Header với Progress -->
+        <div class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-2xl shadow-xl p-8 mb-6 text-white">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-user-circle text-4xl"></i>
+                    <div>
+                        <h2 class="text-3xl font-bold">Hồ sơ cá nhân</h2>
+                        <p class="text-indigo-100 text-sm">Quản lý thông tin tuyển sinh của bạn</p>
+                    </div>
+                </div>
+                {% if applicant %}
+                <div class="text-right">
+                    <div class="text-3xl font-bold" id="profileProgress">0%</div>
+                    <div class="text-sm text-indigo-100">Hoàn thành</div>
+                </div>
+                {% endif %}
+            </div>
+            
+            {% if applicant %}
+            <!-- Progress Bar -->
+            <div class="bg-white/20 rounded-full h-3 overflow-hidden">
+                <div id="progressBar" class="bg-white h-full rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if applicant %}
+        <!-- Quick Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 {% if applicant.full_name %}border-green-500{% else %}border-gray-300{% endif %}">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-circle-check text-2xl {% if applicant.full_name %}text-green-500{% else %}text-gray-300{% endif %}"></i>
+                    <div>
+                        <div class="text-sm text-gray-600">Thông tin cơ bản</div>
+                        <div class="font-bold">{% if applicant.full_name and applicant.phone %}Đã hoàn thành{% else %}Chưa đủ{% endif %}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 {% if applicant.date_of_birth and applicant.address %}border-green-500{% else %}border-gray-300{% endif %}">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-circle-check text-2xl {% if applicant.date_of_birth and applicant.address %}text-green-500{% else %}text-gray-300{% endif %}"></i>
+                    <div>
+                        <div class="text-sm text-gray-600">Địa chỉ & Ngày sinh</div>
+                        <div class="font-bold">{% if applicant.date_of_birth and applicant.address %}Đã hoàn thành{% else %}Chưa đủ{% endif %}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 {% if applicant.high_school %}border-green-500{% else %}border-gray-300{% endif %}">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-circle-check text-2xl {% if applicant.high_school %}text-green-500{% else %}text-gray-300{% endif %}"></i>
+                    <div>
+                        <div class="text-sm text-gray-600">Học vấn</div>
+                        <div class="font-bold">{% if applicant.high_school %}Đã hoàn thành{% else %}Chưa có{% endif %}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detail Table -->
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+            <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-address-card text-indigo-500"></i>
+                Chi tiết hồ sơ
+            </h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-sm">
+                    <tbody class="divide-y">
+                        <tr class="hover:bg-gray-50 transition">
+                            <th class="py-3 px-4 text-left font-medium w-48 text-gray-600">
+                                <i class="fa-solid fa-user mr-2 text-indigo-500"></i>Họ tên
+                            </th>
+                            <td class="py-3 px-4">
+                                <span class="font-semibold">{{ applicant.full_name }}</span>
+                                {% if applicant.full_name %}
+                                <i class="fa-solid fa-circle-check text-green-500 ml-2"></i>
+                                {% else %}
+                                <i class="fa-solid fa-circle-exclamation text-yellow-500 ml-2"></i>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition">
+                            <th class="py-3 px-4 text-left font-medium text-gray-600">
+                                <i class="fa-solid fa-envelope mr-2 text-indigo-500"></i>Email
+                            </th>
+                            <td class="py-3 px-4">
+                                <span class="font-semibold">{{ applicant.email }}</span>
+                                <i class="fa-solid fa-circle-check text-green-500 ml-2"></i>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition">
+                            <th class="py-3 px-4 text-left font-medium text-gray-600">
+                                <i class="fa-solid fa-phone mr-2 text-indigo-500"></i>Số điện thoại
+                            </th>
+                            <td class="py-3 px-4">
+                                <span class="font-semibold">{{ applicant.phone if applicant.phone else '—' }}</span>
+                                {% if applicant.phone %}
+                                <i class="fa-solid fa-circle-check text-green-500 ml-2"></i>
+                                {% else %}
+                                <i class="fa-solid fa-circle-exclamation text-yellow-500 ml-2"></i>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition">
+                            <th class="py-3 px-4 text-left font-medium text-gray-600">
+                                <i class="fa-solid fa-cake-candles mr-2 text-indigo-500"></i>Ngày sinh
+                            </th>
+                            <td class="py-3 px-4">
+                                <span class="font-semibold">{{ applicant.date_of_birth if applicant.date_of_birth else '—' }}</span>
+                                {% if applicant.date_of_birth %}
+                                <i class="fa-solid fa-circle-check text-green-500 ml-2"></i>
+                                {% else %}
+                                <i class="fa-solid fa-circle-exclamation text-yellow-500 ml-2"></i>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition">
+                            <th class="py-3 px-4 text-left font-medium text-gray-600">
+                                <i class="fa-solid fa-location-dot mr-2 text-indigo-500"></i>Địa chỉ
+                            </th>
+                            <td class="py-3 px-4">
+                                <span class="font-semibold">{{ applicant.address if applicant.address else '—' }}</span>
+                                {% if applicant.address %}
+                                <i class="fa-solid fa-circle-check text-green-500 ml-2"></i>
+                                {% else %}
+                                <i class="fa-solid fa-circle-exclamation text-yellow-500 ml-2"></i>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition">
+                            <th class="py-3 px-4 text-left font-medium text-gray-600">
+                                <i class="fa-solid fa-school mr-2 text-indigo-500"></i>Trường THPT
+                            </th>
+                            <td class="py-3 px-4">
+                                <span class="font-semibold">{{ applicant.high_school if applicant.high_school else '—' }}</span>
+                                {% if applicant.high_school %}
+                                <i class="fa-solid fa-circle-check text-green-500 ml-2"></i>
+                                {% else %}
+                                <i class="fa-solid fa-circle-exclamation text-yellow-500 ml-2"></i>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition">
+                            <th class="py-3 px-4 text-left font-medium text-gray-600">
+                                <i class="fa-solid fa-calendar-plus mr-2 text-indigo-500"></i>Ngày đăng ký
+                            </th>
+                            <td class="py-3 px-4">
+                                <span class="font-semibold">{{ applicant.registration_date }}</span>
+                                <i class="fa-solid fa-circle-check text-green-500 ml-2"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap gap-4 mt-6">
+            <a href="{{ url_for('edit_profile') }}" class="px-6 py-3 bg-gradient-to-r from-sky-500 to-indigo-500 text-white rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square"></i> Chỉnh sửa hồ sơ
+            </a>
+            <a href="{{ url_for('manage_documents') }}" class="px-6 py-3 bg-gradient-to-r from-emerald-500 to-green-500 text-white rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all flex items-center gap-2">
+                <i class="fa-solid fa-folder-open"></i> Tài liệu hồ sơ
+            </a>
+            <form action="{{ url_for('delete_profile') }}" method="post" onsubmit="return confirm('⚠️ Bạn có chắc muốn xóa hồ sơ? Hành động này không thể hoàn tác!');">
+                <button type="submit" class="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-trash"></i> Xóa hồ sơ
+                </button>
+            </form>
+        </div>
+        
+        <!-- AI Recommendation Form -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 mt-6">
+            <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-lightbulb text-indigo-500"></i>
+                Gợi ý ngành bằng AI theo điểm và sở thích
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">Nhập tổng điểm 3 môn và một vài sở thích để nhận gợi ý ngành phù hợp.</p>
+
+            <form id="aiRecommendForm" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="text-sm text-gray-600">Tổng điểm (3 môn)</label>
+                    <input type="number" step="0.25" name="total_score" id="total_score" class="w-full mt-1 p-2 border rounded" placeholder="Ví dụ: 21.5" required>
+                </div>
+                <div>
+                    <label class="text-sm text-gray-600">Điểm Toán</label>
+                    <input type="number" step="0.25" name="math_score" id="math_score" class="w-full mt-1 p-2 border rounded" placeholder="Ví dụ: 8.0">
+                </div>
+                <div>
+                    <label class="text-sm text-gray-600">Tổ hợp</label>
+                    <input type="text" name="subject_combination" id="subject_combination" class="w-full mt-1 p-2 border rounded" placeholder="Ví dụ: A00, D01">
+                </div>
+
+                <div class="md:col-span-3">
+                    <label class="text-sm text-gray-600">Sở thích (phân cách bằng dấu phẩy)</label>
+                    <input type="text" name="interests" id="interests" class="w-full mt-1 p-2 border rounded" placeholder="Ví dụ: công nghệ, lập trình, AI">
+                </div>
+
+                <div class="md:col-span-3 flex items-center gap-3 mt-2">
+                    <button type="submit" class="px-6 py-3 bg-gradient-to-r from-sky-500 to-indigo-500 text-white rounded-lg font-semibold">Nhận gợi ý</button>
+                    <button type="button" id="clearRecommend" class="px-4 py-2 bg-gray-100 rounded">Xóa</button>
+                </div>
+            </form>
+
+            <div id="recommendResults" class="mt-6 hidden">
+                <h4 class="text-lg font-semibold mb-3">Kết quả gợi ý</h4>
+                <div id="recommendList" class="space-y-3"></div>
+            </div>
+        </div>
+        {% else %}
+        <!-- Empty State -->
+        <div class="bg-white rounded-2xl shadow-xl p-12 text-center">
+            <i class="fa-solid fa-user-slash text-6xl text-gray-300 mb-4"></i>
+            <h3 class="text-2xl font-bold text-gray-700 mb-2">Chưa có hồ sơ</h3>
+            <p class="text-gray-500 mb-6">Bạn chưa tạo hồ sơ tuyển sinh. Hãy tạo hồ sơ để bắt đầu!</p>
+            <a href="{{ url_for('edit_profile') }}" class="inline-block px-8 py-3 bg-gradient-to-r from-emerald-500 to-green-500 text-white rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all">
+                <i class="fa-solid fa-plus mr-2"></i>Tạo hồ sơ ngay
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    {% if applicant %}
+    // Tính toán % hoàn thành hồ sơ
+    const fields = [
+        {{ 'true' if applicant.full_name else 'false' }},
+        {{ 'true' if applicant.email else 'false' }},
+        {{ 'true' if applicant.phone else 'false' }},
+        {{ 'true' if applicant.date_of_birth else 'false' }},
+        {{ 'true' if applicant.address else 'false' }},
+        {{ 'true' if applicant.high_school else 'false' }}
+    ];
+    
+    const completedFields = fields.filter(f => f === true).length;
+    const totalFields = fields.length;
+    const percentage = Math.round((completedFields / totalFields) * 100);
+    
+    // Animate progress
+    setTimeout(() => {
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('profileProgress');
+        
+        progressBar.style.width = percentage + '%';
+        
+        let current = 0;
+        const increment = percentage / 30;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= percentage) {
+                current = percentage;
+                clearInterval(timer);
+            }
+            progressText.textContent = Math.round(current) + '%';
+        }, 20);
+    }, 300);
+    {% endif %}
+});
+</script>
+<script>
+// AI recommendation form handling
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('aiRecommendForm');
+    const resultsWrap = document.getElementById('recommendResults');
+    const resultsList = document.getElementById('recommendList');
+    const clearBtn = document.getElementById('clearRecommend');
+
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const total_score = parseFloat(document.getElementById('total_score').value || 0);
+        const math_score = parseFloat(document.getElementById('math_score').value || 0);
+        const subject_combination = document.getElementById('subject_combination').value || '';
+        const interests_raw = document.getElementById('interests').value || '';
+        const interests = interests_raw.split(',').map(s => s.trim()).filter(Boolean);
+
+        if (!total_score || isNaN(total_score)) {
+            alert('Vui lòng nhập tổng điểm hợp lệ.');
+            return;
+        }
+
+        // Prepare payload
+        const payload = {
+            total_score: total_score,
+            math_score: math_score || null,
+            subject_combination: subject_combination,
+            interests: interests,
+            save_preference: false
+        };
+
+        // If applicant exists, attach applicant_id
+        {% if applicant %}
+        payload.applicant_id = {{ applicant.id }};
+        {% endif %}
+
+        // Show loading state
+        resultsWrap.classList.remove('hidden');
+        resultsList.innerHTML = '<div class="p-4 bg-gray-50 border rounded">Đang xử lý... Vui lòng chờ.</div>';
+
+        try {
+            const resp = await fetch('/api/recommend-programs', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!resp.ok) {
+                const text = await resp.text();
+                resultsList.innerHTML = `<div class="p-4 bg-red-50 border rounded text-red-600">Lỗi: ${resp.status} ${text}</div>`;
+                return;
+            }
+
+            const data = await resp.json();
+            if (!data.success) {
+                resultsList.innerHTML = `<div class="p-4 bg-yellow-50 border rounded">Không có kết quả: ${data.error || 'Không rõ'}</div>`;
+                return;
+            }
+
+            const recs = data.data.recommendations || [];
+            if (recs.length === 0) {
+                resultsList.innerHTML = '<div class="p-4 bg-gray-50 border rounded">Không tìm thấy ngành phù hợp.</div>';
+                return;
+            }
+
+            // Render recommendations
+            resultsList.innerHTML = '';
+            recs.forEach((r, idx) => {
+                const div = document.createElement('div');
+                div.className = 'p-4 border rounded bg-white';
+                div.innerHTML = `
+                    <div class="flex justify-between">
+                        <div class="font-semibold text-md">${idx+1}. ${r.program_name} <span class="text-sm text-gray-500">(${r.year})</span></div>
+                        <div class="text-indigo-600 font-bold">${r.admission_score ? r.admission_score.toFixed(2) : '—'} điểm</div>
+                    </div>
+                    <div class="text-sm text-gray-600 mt-2">Độ phù hợp: <strong>${r.match_score}</strong> — Xác suất: <strong>${r.probability}</strong></div>
+                    ${r.notes ? `<div class="text-sm text-yellow-700 mt-2">Ghi chú: ${r.notes}</div>` : ''}
+                    ${r.program_info ? `<div class="text-sm text-gray-700 mt-2">${r.program_info.description || ''}</div>` : ''}
+                `;
+                resultsList.appendChild(div);
+            });
+
+        } catch (err) {
+            resultsList.innerHTML = `<div class="p-4 bg-red-50 border rounded text-red-600">Lỗi: ${err.message}</div>`;
+        }
+    });
+
+    clearBtn?.addEventListener('click', () => {
+        form.reset();
+        resultsWrap.classList.add('hidden');
+        resultsList.innerHTML = '';
+    });
+});
+</script>
+{% endblock %}

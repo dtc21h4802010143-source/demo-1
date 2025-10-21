@@ -1,0 +1,578 @@
+{% extends "base.html" %}
+
+{% block title %}Tư Vấn Ngành Học AI - Hệ thống Tuyển sinh{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="text-center mb-12">
+        <div class="inline-block p-4 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full mb-4">
+            <i class="fas fa-brain text-white text-4xl"></i>
+        </div>
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">
+            Trợ Lý AI Tư Vấn Ngành Học
+        </h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Nhập điểm số của bạn, AI sẽ phân tích và gợi ý các ngành học phù hợp nhất với xác suất đỗ chính xác
+        </p>
+    </div>
+
+    <!-- Form Input -->
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                <i class="fas fa-edit text-indigo-600"></i>
+                Nhập điểm số của bạn
+            </h2>
+
+            <!-- Method Selection -->
+            <div class="mb-6">
+                <label class="block text-sm font-semibold text-gray-700 mb-3">
+                    Phương thức xét tuyển
+                </label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <button type="button" class="method-btn active" data-method="thpt">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Thi THPT</span>
+                    </button>
+                    <button type="button" class="method-btn" data-method="hoc_ba">
+                        <i class="fas fa-book"></i>
+                        <span>Học bạ</span>
+                    </button>
+                    <button type="button" class="method-btn" data-method="dgnl">
+                        <i class="fas fa-clipboard-check"></i>
+                        <span>ĐGNL</span>
+                    </button>
+                    <button type="button" class="method-btn" data-method="tuyen_thang">
+                        <i class="fas fa-award"></i>
+                        <span>Tuyển thẳng</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Score Input Forms -->
+            <form id="advisorForm">
+                <!-- THPT Scores -->
+                <div id="thptScores" class="score-form active">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Toán <span class="text-red-500">*</span>
+                            </label>
+                            <input type="number" name="toan" step="0.1" min="0" max="10" 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                                   placeholder="0.0">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Văn <span class="text-red-500">*</span>
+                            </label>
+                            <input type="number" name="van" step="0.1" min="0" max="10"
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                                   placeholder="0.0">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Ngoại ngữ <span class="text-red-500">*</span>
+                            </label>
+                            <input type="number" name="ngoai_ngu" step="0.1" min="0" max="10"
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                                   placeholder="0.0">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Lý
+                            </label>
+                            <input type="number" name="ly" step="0.1" min="0" max="10"
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                                   placeholder="0.0">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Hóa
+                            </label>
+                            <input type="number" name="hoa" step="0.1" min="0" max="10"
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                                   placeholder="0.0">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Sinh
+                            </label>
+                            <input type="number" name="sinh" step="0.1" min="0" max="10"
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                                   placeholder="0.0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Học bạ Scores -->
+                <div id="hocBaScores" class="score-form">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Điểm TB Lớp 10 <span class="text-red-500">*</span>
+                            </label>
+                            <input type="number" name="tb_10" step="0.1" min="0" max="10"
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                                   placeholder="0.0">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Điểm TB Lớp 11 <span class="text-red-500">*</span>
+                            </label>
+                            <input type="number" name="tb_11" step="0.1" min="0" max="10"
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                                   placeholder="0.0">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Điểm TB Lớp 12 (HK1) <span class="text-red-500">*</span>
+                            </label>
+                            <input type="number" name="tb_12" step="0.1" min="0" max="10"
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                                   placeholder="0.0">
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-4">
+                        <p class="text-sm text-gray-700">
+                            <i class="fas fa-info-circle text-blue-500"></i>
+                            Điểm TB 3 năm: <span id="tb3Nam" class="font-bold text-indigo-600">0.00</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ĐGNL Scores -->
+                <div id="dgnlScores" class="score-form">
+                    <div class="max-w-md mx-auto">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Điểm ĐGNL (thang 1200) <span class="text-red-500">*</span>
+                        </label>
+                        <input type="number" name="dgnl" step="1" min="0" max="1200"
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg text-center text-2xl font-bold"
+                               placeholder="0">
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="mt-8 text-center">
+                    <button type="submit" id="analyzeBtn" 
+                            class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-12 py-4 rounded-full font-bold text-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                        <i class="fas fa-magic mr-2"></i>
+                        Phân Tích & Tư Vấn Ngành
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="hidden text-center py-12">
+            <div class="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-indigo-600 mb-4"></div>
+            <p class="text-gray-600 text-lg">AI đang phân tích điểm số của bạn...</p>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="hidden">
+            <!-- Score Summary -->
+            <div class="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl shadow-xl p-8 mb-8 text-white">
+                <h3 class="text-2xl font-bold mb-4">
+                    <i class="fas fa-chart-line mr-2"></i>
+                    Phân Tích Điểm Số
+                </h3>
+                <div id="scoreSummary" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Will be populated by JS -->
+                </div>
+            </div>
+
+            <!-- Suggested Programs (theo phương thức) -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-graduation-cap text-indigo-600 mr-2"></i>
+                    Các Ngành Phù Hợp Với Bạn (theo phương thức)
+                </h3>
+                <div id="suggestedPrograms">
+                    <!-- Will be populated by JS -->
+                </div>
+            </div>
+
+            <!-- AI Recommend by total score + interests -->
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-indigo-600"></i>
+                    Gợi ý ngành bằng AI theo điểm & sở thích
+                </h3>
+                <p class="text-sm text-gray-600 mb-4">Nhập tổng điểm 3 môn và vài sở thích để nhận gợi ý.</p>
+                <form id="aiQuickForm" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="text-sm text-gray-600">Tổng điểm (3 môn)</label>
+                        <input type="number" step="0.25" name="total_score" class="w-full mt-1 p-2 border rounded" placeholder="VD: 21.5" required>
+                    </div>
+                    <div>
+                        <label class="text-sm text-gray-600">Điểm Toán</label>
+                        <input type="number" step="0.25" name="math_score" class="w-full mt-1 p-2 border rounded" placeholder="VD: 8.0">
+                    </div>
+                    <div>
+                        <label class="text-sm text-gray-600">Tổ hợp</label>
+                        <input type="text" name="subject_combination" class="w-full mt-1 p-2 border rounded" placeholder="VD: A00, D01">
+                    </div>
+                    <div class="md:col-span-3">
+                        <label class="text-sm text-gray-600">Sở thích (phân cách bằng dấu phẩy)</label>
+                        <input type="text" name="interests" class="w-full mt-1 p-2 border rounded" placeholder="VD: công nghệ, lập trình, AI">
+                    </div>
+                    <div class="md:col-span-3 flex items-center gap-3 mt-2">
+                        <button type="submit" class="px-6 py-3 bg-gradient-to-r from-sky-500 to-indigo-500 text-white rounded-lg font-semibold">Nhận gợi ý</button>
+                        <button type="button" id="aiQuickClear" class="px-4 py-2 bg-gray-100 rounded">Xóa</button>
+                    </div>
+                </form>
+                <div id="aiQuickResults" class="mt-6 hidden">
+                    <h4 class="text-lg font-semibold mb-3">Kết quả gợi ý (AI)</h4>
+                    <div id="aiQuickList" class="space-y-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.method-btn {
+    padding: 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.75rem;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.method-btn i {
+    font-size: 1.5rem;
+    color: #6b7280;
+}
+
+.method-btn span {
+    font-weight: 600;
+    color: #374151;
+}
+
+.method-btn:hover {
+    border-color: #818cf8;
+    background: #f5f3ff;
+}
+
+.method-btn.active {
+    border-color: #6366f1;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.method-btn.active i,
+.method-btn.active span {
+    color: white;
+}
+
+.score-form {
+    display: none;
+}
+
+.score-form.active {
+    display: block;
+}
+
+.program-card {
+    border: 2px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s;
+}
+
+.program-card:hover {
+    border-color: #6366f1;
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
+}
+
+.probability-bar {
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.probability-fill {
+    height: 100%;
+    transition: width 1s ease-out;
+}
+
+.status-very_high { background: linear-gradient(to right, #10b981, #059669); }
+.status-high { background: linear-gradient(to right, #3b82f6, #2563eb); }
+.status-medium { background: linear-gradient(to right, #f59e0b, #d97706); }
+.status-low { background: linear-gradient(to right, #f97316, #ea580c); }
+.status-very_low { background: linear-gradient(to right, #ef4444, #dc2626); }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const methodBtns = document.querySelectorAll('.method-btn');
+    const scoreForms = document.querySelectorAll('.score-form');
+    const form = document.getElementById('advisorForm');
+    const loadingState = document.getElementById('loadingState');
+    const results = document.getElementById('results');
+    let currentMethod = 'thpt';
+
+    // Method selection
+    methodBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            methodBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            currentMethod = this.dataset.method;
+            
+            scoreForms.forEach(form => form.classList.remove('active'));
+            document.getElementById(currentMethod + 'Scores')?.classList.add('active');
+        });
+    });
+
+    // Auto-calculate TB 3 năm
+    const hocBaInputs = document.querySelectorAll('#hocBaScores input');
+    hocBaInputs.forEach(input => {
+        input.addEventListener('input', function() {
+            const tb10 = parseFloat(document.querySelector('input[name="tb_10"]').value) || 0;
+            const tb11 = parseFloat(document.querySelector('input[name="tb_11"]').value) || 0;
+            const tb12 = parseFloat(document.querySelector('input[name="tb_12"]').value) || 0;
+            const avg = ((tb10 + tb11 + tb12) / 3).toFixed(2);
+            document.getElementById('tb3Nam').textContent = avg;
+        });
+    });
+
+    // Form submission
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const scores = {};
+        
+        for (let [key, value] of formData.entries()) {
+            if (value) {
+                scores[key] = parseFloat(value);
+            }
+        }
+
+        // For học bạ, calculate TB 3 năm
+        if (currentMethod === 'hoc_ba' && scores.tb_10 && scores.tb_11 && scores.tb_12) {
+            scores.tb_3_nam = (scores.tb_10 + scores.tb_11 + scores.tb_12) / 3;
+        }
+
+        // Show loading
+        loadingState.classList.remove('hidden');
+        results.classList.add('hidden');
+
+        try {
+            const response = await fetch('/api/suggest-programs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    scores: scores,
+                    method: currentMethod
+                })
+            });
+
+            // Check content type before parsing JSON
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                const text = await response.text();
+                console.error('Non-JSON response:', text.substring(0, 500));
+                alert('Lỗi: Server trả về HTML. Vui lòng đảm bảo server đang chạy và route /api/suggest-programs tồn tại.');
+                return;
+            }
+
+            const data = await response.json();
+
+            if (data.success) {
+                displayResults(data);
+            } else {
+                alert('Có lỗi xảy ra: ' + data.error);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Không thể kết nối đến server. Vui lòng thử lại.');
+        } finally {
+            loadingState.classList.add('hidden');
+        }
+    });
+
+    function displayResults(data) {
+        // Display score summary
+        const scoreSummary = document.getElementById('scoreSummary');
+        let summaryHTML = '';
+        
+        for (let [combo, score] of Object.entries(data.combinations)) {
+            summaryHTML += `
+                <div class="text-center">
+                    <div class="text-3xl font-bold mb-2">${score}</div>
+                    <div class="text-sm opacity-90">Khối ${combo}</div>
+                </div>
+            `;
+        }
+        
+        scoreSummary.innerHTML = summaryHTML;
+
+        // Display suggested programs
+        const programsContainer = document.getElementById('suggestedPrograms');
+        
+        if (data.suggestions.length === 0) {
+            programsContainer.innerHTML = `
+                <div class="text-center py-8 text-gray-500">
+                    <i class="fas fa-search text-4xl mb-4"></i>
+                    <p>Không tìm thấy ngành phù hợp. Vui lòng kiểm tra lại điểm số.</p>
+                </div>
+            `;
+        } else {
+            let programsHTML = '';
+            
+            data.suggestions.forEach((prog, index) => {
+                const statusText = {
+                    'very_high': 'Rất cao',
+                    'high': 'Cao',
+                    'medium': 'Trung bình',
+                    'low': 'Thấp',
+                    'very_low': 'Rất thấp'
+                };
+
+                programsHTML += `
+                    <div class="program-card">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="text-2xl font-bold text-indigo-600">#${index + 1}</span>
+                                    <div>
+                                        <h4 class="text-xl font-bold text-gray-800">${prog.name}</h4>
+                                        <p class="text-sm text-gray-500">${prog.code} - ${prog.department}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-3xl font-bold text-indigo-600">${prog.probability}%</div>
+                                <div class="text-xs text-gray-500">${statusText[prog.status]}</div>
+                            </div>
+                        </div>
+
+                        <div class="probability-bar mb-4">
+                            <div class="probability-fill status-${prog.status}" style="width: ${prog.probability}%"></div>
+                        </div>
+
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                            <div>
+                                <div class="text-gray-500 mb-1">Điểm chuẩn ${prog.year}</div>
+                                <div class="font-bold text-gray-800">${prog.minimum_score}</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-500 mb-1">Điểm của bạn</div>
+                                <div class="font-bold ${prog.difference >= 0 ? 'text-green-600' : 'text-red-600'}">
+                                    ${prog.your_score} <span class="text-xs">(${prog.difference >= 0 ? '+' : ''}${prog.difference})</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-gray-500 mb-1">Khối xét tuyển</div>
+                                <div class="font-bold text-gray-800">${prog.best_combination}</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-500 mb-1">Chỉ tiêu</div>
+                                <div class="font-bold text-gray-800">${prog.quota} sinh viên</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            programsContainer.innerHTML = programsHTML;
+        }
+
+        results.classList.remove('hidden');
+        results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    // AI quick form handler (total score + interests)
+    const aiQuickForm = document.getElementById('aiQuickForm');
+    const aiQuickResults = document.getElementById('aiQuickResults');
+    const aiQuickList = document.getElementById('aiQuickList');
+    const aiQuickClear = document.getElementById('aiQuickClear');
+
+    if (aiQuickForm) {
+        aiQuickForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fd = new FormData(aiQuickForm);
+            const total_score = parseFloat(fd.get('total_score') || '0');
+            const math_score = parseFloat(fd.get('math_score') || '0') || null;
+            const subject_combination = (fd.get('subject_combination') || '').trim();
+            const interests_raw = (fd.get('interests') || '').trim();
+            const interests = interests_raw.split(',').map(s => s.trim()).filter(Boolean);
+            if (!total_score || isNaN(total_score)) {
+                alert('Vui lòng nhập tổng điểm hợp lệ.');
+                return;
+            }
+            aiQuickResults.classList.remove('hidden');
+            aiQuickList.innerHTML = '<div class="p-4 bg-gray-50 border rounded">Đang xử lý...</div>';
+            try {
+                const resp = await fetch('/api/recommend-programs', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        total_score,
+                        math_score,
+                        subject_combination,
+                        interests,
+                        save_preference: false
+                    })
+                });
+                
+                // Check content type before parsing
+                const contentType = resp.headers.get('content-type');
+                if (!contentType || !contentType.includes('application/json')) {
+                    const text = await resp.text();
+                    console.error('Non-JSON response:', text.substring(0, 500));
+                    aiQuickList.innerHTML = `<div class="p-4 bg-red-50 border rounded text-red-600">Lỗi: Server trả về HTML thay vì JSON. Vui lòng kiểm tra server logs.</div>`;
+                    return;
+                }
+                
+                const data = await resp.json();
+                if (!resp.ok || !data.success) {
+                    aiQuickList.innerHTML = `<div class="p-4 bg-red-50 border rounded text-red-600">Lỗi: ${data.error || resp.status}</div>`;
+                    return;
+                }
+                const recs = data.data?.recommendations || [];
+                if (!recs.length) {
+                    aiQuickList.innerHTML = '<div class="p-4 bg-gray-50 border rounded">Không tìm thấy ngành phù hợp.</div>';
+                    return;
+                }
+                aiQuickList.innerHTML = '';
+                recs.slice(0, 10).forEach((r, idx) => {
+                    const el = document.createElement('div');
+                    el.className = 'p-4 border rounded bg-white';
+                    el.innerHTML = `
+                        <div class="flex justify-between">
+                            <div class="font-semibold">${idx + 1}. ${r.program_name} <span class="text-sm text-gray-500">(${r.year})</span></div>
+                            <div class="text-indigo-600 font-bold">${r.admission_score ? r.admission_score.toFixed(2) : '—'} điểm</div>
+                        </div>
+                        <div class="text-sm text-gray-600 mt-2">Phù hợp: <strong>${r.match_score}</strong> — Xác suất: <strong>${r.probability}</strong></div>
+                        ${r.notes ? `<div class='text-sm text-yellow-700 mt-2'>Ghi chú: ${r.notes}</div>` : ''}
+                        ${r.program_info ? `<div class='text-sm text-gray-700 mt-2'>${r.program_info.description || ''}</div>` : ''}
+                    `;
+                    aiQuickList.appendChild(el);
+                });
+            } catch (err) {
+                aiQuickList.innerHTML = `<div class="p-4 bg-red-50 border rounded text-red-600">Lỗi: ${err.message}</div>`;
+            }
+        });
+        aiQuickClear?.addEventListener('click', () => {
+            aiQuickForm.reset();
+            aiQuickResults.classList.add('hidden');
+            aiQuickList.innerHTML = '';
+        });
+    }
+});
+</script>
+{% endblock %}

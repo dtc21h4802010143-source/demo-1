@@ -1,0 +1,57 @@
+{
+  "truong_dai_hoc": {
+    "thong_tin_chung": {
+      "ten_truong": "Trường Đại học Công nghệ Thông tin và Truyền thông - Đại học Thái Nguyên",
+      "ten_viet_tat": "ICTU",
+      "ma_truong": "DTC",
+      "dia_chi": "Đường Z115, phường Quyết Thắng, TP. Thái Nguyên, tỉnh Thái Nguyên.",
+      "website": "https://tuyensinh.ictu.edu.vn/",
+      "facebook": "https://www.facebook.com/tuyensinhdaihoc.ictu",
+      "email": "tuyensinh@ictu.edu.vn",
+      "hotline": ["0981 33 66 28", "0981 33 66 29"]
+    },
+    "tuyen_sinh_qua_cac_nam": {
+      "2024": {
+        "tong_chi_tieu": "2.500 - 3.300",
+        "phuong_thuc_xet_tuyen": ["Xét học bạ THPT", "Xét điểm thi tốt nghiệp THPT", "Xét tuyển thẳng", "Xét kết quả thi Đánh giá năng lực (V-SAT-TNU)"],
+        "diem_chuan_khoang": "18.4 - 22.8 (dựa trên điểm thi THPT)",
+        "hoc_phi": {
+          "ghi_chu": "Dự kiến cho năm học 2024-2025",
+          "theo_thang": "1.350.000 - 1.640.000 VNĐ/tháng",
+          "theo_nam": "13.500.000 - 16.400.000 VNĐ/năm",
+          "chi_tiet_theo_khoi": {
+            "kinh_doanh_quan_ly": "Khoảng 14.100.000 - 15.000.000 VNĐ/năm",
+            "cntt_ky_thuat_my_thuat": "Khoảng 16.400.000 VNĐ/năm"
+          }
+        },
+        "danh_sach_nganh": [
+          {"nganh": "Thiết kế đồ họa", "ma_nganh": "7210403", "to_hop_xet": ["A00", "C01", "C14", "D01"], "phuong_thuc": ["Điểm thi THPT", "Học bạ", "Đánh giá năng lực V-SAT-TNU", "Tuyển thẳng"], "diem_chuan": {"thi_thpt": 20.6, "hoc_ba": 19.1}, "hoc_phi_nganh": "Khoảng 16.400.000 VNĐ/năm", "uu_tien": "Theo khu vực, đối tượng, tuyển thẳng Bộ GD&ĐT"},
+          {"nganh": "Quản trị kinh doanh số", "ma_nganh": "7340101", "to_hop_xet": ["A00", "C01", "C14", "D01"], "phuong_thuc": ["Điểm thi THPT", "Học bạ", "Đánh giá năng lực V-SAT-TNU", "Tuyển thẳng"], "diem_chuan": {"thi_thpt": 20.9, "hoc_ba": 19.7}, "hoc_phi_nganh": "Khoảng 14.100.000 - 15.000.000 VNĐ/năm", "uu_tien": "Theo quy chế ICTU và Bộ GD&ĐT"},
+          {"nganh": "Truyền thông đa phương tiện", "ma_nganh": "7320104", "to_hop_xet": ["A00", "C01", "C14", "D01"], "phuong_thuc": ["Điểm thi THPT", "Học bạ", "Đánh giá năng lực V-SAT-TNU", "Tuyển thẳng"], "diem_chuan": {"thi_thpt": 21.7, "hoc_ba": 18.0}, "hoc_phi_nganh": "Khoảng 16.400.000 VNĐ/năm", "uu_tien": "Theo quy định Bộ GD&ĐT và ICTU"},
+          {"nganh": "Khoa học máy tính (AI & Big Data)", "ma_nganh": "7480101", "to_hop_xet": ["A00", "C01", "C14", "D01"], "phuong_thuc": ["Điểm thi THPT", "Học bạ", "Đánh giá năng lực V-SAT-TNU", "Tuyển thẳng"], "diem_chuan": {"thi_thpt": 22.1, "hoc_ba": 20.2}, "hoc_phi_nganh": "Khoảng 16.400.000 VNĐ/năm", "uu_tien": "Ưu tiên thí sinh có thành tích Tin học, theo quy định ICTU"},
+          {"nganh": "Mạng máy tính và truyền thông dữ liệu", "ma_nganh": "7480102", "to_hop_xet": ["A00", "C01", "C14", "D01"], "phuong_thuc": ["Điểm thi THPT", "Học bạ"], "diem_chuan": {"thi_thpt": 22.8, "hoc_ba": 22.3}, "hoc_phi_nganh": "Khoảng 16.400.000 VNĐ/năm", "uu_tien": "Theo quy định ICTU"},
+          {"nganh": "Kỹ thuật phần mềm", "ma_nganh": "7480103", "to_hop_xet": ["A00", "C01", "C14", "D01"], "phuong_thuc": ["Điểm thi THPT", "Học bạ"], "diem_chuan": {"thi_thpt": 20.8, "hoc_ba": 19.1}, "hoc_phi_nganh": "Khoảng 16.400.000 VNĐ/năm", "uu_tien": "Theo quy định ICTU"},
+          {"nganh": "Công nghệ thông tin", "ma_nganh": "7480201", "to_hop_xet": ["A00", "C01", "C14", "D01"], "phuong_thuc": ["Điểm thi THPT", "Học bạ"], "diem_chuan": {"thi_thpt": 20.9, "hoc_ba": 18.2}, "hoc_phi_nganh": "Khoảng 16.400.000 VNĐ/năm", "uu_tien": "Theo quy định Bộ GD&ĐT"},
+          {"nganh": "An toàn thông tin", "ma_nganh": "7480202", "to_hop_xet": ["A00", "C01", "C14", "D01"], "phuong_thuc": ["Điểm thi THPT", "Học bạ"], "diem_chuan": {"thi_thpt": 19.3, "hoc_ba": 20.5}, "hoc_phi_nganh": "Khoảng 16.400.000 VNĐ/năm", "uu_tien": "Theo quy chế ưu tiên ICTU"},
+          {"nganh": "Công nghệ ô tô", "ma_nganh": "7510205", "to_hop_xet": ["A00", "C01", "C14", "D01"], "phuong_thuc": ["Điểm thi THPT", "Học bạ"], "diem_chuan": {"thi_thpt": 19.9, "hoc_ba": 18.2}, "hoc_phi_nganh": "Khoảng 16.400.000 VNĐ/năm", "uu_tien": "Theo quy định Bộ GD&ĐT"},
+          {"nganh": "Vi mạch bán dẫn", "ma_nganh": "7520208", "to_hop_xet": ["A00", "C01", "C14", "D01"], "phuong_thuc": ["Điểm thi THPT", "Học bạ"], "diem_chuan": {"thi_thpt": 21.7, "hoc_ba": 20.3}, "hoc_phi_nganh": "Khoảng 16.400.000 VNĐ/năm", "uu_tien": "Theo quy định ICTU"}
+        ]
+      },
+      "2023": {"phuong_thuc_xet_tuyen": ["Xét học bạ THPT", "Xét điểm thi tốt nghiệp THPT", "Tuyển thẳng"], "diem_chuan_khoang": "16.0 - 19.5 (cao nhất là ngành Kỹ thuật phần mềm liên kết quốc tế)", "hoc_phi": {"ghi_chu": "Dự kiến cho năm học 2023-2024, tăng khoảng 10% so với 2022", "chi_tiet_theo_khoi": {"khoa_hoc_xa_hoi_kinh_te": "Khoảng 13.000.000 VNĐ/năm", "ky_thuat_cong_nghe_my_thuat": "Khoảng 15.000.000 VNĐ/năm"}}},
+      "2022": {"tong_chi_tieu": "2.120", "phuong_thuc_xet_tuyen": ["Xét học bạ THPT", "Xét điểm thi tốt nghiệp THPT", "Xét kết quả thi Đánh giá năng lực (V-SAT-TNU)", "Tuyển thẳng"], "diem_chuan_khoang": "16 - 19", "hoc_phi": {"ghi_chu": "Áp dụng cho năm học 2022-2023", "chi_tiet_theo_khoi": {"khoa_hoc_xa_hoi_kinh_te": "1.080.000 VNĐ/tháng", "ky_thuat_cong_nghe_my_thuat": "1.290.000 VNĐ/tháng"}}},
+      "2021": {"tong_chi_tieu": "1.900", "phuong_thuc_xet_tuyen": ["Xét điểm thi tốt nghiệp THPT", "Xét học bạ THPT"], "diem_chuan_khoang": "16.0 - 19.0 (cao nhất là KT phần mềm liên kết QT, CNTT chất lượng cao)", "hoc_phi": {"ghi_chu": "Áp dụng cho năm học 2021-2022", "chi_tiet_theo_bang_cap": {"cu_nhan": "980.000 VNĐ/tháng", "ky_su": "1.170.000 VNĐ/tháng"}}},
+      "2020": {"tong_chi_tieu": "1.460", "so_nganh_dao_tao": 17, "phuong_thuc_xet_tuyen": ["Xét điểm thi THPT Quốc Gia", "Xét học bạ THPT", "Xét tuyển thẳng"], "hoc_phi": {"ghi_chu": "Áp dụng cho năm học 2020-2021", "chi_tiet_theo_bang_cap": {"cu_nhan": "980.000 VNĐ/tháng", "ky_su": "1.170.000 VNĐ/tháng"}}}
+    }
+  },
+  "intents": [
+    {"tag": "greeting", "patterns": ["Xin chào", "Chào bạn", "Hi", "Hello", "Chào tư vấn viên"], "responses": ["Xin chào! Tôi là trợ lý tư vấn tuyển sinh ICTU. Tôi có thể giúp gì cho bạn?", "Chào bạn! Rất vui được hỗ trợ bạn về tuyển sinh Trường Đại học Công nghệ Thông tin và Truyền thông - ĐHTN. Bạn cần tư vấn về vấn đề gì?", "Xin chào! Tôi có thể giúp bạn tìm hiểu về các chương trình đào tạo, điểm chuẩn, học phí của ICTU."]},
+    {"tag": "goodbye", "patterns": ["Tạm biệt", "Goodbye", "Bye", "Hẹn gặp lại"], "responses": ["Cảm ơn bạn đã quan tâm đến ICTU. Chúc bạn một ngày tốt lành!", "Rất vui được tư vấn cho bạn. Hẹn gặp lại!", "Tạm biệt! Nếu có thắc mắc gì thêm, đừng ngại liên hệ hotline 0981 33 66 28 hoặc 0981 33 66 29 nhé!"]},
+    {"tag": "programs", "patterns": ["Trường có những ngành nào", "Các chương trình đào tạo", "Danh sách ngành học", "Các chuyên ngành", "Ngành đào tạo"], "responses": ["ICTU năm 2024 đào tạo 10 ngành:\n1. Thiết kế đồ họa (7210403)\n2. Quản trị kinh doanh số (7340101)\n3. Truyền thông đa phương tiện (7320104)\n4. Khoa học máy tính/AI & Big Data (7480101)\n5. Mạng máy tính và truyền thông dữ liệu (7480102)\n6. Kỹ thuật phần mềm (7480103)\n7. Công nghệ thông tin (7480201)\n8. An toàn thông tin (7480202)\n9. Công nghệ ô tô (7510205)\n10. Vi mạch bán dẫn (7520208)\nBạn quan tâm ngành nào?", "Các ngành đào tạo chủ yếu tập trung vào CNTT, kỹ thuật, truyền thông và kinh doanh số. Bạn muốn tìm hiểu thêm về ngành nào?"]},
+    {"tag": "admission_criteria", "patterns": ["Điểm chuẩn", "Điều kiện xét tuyển", "Tiêu chí tuyển sinh", "Yêu cầu đầu vào", "Điểm đầu vào"], "responses": ["Điểm chuẩn năm 2024 dao động từ 18.4 - 22.8 điểm (điểm thi THPT). Cao nhất là Mạng máy tính (22.8), thấp nhất là An toàn thông tin (19.3). Bạn quan tâm ngành nào?", "ICTU có 4 phương thức xét tuyển:\n1. Xét điểm thi THPT (tổ hợp A00, C01, C14, D01)\n2. Xét học bạ THPT\n3. Xét kết quả V-SAT-TNU\n4. Tuyển thẳng\nBạn muốn biết chi tiết phương thức nào?"]},
+    {"tag": "tuition", "patterns": ["Học phí", "Chi phí học tập", "Tiền học", "Phí đào tạo"], "responses": ["Học phí năm 2024-2025:\n- Ngành kinh doanh/quản lý: 14.100.000 - 15.000.000 VNĐ/năm\n- Ngành CNTT/kỹ thuật/mỹ thuật: 16.400.000 VNĐ/năm\nTrường có nhiều chính sách học bổng và hỗ trợ tài chính.", "Mức học phí dao động từ 1.350.000 - 1.640.000 VNĐ/tháng (13.5 - 16.4 triệu/năm). Trường có chính sách giảm học phí cho sinh viên có hoàn cảnh khó khăn và học bổng cho sinh viên xuất sắc."]},
+    {"tag": "scholarship", "patterns": ["Học bổng", "Chính sách hỗ trợ", "Giảm học phí", "Ưu đãi học tập"], "responses": ["ICTU có các loại học bổng:\n1. Học bổng đầu vào cho thí sinh điểm cao\n2. Học bổng học tập hàng kỳ\n3. Học bổng tài trợ doanh nghiệp\n4. Ưu tiên theo khu vực, đối tượng, tuyển thẳng Bộ GD&ĐT\nBạn muốn tìm hiểu loại nào?", "Chính sách học bổng đa dạng từ 25-100% học phí tùy theo thành tích. Ngoài ra còn có các gói hỗ trợ tài chính và vay ưu đãi."]},
+    {"tag": "dormitory", "patterns": ["Ký túc xá", "Chỗ ở", "Nhà ở sinh viên", "KTX"], "responses": ["Trường có ký túc xá với sức chứa lớn, đầy đủ tiện nghi. Chi phí từ 300-500k/tháng tùy loại phòng.", "KTX của trường có các loại phòng 4-8 người, đầy đủ điều hòa, nóng lạnh. Ưu tiên sinh viên năm nhất và có hoàn cảnh khó khăn."]},
+    {"tag": "application_process", "patterns": ["Cách đăng ký", "Thủ tục nhập học", "Hồ sơ xét tuyển", "Quy trình đăng ký"], "responses": ["Quy trình đăng ký gồm 4 bước:\n1. Nộp hồ sơ online tại https://tuyensinh.ictu.edu.vn/ hoặc offline\n2. Đóng lệ phí xét tuyển\n3. Chờ kết quả\n4. Nhập học\nLiên hệ: 0981 33 66 28/29 hoặc tuyensinh@ictu.edu.vn", "Bạn có thể đăng ký online qua website tuyển sinh hoặc nộp hồ sơ trực tiếp tại trường (Đường Z115, phường Quyết Thắng, TP. Thái Nguyên). Cần những giấy tờ:\n- Phiếu ĐKXT\n- Học bạ THPT\n- Bằng tốt nghiệp/Giấy CNTN\n- CMND/CCCD"]},
+    {"tag": "career_prospects", "patterns": ["Cơ hội việc làm", "Nghề nghiệp", "Định hướng nghề", "Việc làm sau tốt nghiệp"], "responses": ["Sinh viên ICTU tốt nghiệp có nhiều cơ hội việc làm trong lĩnh vực CNTT, AI, Big Data, Cybersecurity, truyền thông số, quản trị kinh doanh số với mức lương khởi điểm từ 10-20 triệu. Trường có mạng lưới doanh nghiệp đối tác rộng lớn.", "Tỷ lệ sinh viên có việc làm sau tốt nghiệp đạt trên 90%. Trường thường xuyên tổ chức job fair và có trung tâm hỗ trợ việc làm riêng."]}
+  ]
+}

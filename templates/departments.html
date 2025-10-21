@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Khoa/Viện{% endblock %}
+{% block content %}
+<div class="mb-8">
+    <h2 class="text-2xl font-bold mb-6">Danh sách Khoa/Viện</h2>
+    {% if departments %}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {% for d in departments %}
+        <div class="bg-white rounded-xl shadow p-6 flex flex-col gap-2">
+            <h3 class="text-lg font-semibold text-sky-700 mb-1">{{ d.name }}</h3>
+            <p class="text-gray-600">{{ d.description }}</p>
+            <div class="text-sm text-gray-500"><span class="font-medium">Trưởng khoa/viện:</span> {{ d.head or '-' }}</div>
+            <div class="text-sm text-gray-500"><span class="font-medium">Email liên hệ:</span> {{ d.contact_email or '-' }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-gray-500">Chưa có khoa/viện nào.</p>
+    {% endif %}
+</div>
+{% endblock %}

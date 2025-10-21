@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Danh sách ngành đào tạo{% endblock %}
+{% block content %}
+<div class="mb-8">
+    <h2 class="text-2xl font-bold mb-6">Danh sách ngành đào tạo</h2>
+    <div class="overflow-x-auto rounded-xl shadow">
+        <table class="min-w-full text-sm bg-white">
+            <thead>
+                <tr class="bg-sky-50 text-sky-700">
+                    <th class="py-3 px-4 text-left">STT</th>
+                    <th class="py-3 px-4 text-left">Tên ngành</th>
+                    <th class="py-3 px-4 text-left">Mã ngành</th>
+                    <th class="py-3 px-4 text-left">Khoa/Viện</th>
+                    <th class="py-3 px-4 text-left">Mô tả</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for program in programs %}
+                <tr class="border-b hover:bg-sky-50">
+                    <td class="py-2 px-4">{{ loop.index }}</td>
+                    <td class="py-2 px-4 font-medium">{{ program.name }}</td>
+                    <td class="py-2 px-4">{{ program.code }}</td>
+                    <td class="py-2 px-4">{{ program.department.name }}</td>
+                    <td class="py-2 px-4 text-gray-600">{{ program.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

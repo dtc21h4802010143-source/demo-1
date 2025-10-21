@@ -1,0 +1,47 @@
+id,name,code,department_id,description,duration,requirements,career_prospects,tuition_fee
+1,Kỹ thuật phần mềm,7480103,2,Đào tạo kỹ sư phần mềm chuyên nghiệp,4 năm,"Tổ hợp A00, A01","Kỹ sư phần mềm, DevOps, Software Architect",12000000.0
+2,Công nghệ thông tin,7480201,2,Đào tạo chuyên gia về phát triển phần mềm và hệ thống thông tin,4 năm,"Tổ hợp A00, A01, D01","Lập trình viên, Phân tích hệ thống, Quản lý dự án CNTT",12000000.0
+3,Kỹ thuật phần mềm,KTPM,2,Ngành Kỹ thuật phần mềm.,4 năm,"Theo quy định tuyển sinh (ví dụ: Tổ hợp A00, A01, D01)",Cơ hội việc làm rộng mở trong lĩnh vực liên quan.,12000000.0
+4,Khoa học máy tính (chuyên ngành Trí tuệ nhân tạo và Dữ liệu lớn),KHMT_AI_DL,2,Ngành Khoa học máy tính (chuyên ngành Trí tuệ nhân tạo và Dữ liệu lớn).,4 năm,"Theo quy định tuyển sinh (ví dụ: Tổ hợp A00, A01, D01)",Cơ hội việc làm rộng mở trong lĩnh vực liên quan.,12000000.0
+5,An toàn thông tin (hoặc An ninh mạng),ATTT,2,Ngành An toàn thông tin (hoặc An ninh mạng).,4 năm,"Theo quy định tuyển sinh (ví dụ: Tổ hợp A00, A01, D01)",Cơ hội việc làm rộng mở trong lĩnh vực liên quan.,12000000.0
+6,Mạng máy tính và Truyền thông dữ liệu,MMT_TTDL,2,Ngành Mạng máy tính và Truyền thông dữ liệu.,4 năm,"Theo quy định tuyển sinh (ví dụ: Tổ hợp A00, A01, D01)",Cơ hội việc làm rộng mở trong lĩnh vực liên quan.,12000000.0
+7,Kỹ thuật máy tính,7480106,2,Đào tạo về kiến trúc máy tính và hệ thống nhúng,4 năm,"Tổ hợp A00, A01","Kỹ sư phần cứng, Embedded System Developer",12000000.0
+8,Hệ thống thông tin,7340405,2,Đào tạo về quản trị và phân tích hệ thống thông tin,4 năm,"Tổ hợp A00, A01, D01","Business Analyst, System Administrator, IT Manager",11500000.0
+9,"Công nghệ kỹ thuật điện, điện tử",CNKT_DD,3,"Ngành Công nghệ kỹ thuật điện, điện tử.",4 năm,"Theo quy định tuyển sinh (ví dụ: Tổ hợp A00, A01, D01)",Cơ hội việc làm rộng mở trong lĩnh vực liên quan.,12000000.0
+10,Công nghệ kỹ thuật điều khiển và tự động hóa (Tự động hóa),CNKT_TDH,3,Ngành Công nghệ kỹ thuật điều khiển và tự động hóa (Tự động hóa).,4 năm,"Theo quy định tuyển sinh (ví dụ: Tổ hợp A00, A01, D01)",Cơ hội việc làm rộng mở trong lĩnh vực liên quan.,12000000.0
+11,Công nghệ kỹ thuật điện tử - viễn thông,CNKT_DTVT,3,Ngành Công nghệ kỹ thuật điện tử - viễn thông.,4 năm,"Theo quy định tuyển sinh (ví dụ: Tổ hợp A00, A01, D01)",Cơ hội việc làm rộng mở trong lĩnh vực liên quan.,12000000.0
+12,Công nghệ ôtô và Giao thông thông minh (Công nghệ ô tô),CNOTO,3,Ngành Công nghệ ôtô và Giao thông thông minh (Công nghệ ô tô).,4 năm,"Theo quy định tuyển sinh (ví dụ: Tổ hợp A00, A01, D01)",Cơ hội việc làm rộng mở trong lĩnh vực liên quan.,12000000.0
+13,Kỹ thuật cơ điện tử thông minh và robot (Cơ điện tử),KTCĐT,3,Ngành Kỹ thuật cơ điện tử thông minh và robot (Cơ điện tử).,4 năm,"Theo quy định tuyển sinh (ví dụ: Tổ hợp A00, A01, D01)",Cơ hội việc làm rộng mở trong lĩnh vực liên quan.,12000000.0
+14,Kỹ thuật y sinh,KTYS,3,Ngành Kỹ thuật y sinh.,4 năm,"Theo quy định tuyển sinh (ví dụ: Tổ hợp A00, A01, D01)",Cơ hội việc làm rộng mở trong lĩnh vực liên quan.,12000000.0
+15,Vi mạch bán dẫn,7510302,3,Đào tạo về thiết kế và sản xuất vi mạch tích hợp,4 năm,"Tổ hợp A00, A01","IC Designer, Chip Engineer, Semiconductor Engineer",13500000.0
+16,Thương mại điện tử,7340122,4,Đào tạo về kinh doanh trực tuyến và thương mại điện tử,4 năm,"Tổ hợp A01, D01, C00","E-commerce Manager, Digital Marketing, Online Business Owner",11500000.0
+17,Marketing số,7340115,4,Đào tạo về tiếp thị và quảng cáo kỹ thuật số,4 năm,"Tổ hợp A01, D01, C00","Digital Marketer, SEO/SEM Specialist, Content Marketing Manager",11500000.0
+18,Quản trị kinh doanh số,7340101,4,Đào tạo về quản trị doanh nghiệp trong môi trường số,4 năm,"Tổ hợp A01, D01, C00","Business Manager, Digital Transformation Manager, CEO",11500000.0
+19,Quản lý logistics và chuỗi cung ứng,7340602,4,Đào tạo về quản lý chuỗi cung ứng và logistics,4 năm,"Tổ hợp A00, D01, C00","Logistics Manager, Supply Chain Analyst, Operations Manager",11000000.0
+20,Quản trị văn phòng,7340406,4,Đào tạo về quản lý văn phòng và hành chính,4 năm,"Tổ hợp D01, C00","Office Manager, Executive Assistant, Administrative Manager",10500000.0
+21,Kinh tế số (hoặc Công nghệ tài chính),KTSO_FINTECH,4,Ngành Kinh tế số (hoặc Công nghệ tài chính).,4 năm,"Theo quy định tuyển sinh (ví dụ: Tổ hợp A00, A01, D01)",Cơ hội việc làm rộng mở trong lĩnh vực liên quan.,12000000.0
+22,Hệ thống thông tin quản lý,HTTQL,4,Ngành Hệ thống thông tin quản lý.,4 năm,"Theo quy định tuyển sinh (ví dụ: Tổ hợp A00, A01, D01)",Cơ hội việc làm rộng mở trong lĩnh vực liên quan.,12000000.0
+23,Truyền thông đa phương tiện,7320105,5,Đào tạo về sản xuất nội dung đa phương tiện,4 năm,"Tổ hợp D01, C00, V00","Multimedia Producer, Video Editor, Motion Graphics Designer",12000000.0
+24,Thiết kế đồ họa,7210403,5,Đào tạo về thiết kế đồ họa và hình ảnh số,4 năm,"Tổ hợp D01, V00 hoặc có năng khiếu","Graphic Designer, UI/UX Designer, Art Director",12000000.0
+25,Công nghệ truyền thông,7320104,5,Đào tạo về công nghệ và kỹ thuật truyền thông hiện đại,4 năm,"Tổ hợp D01, C00, V00","Content Creator, Media Producer, Communication Specialist",11500000.0
+26,Nghệ thuật số,7210407,5,Đào tạo về nghệ thuật và sáng tạo kỹ thuật số,4 năm,"Tổ hợp D01, V00 hoặc có năng khiếu","Digital Artist, 3D Modeler, Game Designer",13000000.0
+27,Khoa học dữ liệu,KHDL,2,Ngành Khoa học dữ liệu.,4 năm,"Theo quy định tuyển sinh (ví dụ: Tổ hợp A00, A01, D01)",Cơ hội việc làm rộng mở trong lĩnh vực liên quan.,12000000.0
+28,Điện tử viễn thông,7520207,3,Đào tạo về điện tử và hệ thống viễn thông,4 năm,"Tổ hợp A00, A01","Kỹ sư điện tử, Telecom Engineer, RF Engineer",12000000.0
+29,Kế toán,KETOAN,4,Ngành Kế toán.,4 năm,"Theo quy định tuyển sinh (ví dụ: Tổ hợp A00, A01, D01)",Cơ hội việc làm rộng mở trong lĩnh vực liên quan.,12000000.0
+30,Tài chính ngân hàng,TCNH,4,Ngành Tài chính ngân hàng.,4 năm,"Theo quy định tuyển sinh (ví dụ: Tổ hợp A00, A01, D01)",Cơ hội việc làm rộng mở trong lĩnh vực liên quan.,12000000.0
+31,Công nghệ đa phương tiện,CNDPT,5,Ngành Công nghệ đa phương tiện.,4 năm,"Theo quy định tuyển sinh (ví dụ: Tổ hợp A00, A01, D01)",Cơ hội việc làm rộng mở trong lĩnh vực liên quan.,12000000.0
+32,Ngôn ngữ Anh,7220201,9,Đào tạo tiếng Anh cho truyền thông và giao tiếp quốc tế,4 năm,"Tổ hợp D01, D14, D15","English Teacher, Translator, International Communication Specialist",10500000.0
+33,Tiếng Anh truyền thông,TATTT,6,Ngành Tiếng Anh truyền thông.,4 năm,"Theo quy định tuyển sinh (ví dụ: Tổ hợp A00, A01, D01)",Cơ hội việc làm rộng mở trong lĩnh vực liên quan.,12000000.0
+34,Khoa học máy tính,7480101,2,"Đào tạo chuyên sâu về thuật toán, AI và khoa học dữ liệu",4 năm,"Tổ hợp A00, A01","Data Scientist, AI Engineer, Research Scientist",13000000.0
+35,An ninh mạng,7480202,2,Đào tạo chuyên gia bảo mật và an toàn thông tin,4 năm,"Tổ hợp A00, A01","Chuyên viên bảo mật, Penetration Tester, Security Analyst",12500000.0
+36,Mạng máy tính và truyền thông dữ liệu,7480102,2,Đào tạo về mạng máy tính và truyền thông,4 năm,"Tổ hợp A00, A01","Network Engineer, Network Administrator, Telecom Specialist",12000000.0
+37,Tự động hóa,7510203,3,Đào tạo về điều khiển và tự động hóa công nghiệp,4 năm,"Tổ hợp A00, A01","Kỹ sư tự động hóa, PLC Programmer, Control System Engineer",12000000.0
+38,Cơ điện tử,7510204,3,Đào tạo về robot và hệ thống cơ điện tử thông minh,4 năm,"Tổ hợp A00, A01","Kỹ sư robot, Mechatronics Engineer, Automation Engineer",12500000.0
+39,Công nghệ ô tô,7510205,3,Đào tạo về công nghệ và kỹ thuật ô tô hiện đại,4 năm,"Tổ hợp A00, A01","Kỹ sư ô tô, Automotive Engineer, Quality Control",11500000.0
+40,Kỹ thuật Điện,7510301,3,Đào tạo về hệ thống điện và năng lượng,4 năm,"Tổ hợp A00, A01","Kỹ sư điện, Power System Engineer, Electrical Designer",11500000.0
+41,Điện tử,7520114,3,Đào tạo về thiết kế và chế tạo mạch điện tử,4 năm,"Tổ hợp A00, A01","Kỹ sư điện tử, Electronics Designer, PCB Designer",11500000.0
+42,Công nghệ tài chính,7340201,4,Đào tạo về ứng dụng công nghệ trong tài chính và ngân hàng,4 năm,"Tổ hợp A00, A01, D01","Fintech Developer, Financial Analyst, Blockchain Developer",12500000.0
+43,Hệ thống thông tin kinh tế,7340123,4,Đào tạo về phân tích và quản trị hệ thống thông tin kinh tế,4 năm,"Tổ hợp A00, A01, D01","Business Intelligence Analyst, ERP Consultant, IT Business Analyst",11500000.0
+44,Công nghệ thông tin quốc tế,7480211,8,Chương trình CNTT chất lượng cao liên kết quốc tế,4 năm,"Tổ hợp A00, A01, tiếng Anh tốt","International IT Professional, Global Project Manager",18000000.0
+45,Kỹ thuật phần mềm liên kết quốc tế,7480113,8,Chương trình kỹ thuật phần mềm liên kết với đại học nước ngoài,4 năm,"Tổ hợp A00, A01, tiếng Anh tốt","Software Engineer (International), Solutions Architect",18000000.0
+46,Công nghệ thông tin trọng điểm,7480212,8,Chương trình CNTT chất lượng cao trọng điểm,4 năm,"Tổ hợp A00, A01, điểm cao","Senior Developer, Tech Lead, CTO",16000000.0

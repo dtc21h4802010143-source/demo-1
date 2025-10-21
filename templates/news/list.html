@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Tin tức & Sự kiện{% endblock %}
+{% block content %}
+<section class="max-w-3xl mx-auto mt-12">
+  <h1 class="text-3xl font-bold mb-8 text-indigo-700 text-center">Tin tức & Sự kiện</h1>
+  {% for news in news_list %}
+  <div class="mb-8 p-6 bg-white rounded-xl shadow hover:shadow-lg transition-all">
+    <a href="{{ url_for('news_detail', news_id=news.id) }}" class="text-2xl font-bold text-indigo-600 hover:underline">{{ news.title }}</a>
+    <div class="text-gray-500 text-sm mb-2">{{ news.created_at.strftime('%d/%m/%Y') }} | {{ news.author or 'Ban tuyển sinh' }}</div>
+    <div class="text-gray-800 line-clamp-3">{{ news.content[:180] }}...</div>
+  </div>
+  {% else %}
+  <div class="text-center text-gray-500">Chưa có tin tức nào.</div>
+  {% endfor %}
+</section>
+{% endblock %}

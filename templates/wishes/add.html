@@ -1,0 +1,408 @@
+{% extends "base.html" %}
+{% block title %}Nộp nguyện vọng{% endblock %}
+{% block content %}
+<div class="flex min-h-[70vh] items-center justify-center py-8 px-4">
+  <div class="w-full max-w-2xl">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 rounded-2xl shadow-xl p-8 mb-6 text-white">
+      <div class="flex items-center gap-3">
+        <i class="fa-solid fa-star text-4xl"></i>
+        <div>
+          <h2 class="text-3xl font-bold">Nộp nguyện vọng mới</h2>
+          <p class="text-yellow-100 text-sm">Chọn ngành học phù hợp với định hướng của bạn</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Card -->
+    <div class="bg-white rounded-2xl shadow-xl p-8">
+      <form method="POST" id="wishForm" class="space-y-6">
+        <div>
+          <label for="program_id" class="block text-sm font-medium mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-graduation-cap text-emerald-500"></i>
+            Chọn ngành đăng ký <span class="text-red-500">*</span>
+          </label>
+          
+          <!-- Search box -->
+          <div class="relative mb-4">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            <input type="text" id="searchProgram" 
+                   placeholder="Tìm kiếm ngành học..." 
+                   class="w-full border-2 rounded-lg py-3 pl-10 pr-4 text-sm focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none transition">
+          </div>
+          
+          <!-- Program cards grid -->
+          <div id="programGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-96 overflow-y-auto p-2">
+            {% for program in programs %}
+            <div class="program-card border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-emerald-500 hover:shadow-lg transition-all" 
+                 data-program-id="{{ program.id }}" 
+                 data-program-name="{{ program.name|lower }}">
+              <div class="flex items-start gap-3">
+                <input type="radio" name="program_id" value="{{ program.id }}" 
+                       id="program_{{ program.id }}" 
+                       class="mt-1 w-5 h-5 text-emerald-600 focus:ring-emerald-500" 
+                       required>
+                <label for="program_{{ program.id }}" class="flex-1 cursor-pointer">
+                  <div class="font-bold text-gray-800 mb-1">{{ program.name }}</div>
+                  <div class="text-xs text-gray-500 flex items-center gap-2">
+                    <i class="fa-solid fa-building"></i>
+                    <span>{{ program.department.name if program.department else 'Chưa phân khoa' }}</span>
+                  </div>
+                  {% if program.description %}
+                  <p class="text-xs text-gray-600 mt-2 line-clamp-2">{{ program.description }}</p>
+                  {% endif %}
+                </label>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          
+          <!-- Hidden traditional select for fallback -->
+          <select id="program_id_hidden" name="program_id_backup" class="hidden">
+            <option value="">-- Chọn ngành --</option>
+            {% for program in programs %}
+            <option value="{{ program.id }}">{{ program.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Phương thức xét tuyển -->
+        <div>
+          <label for="admission_method" class="block text-sm font-medium mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-clipboard-check text-blue-500"></i>
+            Phương thức xét tuyển <span class="text-red-500">*</span>
+          </label>
+          <select name="admission_method" id="admission_method" 
+                  class="w-full border-2 rounded-lg py-3 px-4 text-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none transition"
+                  required>
+            <option value="">-- Chọn phương thức --</option>
+            <option value="Xét theo điểm thi tốt nghiệp THPT">Xét theo điểm thi tốt nghiệp THPT</option>
+            <option value="Xét học bạ THPT">Xét học bạ THPT</option>
+            <option value="Xét theo điểm ĐGNL / đánh giá năng lực">Xét theo điểm ĐGNL / đánh giá năng lực</option>
+            <option value="Xét tuyển thẳng / ưu tiên">Xét tuyển thẳng / ưu tiên</option>
+          </select>
+        </div>
+
+        <!-- Form nhập điểm (hiển thị động) -->
+        <div id="scoreInputSection" class="hidden">
+          <!-- Xét theo điểm thi THPT -->
+          <div id="scoreThpt" class="score-form hidden">
+            <h4 class="font-bold text-gray-700 mb-3 flex items-center gap-2">
+              <i class="fa-solid fa-calculator text-purple-500"></i>
+              Nhập điểm thi tốt nghiệp THPT
+            </h4>
+            <div class="grid grid-cols-3 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-1">Toán <span class="text-red-500">*</span></label>
+                <input type="number" name="score_toan" step="0.1" min="0" max="10" 
+                       class="w-full border-2 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-purple-400 focus:border-purple-400 outline-none">
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">Văn <span class="text-red-500">*</span></label>
+                <input type="number" name="score_van" step="0.1" min="0" max="10" 
+                       class="w-full border-2 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-purple-400 focus:border-purple-400 outline-none">
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">Ngoại ngữ <span class="text-red-500">*</span></label>
+                <input type="number" name="score_ngoaingu" step="0.1" min="0" max="10" 
+                       class="w-full border-2 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-purple-400 focus:border-purple-400 outline-none">
+              </div>
+            </div>
+            <div class="mt-3">
+              <label class="block text-sm font-medium mb-1">Chọn tổ hợp môn <span class="text-red-500">*</span></label>
+              <select name="score_tohop" class="w-full border-2 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-purple-400 focus:border-purple-400 outline-none">
+                <option value="">-- Chọn tổ hợp --</option>
+                <option value="A00">A00 (Toán, Lý, Hóa)</option>
+                <option value="A01">A01 (Toán, Lý, Anh)</option>
+                <option value="B00">B00 (Toán, Hóa, Sinh)</option>
+                <option value="C00">C00 (Văn, Sử, Địa)</option>
+                <option value="D01">D01 (Toán, Văn, Anh)</option>
+              </select>
+            </div>
+            <div class="grid grid-cols-3 gap-4 mt-3" id="scoreSubjects">
+              <div>
+                <label class="block text-sm font-medium mb-1">Môn 1 <span class="text-red-500">*</span></label>
+                <input type="number" name="score_mon1" step="0.1" min="0" max="10" 
+                       class="w-full border-2 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-purple-400 focus:border-purple-400 outline-none">
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">Môn 2 <span class="text-red-500">*</span></label>
+                <input type="number" name="score_mon2" step="0.1" min="0" max="10" 
+                       class="w-full border-2 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-purple-400 focus:border-purple-400 outline-none">
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">Môn 3 <span class="text-red-500">*</span></label>
+                <input type="number" name="score_mon3" step="0.1" min="0" max="10" 
+                       class="w-full border-2 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-purple-400 focus:border-purple-400 outline-none">
+              </div>
+            </div>
+          </div>
+
+          <!-- Xét học bạ THPT -->
+          <div id="scoreHocba" class="score-form hidden">
+            <h4 class="font-bold text-gray-700 mb-3 flex items-center gap-2">
+              <i class="fa-solid fa-book text-green-500"></i>
+              Nhập điểm học bạ THPT
+            </h4>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-1">Điểm TB lớp 10 <span class="text-red-500">*</span></label>
+                <input type="number" name="score_lop10" step="0.1" min="0" max="10" 
+                       class="w-full border-2 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-green-400 focus:border-green-400 outline-none">
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">Điểm TB lớp 11 <span class="text-red-500">*</span></label>
+                <input type="number" name="score_lop11" step="0.1" min="0" max="10" 
+                       class="w-full border-2 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-green-400 focus:border-green-400 outline-none">
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">Điểm TB lớp 12 (HK1) <span class="text-red-500">*</span></label>
+                <input type="number" name="score_lop12" step="0.1" min="0" max="10" 
+                       class="w-full border-2 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-green-400 focus:border-green-400 outline-none">
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">Điểm TB 3 năm</label>
+                <input type="number" name="score_tb3nam" step="0.1" min="0" max="10" readonly
+                       class="w-full border-2 rounded-lg py-2 px-3 text-sm bg-gray-100 outline-none">
+              </div>
+            </div>
+          </div>
+
+          <!-- Xét ĐGNL -->
+          <div id="scoreDgnl" class="score-form hidden">
+            <h4 class="font-bold text-gray-700 mb-3 flex items-center gap-2">
+              <i class="fa-solid fa-brain text-orange-500"></i>
+              Nhập điểm đánh giá năng lực
+            </h4>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-1">Điểm ĐGNL <span class="text-red-500">*</span></label>
+                <input type="number" name="score_dgnl" step="1" min="0" max="1200" 
+                       class="w-full border-2 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-orange-400 focus:border-orange-400 outline-none">
+                <p class="text-xs text-gray-500 mt-1">Thang điểm 1200</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">Loại kỳ thi</label>
+                <select name="score_dgnl_type" 
+                        class="w-full border-2 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-orange-400 focus:border-orange-400 outline-none">
+                  <option value="ĐHQG HCM">ĐHQG TP.HCM</option>
+                  <option value="ĐHQG Hà Nội">ĐHQG Hà Nội</option>
+                  <option value="Khác">Khác</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Xét tuyển thẳng -->
+          <div id="scoreTuyenthang" class="score-form hidden">
+            <h4 class="font-bold text-gray-700 mb-3 flex items-center gap-2">
+              <i class="fa-solid fa-trophy text-yellow-500"></i>
+              Thông tin xét tuyển thẳng / ưu tiên
+            </h4>
+            <div class="space-y-3">
+              <div>
+                <label class="block text-sm font-medium mb-1">Loại ưu tiên <span class="text-red-500">*</span></label>
+                <select name="score_uutien_type" 
+                        class="w-full border-2 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none">
+                  <option value="">-- Chọn loại --</option>
+                  <option value="Học sinh giỏi cấp Quốc gia">Học sinh giỏi cấp Quốc gia</option>
+                  <option value="Học sinh giỏi cấp Tỉnh">Học sinh giỏi cấp Tỉnh</option>
+                  <option value="Giải Quốc tế">Giải Quốc tế</option>
+                  <option value="Khu vực ưu tiên">Khu vực ưu tiên</option>
+                  <option value="Đối tượng ưu tiên">Đối tượng ưu tiên</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">Mô tả thành tích</label>
+                <textarea name="score_uutien_desc" rows="3"
+                          class="w-full border-2 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none"
+                          placeholder="Ví dụ: Giải Nhì Olympic Toán Quốc gia 2024"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Selected program summary -->
+        <div id="selectedSummary" class="bg-emerald-50 border-2 border-emerald-200 rounded-lg p-6 hidden">
+          <h4 class="font-bold text-emerald-700 mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-check-circle"></i>
+            Ngành đã chọn
+          </h4>
+          <div class="text-sm">
+            <div class="flex justify-between mb-2">
+              <span class="text-gray-600">Tên ngành:</span>
+              <span class="font-semibold" id="selected_program_name">—</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">Mã ngành:</span>
+              <span class="font-semibold" id="selected_program_id">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="flex gap-4 pt-6 border-t">
+          <button type="submit" 
+                  class="flex-1 px-6 py-3 bg-gradient-to-r from-emerald-500 to-green-500 text-white rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-check"></i> Nộp nguyện vọng
+          </button>
+          <a href="{{ url_for('view_wishes') }}" 
+             class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition flex items-center gap-2">
+            <i class="fa-solid fa-xmark"></i> Hủy
+          </a>
+        </div>
+      </form>
+    </div>
+
+    <!-- Tips card -->
+    <div class="bg-blue-50 border-l-4 border-blue-400 rounded-lg p-6 mt-6">
+      <h4 class="font-bold text-blue-700 mb-2 flex items-center gap-2">
+        <i class="fa-solid fa-lightbulb"></i>
+        Gợi ý
+      </h4>
+      <ul class="text-sm text-blue-800 space-y-1 list-disc list-inside">
+        <li>Nghiên cứu kỹ thông tin ngành học trước khi đăng ký</li>
+        <li>Tham khảo điểm chuẩn các năm trước</li>
+        <li>Liên hệ tư vấn nếu cần hỗ trợ thêm</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('searchProgram');
+  const programCards = document.querySelectorAll('.program-card');
+  const selectedSummary = document.getElementById('selectedSummary');
+  const admissionMethodSelect = document.getElementById('admission_method');
+  const scoreInputSection = document.getElementById('scoreInputSection');
+  const scoreForms = document.querySelectorAll('.score-form');
+  
+  // Search functionality
+  searchInput.addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    
+    programCards.forEach(card => {
+      const programName = card.dataset.programName;
+      if (programName.includes(searchTerm)) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+  
+  // Program card selection
+  programCards.forEach(card => {
+    card.addEventListener('click', function() {
+      // Remove previous selection
+      programCards.forEach(c => c.classList.remove('border-emerald-500', 'bg-emerald-50'));
+      
+      // Highlight selected card
+      this.classList.add('border-emerald-500', 'bg-emerald-50');
+      
+      // Check the radio button
+      const radio = this.querySelector('input[type="radio"]');
+      radio.checked = true;
+      
+      // Update summary
+      const programId = this.dataset.programId;
+      const programName = this.querySelector('label .font-bold').textContent;
+      
+      document.getElementById('selected_program_id').textContent = '#' + programId;
+      document.getElementById('selected_program_name').textContent = programName;
+      selectedSummary.classList.remove('hidden');
+    });
+  });
+  
+  // Pre-select if there's a checked radio
+  const checkedRadio = document.querySelector('input[name="program_id"]:checked');
+  if (checkedRadio) {
+    const card = checkedRadio.closest('.program-card');
+    card.click();
+  }
+
+  // Phương thức xét tuyển - hiển thị form điểm tương ứng
+  admissionMethodSelect.addEventListener('change', function() {
+    const method = this.value;
+    
+    // Ẩn tất cả form điểm
+    scoreForms.forEach(form => {
+      form.classList.add('hidden');
+      // Clear required và disable inputs
+      form.querySelectorAll('input, select, textarea').forEach(input => {
+        input.removeAttribute('required');
+        input.disabled = true;
+      });
+    });
+    
+    // Hiển thị form tương ứng
+    if (method === 'Xét theo điểm thi tốt nghiệp THPT') {
+      scoreInputSection.classList.remove('hidden');
+      const form = document.getElementById('scoreThpt');
+      form.classList.remove('hidden');
+      form.querySelectorAll('input, select').forEach(input => {
+        if (input.name && !input.readOnly) {
+          input.setAttribute('required', 'required');
+        }
+        input.disabled = false;
+      });
+    } else if (method === 'Xét học bạ THPT') {
+      scoreInputSection.classList.remove('hidden');
+      const form = document.getElementById('scoreHocba');
+      form.classList.remove('hidden');
+      form.querySelectorAll('input:not([readonly])').forEach(input => {
+        if (input.name) {
+          input.setAttribute('required', 'required');
+        }
+        input.disabled = false;
+      });
+    } else if (method === 'Xét theo điểm ĐGNL / đánh giá năng lực') {
+      scoreInputSection.classList.remove('hidden');
+      const form = document.getElementById('scoreDgnl');
+      form.classList.remove('hidden');
+      form.querySelectorAll('input, select').forEach(input => {
+        if (input.name === 'score_dgnl') {
+          input.setAttribute('required', 'required');
+        }
+        input.disabled = false;
+      });
+    } else if (method === 'Xét tuyển thẳng / ưu tiên') {
+      scoreInputSection.classList.remove('hidden');
+      const form = document.getElementById('scoreTuyenthang');
+      form.classList.remove('hidden');
+      form.querySelectorAll('input, select, textarea').forEach(input => {
+        if (input.name === 'score_uutien_type') {
+          input.setAttribute('required', 'required');
+        }
+        input.disabled = false;
+      });
+    } else {
+      scoreInputSection.classList.add('hidden');
+    }
+  });
+
+  // Tính điểm TB 3 năm tự động
+  const lop10 = document.querySelector('input[name="score_lop10"]');
+  const lop11 = document.querySelector('input[name="score_lop11"]');
+  const lop12 = document.querySelector('input[name="score_lop12"]');
+  const tb3nam = document.querySelector('input[name="score_tb3nam"]');
+
+  function calculateAverage() {
+    if (lop10 && lop11 && lop12 && tb3nam) {
+      const d10 = parseFloat(lop10.value) || 0;
+      const d11 = parseFloat(lop11.value) || 0;
+      const d12 = parseFloat(lop12.value) || 0;
+      if (d10 && d11 && d12) {
+        const avg = ((d10 + d11 + d12) / 3).toFixed(2);
+        tb3nam.value = avg;
+      }
+    }
+  }
+
+  if (lop10) lop10.addEventListener('input', calculateAverage);
+  if (lop11) lop11.addEventListener('input', calculateAverage);
+  if (lop12) lop12.addEventListener('input', calculateAverage);
+});
+</script>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}Tất cả thông báo{% endblock %}
+{% block content %}
+<div class="flex min-h-[70vh] items-center justify-center py-8 px-4">
+    <div class="w-full max-w-4xl">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-2xl shadow-xl p-8 mb-6 text-white">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-bell text-4xl"></i>
+                    <div>
+                        <h2 class="text-3xl font-bold">Tất cả thông báo</h2>
+                        <p class="text-indigo-100 text-sm">Quản lý thông báo của bạn</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-3xl font-bold">{{ notifications|length }}</div>
+                    <div class="text-sm text-indigo-100">Tổng thông báo</div>
+                </div>
+            </div>
+        </div>
+
+        {% if notifications %}
+        <!-- Notifications list -->
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div class="divide-y">
+                {% for notif in notifications %}
+                <div class="p-6 hover:bg-gray-50 transition {% if not notif.is_read %}bg-blue-50{% endif %}">
+                    <div class="flex items-start gap-4">
+                        <!-- Icon -->
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center
+                                    {% if notif.type == 'success' %}bg-green-100 text-green-600
+                                    {% elif notif.type == 'error' %}bg-red-100 text-red-600
+                                    {% elif notif.type == 'warning' %}bg-yellow-100 text-yellow-600
+                                    {% else %}bg-blue-100 text-blue-600{% endif %}">
+                            <i class="fa-solid 
+                                {% if notif.type == 'success' %}fa-circle-check
+                                {% elif notif.type == 'error' %}fa-circle-xmark
+                                {% elif notif.type == 'warning' %}fa-triangle-exclamation
+                                {% else %}fa-circle-info{% endif %} text-xl"></i>
+                        </div>
+                        
+                        <!-- Content -->
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-start justify-between gap-4 mb-2">
+                                <h4 class="font-bold text-gray-900">{{ notif.title }}</h4>
+                                {% if not notif.is_read %}
+                                <span class="flex-shrink-0 w-2 h-2 bg-blue-500 rounded-full"></span>
+                                {% endif %}
+                            </div>
+                            <p class="text-gray-700 text-sm mb-3">{{ notif.message }}</p>
+                            <div class="flex items-center gap-4 text-xs text-gray-500">
+                                <span>
+                                    <i class="fa-solid fa-clock mr-1"></i>
+                                    {{ notif.created_at.strftime('%d/%m/%Y %H:%M') }}
+                                </span>
+                                {% if notif.link %}
+                                <a href="{{ notif.link }}" 
+                                   class="text-indigo-600 hover:text-indigo-700 font-semibold flex items-center gap-1">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                    Xem chi tiết
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Summary stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+            <div class="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl p-6 text-white">
+                <div class="text-3xl font-bold mb-1">
+                    {{ notifications|selectattr('is_read', 'equalto', False)|list|length }}
+                </div>
+                <div class="text-sm text-blue-100">Chưa đọc</div>
+            </div>
+            <div class="bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl p-6 text-white">
+                <div class="text-3xl font-bold mb-1">
+                    {{ notifications|selectattr('is_read', 'equalto', True)|list|length }}
+                </div>
+                <div class="text-sm text-green-100">Đã đọc</div>
+            </div>
+            <div class="bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl p-6 text-white">
+                <div class="text-3xl font-bold mb-1">{{ notifications|length }}</div>
+                <div class="text-sm text-purple-100">Tổng cộng</div>
+            </div>
+        </div>
+        
+        {% else %}
+        <!-- Empty state -->
+        <div class="bg-white rounded-2xl shadow-xl p-12 text-center">
+            <i class="fa-solid fa-bell-slash text-6xl text-gray-300 mb-4"></i>
+            <h3 class="text-2xl font-bold text-gray-700 mb-2">Không có thông báo</h3>
+            <p class="text-gray-500">Bạn chưa có thông báo nào.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
