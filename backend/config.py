@@ -11,7 +11,11 @@ class Config:
 
     # Database Settings
     # Store SQLite DB under data/ folder
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///data/admission_system.db')
+    database_url = os.getenv('DATABASE_URL', 'sqlite:///data/admission_system.db')
+    # Render PostgreSQL uses postgres:// but SQLAlchemy needs postgresql://
+    if database_url and database_url.startswith('postgres://'):
+        database_url = database_url.replace('postgres://', 'postgresql://', 1)
+    SQLALCHEMY_DATABASE_URI = database_url
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Mail Settings
