@@ -26,11 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            // Remove typing indicator
             removeTypingIndicator();
-
-            // Add bot response to chat
-            addMessage(data.response, 'bot');
+            addMessage(data.response || 'Không nhận được phản hồi.', 'bot');
+            renderSources(data.sources);
         })
         .catch(error => {
             console.error('Error:', error);
@@ -60,6 +58,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
         chatMessages.appendChild(messageDiv);
         scrollToBottom();
+    }
+
+    // Render RAG sources (if any)
+    function renderSources(sources) {
+        const box = document.getElementById('chatSources');
+        const list = document.getElementById('chatSourcesList');
+        if (!box || !list) return;
+        if (!Array.isArray(sources) || sources.length === 0) {
+            // Hide if no sources
+            box.classList.add('hidden');
+            list.innerHTML = '';
+            return;
+        }
+        box.classList.remove('hidden');
+        list.innerHTML = '';
+        sources.forEach(src => {
+            const li = document.createElement('li');
+            li.className = 'border border-slate-200 rounded p-2 bg-white';
+            const meta = src.meta || {};
+            const labelParts = [];
+            if (meta.type) labelParts.push(meta.type);
+            if (meta.ten_nganh) labelParts.push(meta.ten_nganh);
+            if (meta.ma_nganh) labelParts.push(meta.ma_nganh);
+            const label = labelParts.join(' • ') || 'Tài liệu';
+            const score = typeof src.score === 'number' ? src.score.toFixed(3) : '—';
+            const snippet = (src.snippet || '').slice(0, 280);
+            li.innerHTML = `
+                <div class="flex justify-between items-center">
+                    <span class="font-medium text-sky-700">${label}</span>
+                    <span class="text-[10px] text-slate-500">score: ${score}</span>
+                </div>
+                <div class="mt-1 text-slate-600 leading-snug text-[11px]">${escapeHtml(snippet)}${snippet.length >= 280 ? '…' : ''}</div>
+                <button class="mt-1 text-[10px] text-sky-600 hover:underline toggle-src">Mở rộng</button>
+                <pre class="mt-1 hidden whitespace-pre-wrap text-[10px] bg-slate-50 p-1 rounded border border-slate-100 full-snippet">${escapeHtml(src.snippet || '')}</pre>
+            `;
+            const btn = li.querySelector('.toggle-src');
+            const full = li.querySelector('.full-snippet');
+            btn.addEventListener('click', () => {
+                full.classList.toggle('hidden');
+                btn.textContent = full.classList.contains('hidden') ? 'Mở rộng' : 'Thu gọn';
+            });
+            list.appendChild(li);
+        });
+    }
+
+    function escapeHtml(str) {
+        return str.replace(/[&<>"']/g, function(ch) {
+            return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[ch]);
+        });
     }
 
     // Show typing indicator

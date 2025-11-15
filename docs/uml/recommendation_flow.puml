@@ -1,0 +1,40 @@
+@startuml
+title Quy trình gợi ý ngành học (đơn giản)
+
+skinparam backgroundColor #FFFFFF
+skinparam activity {
+  BackgroundColor<<user>> #E8F5E9
+  BackgroundColor<<system>> #E3F2FD
+  BackgroundColor<<ai>> #FFF3E0
+  BackgroundColor<<chatbot>> #F3E5F5
+  BorderColor #455A64
+}
+
+start
+partition "Ứng viên" {
+  :Nhập điểm + sở thích; <<user>>
+}
+partition "Bộ lọc điểm" {
+  :Tải điều kiện/điểm ngưỡng theo ngành; <<system>>
+  :Loại các ngành không hợp lệ theo điểm; <<system>>
+}
+if (Danh sách ngành hợp lệ trống?) then (Có)
+  :Thông báo không có ngành phù hợp;
+  stop
+else (Không)
+  partition "AI Matching (Jaccard)" {
+    :Tiền xử lý sở thích -> tập từ khóa A; <<ai>>
+    :Tiền xử lý mô tả/ngành -> tập từ khóa B_i; <<ai>>
+    :Tính điểm phù hợp Jaccard cho từng ngành\nJ(A,B_i) = |A ∩ B_i| / |A ∪ B_i|; <<ai>>
+    :Xếp hạng ngành theo điểm phù hợp; <<ai>>
+  }
+  partition "Kết quả" {
+    :Trả danh sách ngành phù hợp (Top N)\n+ điểm Jaccard + lý do; <<system>>
+  }
+  partition "Chatbot" {
+    :Hỗ trợ hỏi thêm về ngành/trường\n(điểm chuẩn, học phí, lộ trình...); <<chatbot>>
+  }
+  stop
+endif
+
+@enduml

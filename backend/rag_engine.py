@@ -52,7 +52,11 @@ class RAGEngine:
             # Load hoặc build index
             if self._cache_exists():
                 print("[RAG] Loading cached index...")
-                self._load_cache()
+                try:
+                    self._load_cache()
+                except Exception as e:
+                    print(f"[RAG] Failed to load cache ({e}). Rebuilding index...")
+                    self._build_index()
             else:
                 print("[RAG] Building new index from knowledge base...")
                 self._build_index()
@@ -60,7 +64,12 @@ class RAGEngine:
             print(f"[RAG] Index ready with {len(self.documents)} documents")
         except Exception as e:
             print(f"[RAG] Error initializing RAG: {e}")
-            self.model = None
+            # As a last resort, keep model if loaded; index may be None
+            if self.model is None:
+                try:
+                    self.model = SentenceTransformer(self.model_name)
+                except Exception:
+                    pass
     
     def _cache_exists(self) -> bool:
         """Kiểm tra cache có tồn tại không"""

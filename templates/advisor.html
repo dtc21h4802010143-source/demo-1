@@ -154,6 +154,18 @@
                     </div>
                 </div>
 
+                <!-- Auto-save indicator & Actions -->
+                <div class="mt-6 flex items-center justify-between">
+                    <div id="autoSaveIndicator" class="text-sm text-gray-500 flex items-center gap-2">
+                        <i class="fas fa-save"></i>
+                        <span id="saveStatus">Tự động lưu</span>
+                    </div>
+                    <button type="button" id="clearSavedData" class="text-sm text-red-500 hover:text-red-700">
+                        <i class="fas fa-trash-alt mr-1"></i>
+                        Xóa dữ liệu đã lưu
+                    </button>
+                </div>
+
                 <!-- Submit Button -->
                 <div class="mt-8 text-center">
                     <button type="submit" id="analyzeBtn" 
@@ -320,7 +332,130 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('advisorForm');
     const loadingState = document.getElementById('loadingState');
     const results = document.getElementById('results');
+    const saveStatus = document.getElementById('saveStatus');
+    const clearSavedBtn = document.getElementById('clearSavedData');
     let currentMethod = 'thpt';
+    let autoSaveTimer = null;
+
+    // ============ AUTO-SAVE & RESTORE ============
+    
+    // Load saved data on page load
+    function loadSavedData() {
+        try {
+            const saved = localStorage.getItem('advisor_form_data');
+            if (saved) {
+                const data = JSON.parse(saved);
+                
+                // Restore method
+                if (data.method) {
+                    currentMethod = data.method;
+                    methodBtns.forEach(btn => {
+                        if (btn.dataset.method === currentMethod) {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    });
+                    scoreForms.forEach(f => f.classList.remove('active'));
+                    document.getElementById(currentMethod + 'Scores')?.classList.add('active');
+                }
+                
+                // Restore input values
+                if (data.scores) {
+                    Object.entries(data.scores).forEach(([name, value]) => {
+                        const input = form.querySelector(`input[name="${name}"]`);
+                        if (input && value) {
+                            input.value = value;
+                        }
+                    });
+                }
+                
+                // Trigger TB 3 năm calculation if học bạ
+                if (currentMethod === 'hoc_ba') {
+                    updateTB3Nam();
+                }
+                
+                updateSaveStatus('Đã khôi phục dữ liệu', 'success');
+            }
+        } catch (err) {
+            console.error('Error loading saved data:', err);
+        }
+    }
+    
+    // Auto-save current form data
+    function autoSaveData() {
+        const formData = new FormData(form);
+        const scores = {};
+        
+        for (let [key, value] of formData.entries()) {
+            if (value) {
+                scores[key] = value;
+            }
+        }
+        
+        const dataToSave = {
+            method: currentMethod,
+            scores: scores,
+            timestamp: new Date().toISOString()
+        };
+        
+        try {
+            localStorage.setItem('advisor_form_data', JSON.stringify(dataToSave));
+            updateSaveStatus('Đã lưu', 'success');
+        } catch (err) {
+            updateSaveStatus('Lỗi lưu', 'error');
+            console.error('Auto-save error:', err);
+        }
+    }
+    
+    // Update save status indicator
+    function updateSaveStatus(text, type = 'info') {
+        saveStatus.textContent = text;
+        saveStatus.parentElement.classList.remove('text-gray-500', 'text-green-600', 'text-red-600');
+        if (type === 'success') {
+            saveStatus.parentElement.classList.add('text-green-600');
+        } else if (type === 'error') {
+            saveStatus.parentElement.classList.add('text-red-600');
+        } else {
+            saveStatus.parentElement.classList.add('text-gray-500');
+        }
+        
+        // Reset to default after 2 seconds
+        setTimeout(() => {
+            saveStatus.textContent = 'Tự động lưu';
+            saveStatus.parentElement.classList.remove('text-green-600', 'text-red-600');
+            saveStatus.parentElement.classList.add('text-gray-500');
+        }, 2000);
+    }
+    
+    // Debounced auto-save on input change
+    function scheduleAutoSave() {
+        clearTimeout(autoSaveTimer);
+        updateSaveStatus('Đang lưu...', 'info');
+        autoSaveTimer = setTimeout(() => {
+            autoSaveData();
+        }, 1000); // Save 1 second after last input
+    }
+    
+    // Clear saved data
+    clearSavedBtn.addEventListener('click', function() {
+        if (confirm('Bạn có chắc muốn xóa tất cả dữ liệu đã lưu?')) {
+            localStorage.removeItem('advisor_form_data');
+            form.reset();
+            updateSaveStatus('Đã xóa dữ liệu', 'success');
+        }
+    });
+    
+    // Attach auto-save to all inputs
+    const allInputs = form.querySelectorAll('input[type="number"], input[type="text"]');
+    allInputs.forEach(input => {
+        input.addEventListener('input', scheduleAutoSave);
+    });
+    
+    // Load saved data on init
+    loadSavedData();
+    
+    // ============ EXISTING CODE ============
 
     // Method selection
     methodBtns.forEach(btn => {
@@ -332,19 +467,24 @@ document.addEventListener('DOMContentLoaded', function() {
             
             scoreForms.forEach(form => form.classList.remove('active'));
             document.getElementById(currentMethod + 'Scores')?.classList.add('active');
+            
+            // Save method change
+            scheduleAutoSave();
         });
     });
 
     // Auto-calculate TB 3 năm
+    function updateTB3Nam() {
+        const tb10 = parseFloat(document.querySelector('input[name="tb_10"]').value) || 0;
+        const tb11 = parseFloat(document.querySelector('input[name="tb_11"]').value) || 0;
+        const tb12 = parseFloat(document.querySelector('input[name="tb_12"]').value) || 0;
+        const avg = ((tb10 + tb11 + tb12) / 3).toFixed(2);
+        document.getElementById('tb3Nam').textContent = avg;
+    }
+    
     const hocBaInputs = document.querySelectorAll('#hocBaScores input');
     hocBaInputs.forEach(input => {
-        input.addEventListener('input', function() {
-            const tb10 = parseFloat(document.querySelector('input[name="tb_10"]').value) || 0;
-            const tb11 = parseFloat(document.querySelector('input[name="tb_11"]').value) || 0;
-            const tb12 = parseFloat(document.querySelector('input[name="tb_12"]').value) || 0;
-            const avg = ((tb10 + tb11 + tb12) / 3).toFixed(2);
-            document.getElementById('tb3Nam').textContent = avg;
-        });
+        input.addEventListener('input', updateTB3Nam);
     });
 
     // Form submission

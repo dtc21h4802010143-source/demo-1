@@ -1,4 +1,171 @@
 {
+  "thong_tin_van_ban": {
+    "so_ky_hieu": "927/QĐ-ĐHCNTT&TT",
+    "ngay_ban_hanh": "25 tháng 6 năm 2025",
+    "loai_van_ban": "QUYẾT ĐỊNH",
+    "co_quan_ban_hanh": "TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN VÀ TRUYỀN THÔNG",
+    "co_quan_chu_quan": "ĐẠI HỌC THÁI NGUYÊN",
+    "nguoi_ky": "PGS.TS. Phùng Trung Nghĩa",
+    "chuc_vu_nguoi_ky": "HIỆU TRƯỞNG",
+    "trich_yeu": "Về việc ban hành Quy định mức thu học phí đối với hình thức đào tạo Chính quy và Vừa làm vừa học năm học 2025-2026",
+    "nam_hoc_ap_dung": "2025-2026",
+    "hieu_luc_tu": "học kỳ 1 năm học 2025 - 2026"
+  },
+  "noi_dung_quy_dinh": {
+    "dai_hoc": {
+      "hinh_thuc_chinh_quy": {
+        "chuong_trinh_dai_tra": {
+          "hoc_phi": [
+            {
+              "khoi_nganh": "II: Nghệ thuật",
+              "chi_tiet_nganh": "Thiết kế đồ họa",
+              "hoc_phi_thang_dong": 1520000,
+              "hoc_phi_tin_chi_khoa_21_22_dong": 490300,
+              "hoc_phi_tin_chi_khoa_23_24_dong": 467600
+            },
+            {
+              "khoi_nganh": "III: Kinh doanh và quản lý, pháp luật",
+              "chi_tiet_nganh": "Hệ thống thông tin quản lý; Quản trị văn phòng; Thương mại điện tử; Marketing số",
+              "hoc_phi_thang_dong": 1590000,
+              "hoc_phi_tin_chi_khoa_21_22_dong": 512900,
+              "hoc_phi_tin_chi_khoa_23_24_dong": 489200
+            },
+            {
+              "khoi_nganh": "V: Máy tính và công nghệ thông tin, Công nghệ kỹ thuật, kỹ thuật",
+              "chi_tiet_nganh": "Công nghệ thông tin; Khoa học máy tính; Mạng máy tính và TTDL; Kỹ thuật phần mềm; Hệ thống thông tin; An toàn thông tin; Công nghệ kỹ thuật điện, điện tử; Công nghệ ô tô và Giao thông thông minh; Công nghệ kỹ thuật điều khiển và tự động hóa; Công nghệ kỹ thuật máy tính; Công nghệ kỹ thuật điện tử, truyền thông; Kỹ thuật y sinh; Kỹ thuật cơ điện tử thông minh và robot.",
+              "hoc_phi_thang_dong": 1850000,
+              "hoc_phi_tin_chi_khoa_21_22_dong": 596700,
+              "hoc_phi_tin_chi_khoa_23_24_dong": 569200
+            },
+            {
+              "khoi_nganh": "VII: Báo chí và thông tin, Khoa học xã hội và hành vi",
+              "chi_tiet_nganh": "Truyền thông đa phương tiện; Công nghệ truyền thông; Kinh tế số; Ngôn ngữ Anh",
+              "hoc_phi_thang_dong": 1690000,
+              "hoc_phi_tin_chi_khoa_21_22_dong": 545100,
+              "hoc_phi_tin_chi_khoa_23_24_dong": 520000
+            }
+          ],
+          "ghi_chu": [
+            {
+              "doi_tuong": "Sinh viên từ Khóa 20, học thêm tín chỉ để được cấp bằng Kỹ sư (sau khi hoàn thành Cử nhân)",
+              "hoc_phi_tin_chi_dong": 600600
+            },
+            {
+              "doi_tuong": "Các Khóa đã đào tạo chưa thể hiện trong bảng giá",
+              "ghi_chu_hoc_phi": "đơn giá tín chỉ học phần được tính bằng đơn giá Khóa 21, 22"
+            }
+          ]
+        },
+        "chuong_trinh_chat_luong_cao": {
+          "nganh": "Công nghệ thông tin",
+          "hoc_phi_tin_chi_dong": 895000,
+          "ghi_chu": "Áp dụng cho tất cả các khóa"
+        },
+        "chuong_trinh_lien_ket_dao_tao": {
+          "ten_chuong_trinh": "Chương trình liên kết đào tạo quốc tế ngành Kỹ thuật phần mềm",
+          "doi_tac": "Trường Đại học Quốc gia Kyungpook, Hàn Quốc",
+          "hoc_phi_usd": 2000,
+          "hoc_phi_vnd": 49946000,
+          "don_vi_tinh": "năm học/sinh viên",
+          "thong_tin_ty_gia": {
+            "ty_gia": "1USD = 24.973VNĐ",
+            "ngay_ap_dung": "14/5/2025",
+            "nguon": "Thông báo số 151/TB-NHNN của Ngân hàng Nhà nước Việt Nam"
+          }
+        },
+        "chuong_trinh_cong_nghe_thong_tin_quoc_te": [
+          {
+            "doi_tuong": "Sinh viên lớp chuyên ngành",
+            "hoc_phi_khoa_22_dong_ky": 13000000,
+            "hoc_phi_khoa_23_24_dong_ky": 14500000
+          },
+          {
+            "doi_tuong": "Sinh viên lớp tiếng Anh dự bị",
+            "hoc_phi_khoa_22_dong_ky": 7000000,
+            "hoc_phi_khoa_23_24_dong_ky": 7000000
+          }
+        ]
+      },
+      "hinh_thuc_vua_lam_vua_hoc": {
+        "quy_dinh_chung": "Mức học phí được tính không vượt quá 1,5 lần đơn giá của hệ đại học chính quy khóa, ngành tương ứng.",
+        "hoc_phi": [
+          {
+            "khoi_nganh": "II: Nghệ thuật",
+            "chi_tiet_nganh": "Thiết kế đồ họa",
+            "hoc_phi_thang_dong": 2280000,
+            "hoc_phi_tin_chi_khoa_21_22_dong": 735000,
+            "hoc_phi_tin_chi_khoa_23_24_dong": 701000
+          },
+          {
+            "khoi_nganh": "III: Kinh doanh và quản lý, pháp luật",
+            "chi_tiet_nganh": "Hệ thống thông tin quản lý; Quản trị văn phòng; Thương mại điện tử; Marketing số",
+            "hoc_phi_thang_dong": 2385000,
+            "hoc_phi_tin_chi_khoa_21_22_dong": 769000,
+            "hoc_phi_tin_chi_khoa_23_24_dong": 733000
+          },
+          {
+            "khoi_nganh": "V: Máy tính và công nghệ thông tin, Công nghệ kỹ thuật, kỹ thuật",
+            "chi_tiet_nganh": "Công nghệ thông tin; Khoa học máy tính; Mạng máy tính và TTDL; Kỹ thuật phần mềm; Hệ thống thông tin; An toàn thông tin; Công nghệ kỹ thuật điện, điện tử; Công nghệ ô tô và Giao thông thông minh; Công nghệ kỹ thuật điều khiển và TĐH; Công nghệ kỹ thuật máy tính; Công nghệ kỹ thuật điện tử, truyền thông; Kỹ thuật y sinh; Kỹ thuật cơ điện tử thông minh và robot.",
+            "hoc_phi_thang_dong": 2775000,
+            "hoc_phi_tin_chi_khoa_21_22_dong": 895000,
+            "hoc_phi_tin_chi_khoa_23_24_dong": 853000
+          },
+          {
+            "khoi_nganh": "VII: Báo chí và thông tin, Khoa học xã hội và hành vi",
+            "chi_tiet_nganh": "Truyền thông đa phương tiện; Công nghệ truyền thông; Kinh tế số; Ngôn ngữ Anh",
+            "hoc_phi_thang_dong": 2535000,
+            "hoc_phi_tin_chi_khoa_21_22_dong": 817000,
+            "hoc_phi_tin_chi_khoa_23_24_dong": 780000
+          }
+        ],
+        "ghi_chu": [
+          {
+            "doi_tuong": "Các Khóa đã đào tạo chưa thể hiện trong bảng giá",
+            "ghi_chu_hoc_phi": "đơn giá tín chỉ học phần được tính bằng đơn giá Khóa 21, 22"
+          },
+          {
+            "doi_tuong": "Sinh viên từ Khóa 20, học thêm tín chỉ để được cấp bằng Kỹ sư (sau khi hoàn thành Cử nhân)",
+            "hoc_phi_tin_chi_dong": 900000
+          }
+        ]
+      }
+    },
+    "sau_dai_hoc": {
+      "thac_si": {
+        "quy_dinh_chung": "Mức học phí ... bằng 1,5 lần so với đại học chính quy tương ứng từng khối ngành đào tạo.",
+        "hoc_phi": [
+          {
+            "khoi_nganh": "III: Kinh doanh và quản lý, pháp luật",
+            "nganh": "Hệ thống thông tin quản lý",
+            "hoc_phi_thang_dong": 2385000,
+            "hoc_phi_tin_chi_dong": 795000
+          },
+          {
+            "khoi_nganh": "V: Máy tính và công nghệ thông tin, Công nghệ kỹ thuật, kỹ thuật",
+            "nganh": [
+              "Khoa học máy tính",
+              "Kỹ thuật viễn thông",
+              "Kỹ thuật điều khiển và Tự động hóa",
+              "Quản lý Công nghệ thông tin"
+            ],
+            "hoc_phi_thang_dong": 2775000,
+            "hoc_phi_tin_chi_dong": 925000
+          }
+        ]
+      },
+      "tien_si": {
+        "quy_dinh_chung": "Mức học phí ... bằng 2,5 lần so với đại học chính quy tương ứng từng khối ngành đào tạo.",
+        "hoc_phi": [
+          {
+            "khoi_nganh": "V: Máy tính và công nghệ thông tin, Công nghệ kỹ thuật, kỹ thuật",
+            "nganh": "Khoa học máy tính",
+            "hoc_phi_thang_dong": 4625000,
+            "hoc_phi_nam_hoc_dong": 46250000
+          }
+        ]
+      }
+    }
+  },
   "truong_dai_hoc": {
     "thong_tin_chung": {
       "ten_truong": "Trường Đại học Công nghệ Thông tin và Truyền thông - Đại học Thái Nguyên",
@@ -49,9 +216,17 @@
     {"tag": "programs", "patterns": ["Trường có những ngành nào", "Các chương trình đào tạo", "Danh sách ngành học", "Các chuyên ngành", "Ngành đào tạo"], "responses": ["ICTU năm 2024 đào tạo 10 ngành:\n1. Thiết kế đồ họa (7210403)\n2. Quản trị kinh doanh số (7340101)\n3. Truyền thông đa phương tiện (7320104)\n4. Khoa học máy tính/AI & Big Data (7480101)\n5. Mạng máy tính và truyền thông dữ liệu (7480102)\n6. Kỹ thuật phần mềm (7480103)\n7. Công nghệ thông tin (7480201)\n8. An toàn thông tin (7480202)\n9. Công nghệ ô tô (7510205)\n10. Vi mạch bán dẫn (7520208)\nBạn quan tâm ngành nào?", "Các ngành đào tạo chủ yếu tập trung vào CNTT, kỹ thuật, truyền thông và kinh doanh số. Bạn muốn tìm hiểu thêm về ngành nào?"]},
     {"tag": "admission_criteria", "patterns": ["Điểm chuẩn", "Điều kiện xét tuyển", "Tiêu chí tuyển sinh", "Yêu cầu đầu vào", "Điểm đầu vào"], "responses": ["Điểm chuẩn năm 2024 dao động từ 18.4 - 22.8 điểm (điểm thi THPT). Cao nhất là Mạng máy tính (22.8), thấp nhất là An toàn thông tin (19.3). Bạn quan tâm ngành nào?", "ICTU có 4 phương thức xét tuyển:\n1. Xét điểm thi THPT (tổ hợp A00, C01, C14, D01)\n2. Xét học bạ THPT\n3. Xét kết quả V-SAT-TNU\n4. Tuyển thẳng\nBạn muốn biết chi tiết phương thức nào?"]},
     {"tag": "tuition", "patterns": ["Học phí", "Chi phí học tập", "Tiền học", "Phí đào tạo"], "responses": ["Học phí năm 2024-2025:\n- Ngành kinh doanh/quản lý: 14.100.000 - 15.000.000 VNĐ/năm\n- Ngành CNTT/kỹ thuật/mỹ thuật: 16.400.000 VNĐ/năm\nTrường có nhiều chính sách học bổng và hỗ trợ tài chính.", "Mức học phí dao động từ 1.350.000 - 1.640.000 VNĐ/tháng (13.5 - 16.4 triệu/năm). Trường có chính sách giảm học phí cho sinh viên có hoàn cảnh khó khăn và học bổng cho sinh viên xuất sắc."]},
+
+  {"tag": "tuition_2025", "patterns": ["Học phí 2025", "Học phí 2025-2026", "Mức học phí 2025", "Học phí năm 2025", "Học phí 1 tháng", "Học phí 1 tín chỉ", "Học phí theo tháng", "Học phí theo tín chỉ"], "responses": ["📋 HỌC PHÍ NĂM HỌC 2025-2026 (Theo QĐ 927/QĐ-ĐHCNTT&TT)\n\n🎨 KHỐI II - NGHỆ THUẬT (Thiết kế đồ họa):\n• Chính quy: 1.520.000 VNĐ/tháng\n• Tín chỉ: 490.300 VNĐ (khóa 21-22) | 467.600 VNĐ (khóa 23-24)\n• Vừa làm vừa học: 2.280.000 VNĐ/tháng\n• Tín chỉ VLVH: 735.000 VNĐ (khóa 21-22) | 701.000 VNĐ (khóa 23-24)\n\n💼 KHỐI III - KINH DOANH & QUẢN LÝ (HTTTQL, QTVP, TMĐT, Marketing số):\n• Chính quy: 1.590.000 VNĐ/tháng\n• Tín chỉ: 512.900 VNĐ (khóa 21-22) | 489.200 VNĐ (khóa 23-24)\n• Vừa làm vừa học: 2.385.000 VNĐ/tháng\n• Tín chỉ VLVH: 769.000 VNĐ (khóa 21-22) | 733.000 VNĐ (khóa 23-24)\n\n💻 KHỐI V - CNTT & KỸ THUẬT (CNTT, KHMT, MMT&TTDL, KTPM, HTTT, ATTT, các ngành kỹ thuật):\n• Chính quy: 1.850.000 VNĐ/tháng (≈18,5 triệu/năm)\n• Tín chỉ: 596.700 VNĐ (khóa 21-22) | 569.200 VNĐ (khóa 23-24)\n• Vừa làm vừa học: 2.775.000 VNĐ/tháng\n• Tín chỉ VLVH: 895.000 VNĐ (khóa 21-22) | 853.000 VNĐ (khóa 23-24)\n• CNTT chất lượng cao: 895.000 VNĐ/tín chỉ (tất cả khóa)\n\n📰 KHỐI VII - BÁO CHÍ & THÔNG TIN (TTĐPT, CNTT, Kinh tế số, Tiếng Anh):\n• Chính quy: 1.690.000 VNĐ/tháng\n• Tín chỉ: 545.100 VNĐ (khóa 21-22) | 520.000 VNĐ (khóa 23-24)\n• Vừa làm vừa học: 2.535.000 VNĐ/tháng\n• Tín chỉ VLVH: 817.000 VNĐ (khóa 21-22) | 780.000 VNĐ (khóa 23-24)\n\n🌏 CHƯƠNG TRÌNH ĐẶC BIỆT:\n• Liên kết quốc tế Kỹ thuật phần mềm (Kyungpook, Hàn Quốc): 2.000 USD/năm (≈49.946.000 VNĐ)\n• CNTT Quốc tế - Lớp chuyên ngành: 13.000.000 VNĐ/kỳ (khóa 22) | 14.500.000 VNĐ/kỳ (khóa 23-24)\n• CNTT Quốc tế - Lớp dự bị tiếng Anh: 7.000.000 VNĐ/kỳ\n\n📌 GHI CHÚ:\n• Khóa 20 học thêm tín chỉ để lấy bằng Kỹ sư: 600.600 VNĐ/tín chỉ (chính quy) | 900.000 VNĐ/tín chỉ (VLVH)\n• Các khóa khác chưa có trong bảng: áp dụng đơn giá khóa 21-22\n• Hiệu lực: Học kỳ 1 năm học 2025-2026", "📊 Chi tiết học phí năm 2025-2026:\n\n🎯 HỌC PHÍ THEO THÁNG (Chính quy):\n• Thiết kế đồ họa: 1.520.000 VNĐ/tháng\n• Kinh doanh & Quản lý: 1.590.000 VNĐ/tháng\n• CNTT & Kỹ thuật: 1.850.000 VNĐ/tháng\n• Báo chí & Truyền thông: 1.690.000 VNĐ/tháng\n\n💳 HỌC PHÍ THEO TÍN CHỈ:\n✅ Khóa 21-22 (Chính quy):\n• Thiết kế đồ họa: 490.300 VNĐ/TC\n• Kinh doanh: 512.900 VNĐ/TC\n• CNTT & Kỹ thuật: 596.700 VNĐ/TC\n• Truyền thông: 545.100 VNĐ/TC\n\n✅ Khóa 23-24 (Chính quy):\n• Thiết kế đồ họa: 467.600 VNĐ/TC\n• Kinh doanh: 489.200 VNĐ/TC\n• CNTT & Kỹ thuật: 569.200 VNĐ/TC\n• Truyền thông: 520.000 VNĐ/TC\n\n🔄 Vừa làm vừa học (VLVH) = 1.5 lần chính quy\n\nBạn muốn biết chi tiết ngành hoặc khóa cụ thể nào?" ]},
     {"tag": "scholarship", "patterns": ["Học bổng", "Chính sách hỗ trợ", "Giảm học phí", "Ưu đãi học tập"], "responses": ["ICTU có các loại học bổng:\n1. Học bổng đầu vào cho thí sinh điểm cao\n2. Học bổng học tập hàng kỳ\n3. Học bổng tài trợ doanh nghiệp\n4. Ưu tiên theo khu vực, đối tượng, tuyển thẳng Bộ GD&ĐT\nBạn muốn tìm hiểu loại nào?", "Chính sách học bổng đa dạng từ 25-100% học phí tùy theo thành tích. Ngoài ra còn có các gói hỗ trợ tài chính và vay ưu đãi."]},
     {"tag": "dormitory", "patterns": ["Ký túc xá", "Chỗ ở", "Nhà ở sinh viên", "KTX"], "responses": ["Trường có ký túc xá với sức chứa lớn, đầy đủ tiện nghi. Chi phí từ 300-500k/tháng tùy loại phòng.", "KTX của trường có các loại phòng 4-8 người, đầy đủ điều hòa, nóng lạnh. Ưu tiên sinh viên năm nhất và có hoàn cảnh khó khăn."]},
     {"tag": "application_process", "patterns": ["Cách đăng ký", "Thủ tục nhập học", "Hồ sơ xét tuyển", "Quy trình đăng ký"], "responses": ["Quy trình đăng ký gồm 4 bước:\n1. Nộp hồ sơ online tại https://tuyensinh.ictu.edu.vn/ hoặc offline\n2. Đóng lệ phí xét tuyển\n3. Chờ kết quả\n4. Nhập học\nLiên hệ: 0981 33 66 28/29 hoặc tuyensinh@ictu.edu.vn", "Bạn có thể đăng ký online qua website tuyển sinh hoặc nộp hồ sơ trực tiếp tại trường (Đường Z115, phường Quyết Thắng, TP. Thái Nguyên). Cần những giấy tờ:\n- Phiếu ĐKXT\n- Học bạ THPT\n- Bằng tốt nghiệp/Giấy CNTN\n- CMND/CCCD"]},
-    {"tag": "career_prospects", "patterns": ["Cơ hội việc làm", "Nghề nghiệp", "Định hướng nghề", "Việc làm sau tốt nghiệp"], "responses": ["Sinh viên ICTU tốt nghiệp có nhiều cơ hội việc làm trong lĩnh vực CNTT, AI, Big Data, Cybersecurity, truyền thông số, quản trị kinh doanh số với mức lương khởi điểm từ 10-20 triệu. Trường có mạng lưới doanh nghiệp đối tác rộng lớn.", "Tỷ lệ sinh viên có việc làm sau tốt nghiệp đạt trên 90%. Trường thường xuyên tổ chức job fair và có trung tâm hỗ trợ việc làm riêng."]}
+    {"tag": "career_prospects", "patterns": ["Cơ hội việc làm", "Nghề nghiệp", "Định hướng nghề", "Việc làm sau tốt nghiệp"], "responses": ["Sinh viên ICTU tốt nghiệp có nhiều cơ hội việc làm trong lĩnh vực CNTT, AI, Big Data, Cybersecurity, truyền thông số, quản trị kinh doanh số với mức lương khởi điểm từ 10-20 triệu. Trường có mạng lưới doanh nghiệp đối tác rộng lớn.", "Tỷ lệ sinh viên có việc làm sau tốt nghiệp đạt trên 90%. Trường thường xuyên tổ chức job fair và có trung tâm hỗ trợ việc làm riêng."]},
+    {"tag": "tuition_it_major", "patterns": ["Học phí ngành CNTT", "Học phí Công nghệ thông tin", "Học phí khoa học máy tính", "Học phí kỹ thuật phần mềm", "Học phí an toàn thông tin", "Học phí mạng máy tính", "Học phí ngành kỹ thuật"], "responses": ["💻 HỌC PHÍ CÁC NGÀNH CNTT & KỸ THUẬT (Năm 2025-2026):\n\n📌 ÁP DỤNG CHO: CNTT, Khoa học máy tính, Mạng máy tính & TTDL, Kỹ thuật phần mềm, Hệ thống thông tin, An toàn thông tin, Công nghệ ô tô, Vi mạch bán dẫn, và các ngành kỹ thuật khác.\n\n🎓 HỆ CHÍNH QUY:\n• Theo tháng: 1.850.000 VNĐ/tháng (× 10 tháng = 18.500.000 VNĐ/năm)\n• Theo tín chỉ:\n  - Khóa 21-22: 596.700 VNĐ/tín chỉ\n  - Khóa 23-24: 569.200 VNĐ/tín chỉ\n  - Khóa 20 (học thêm lấy bằng Kỹ sư): 600.600 VNĐ/tín chỉ\n\n👨‍💼 HỆ VỪA LÀM VỪA HỌC (VLVH):\n• Theo tháng: 2.775.000 VNĐ/tháng\n• Theo tín chỉ:\n  - Khóa 21-22: 895.000 VNĐ/tín chỉ\n  - Khóa 23-24: 853.000 VNĐ/tín chỉ\n  - Khóa 20 (học thêm lấy bằng Kỹ sư): 900.000 VNĐ/tín chỉ\n\n⭐ CHƯƠNG TRÌNH CHẤT LƯỢNG CAO CNTT:\n• 895.000 VNĐ/tín chỉ (áp dụng tất cả các khóa)\n\n📝 Ghi chú: Mức VLVH = 1.5 lần chính quy"]},
+    {"tag": "tuition_design", "patterns": ["Học phí thiết kế đồ họa", "Học phí ngành thiết kế", "Học phí mỹ thuật", "Học phí đồ họa"], "responses": ["🎨 HỌC PHÍ NGÀNH THIẾT KẾ ĐỒ HỌA (Năm 2025-2026):\n\n🎓 HỆ CHÍNH QUY:\n• Theo tháng: 1.520.000 VNĐ/tháng (× 10 tháng = 15.200.000 VNĐ/năm)\n• Theo tín chỉ:\n  - Khóa 21-22: 490.300 VNĐ/tín chỉ\n  - Khóa 23-24: 467.600 VNĐ/tín chỉ\n\n👨‍💼 HỆ VỪA LÀM VỪA HỌC:\n• Theo tháng: 2.280.000 VNĐ/tháng\n• Theo tín chỉ:\n  - Khóa 21-22: 735.000 VNĐ/tín chỉ\n  - Khóa 23-24: 701.000 VNĐ/tín chỉ\n\n📌 Mã ngành: 7210403\n📌 Tổ hợp xét tuyển: A00, C01, C14, D01"]},
+    {"tag": "tuition_business", "patterns": ["Học phí kinh doanh", "Học phí quản trị", "Học phí thương mại điện tử", "Học phí marketing số", "Học phí quản trị văn phòng", "Học phí HTTTQL"], "responses": ["💼 HỌC PHÍ CÁC NGÀNH KINH DOANH & QUẢN LÝ (Năm 2025-2026):\n\n📌 ÁP DỤNG CHO: Hệ thống thông tin quản lý, Quản trị văn phòng, Thương mại điện tử, Marketing số, Quản trị kinh doanh số\n\n🎓 HỆ CHÍNH QUY:\n• Theo tháng: 1.590.000 VNĐ/tháng (× 10 tháng = 15.900.000 VNĐ/năm)\n• Theo tín chỉ:\n  - Khóa 21-22: 512.900 VNĐ/tín chỉ\n  - Khóa 23-24: 489.200 VNĐ/tín chỉ\n\n👨‍💼 HỆ VỪA LÀM VỪA HỌC:\n• Theo tháng: 2.385.000 VNĐ/tháng\n• Theo tín chỉ:\n  - Khóa 21-22: 769.000 VNĐ/tín chỉ\n  - Khóa 23-24: 733.000 VNĐ/tín chỉ\n\n📚 Trường có chính sách học bổng và hỗ trợ tài chính cho sinh viên xuất sắc!"]},
+    {"tag": "tuition_media", "patterns": ["Học phí truyền thông", "Học phí truyền thông đa phương tiện", "Học phí công nghệ truyền thông", "Học phí kinh tế số", "Học phí tiếng Anh"], "responses": ["📰 HỌC PHÍ CÁC NGÀNH TRUYỀN THÔNG & THÔNG TIN (Năm 2025-2026):\n\n📌 ÁP DỤNG CHO: Truyền thông đa phương tiện, Công nghệ truyền thông, Kinh tế số, Ngôn ngữ Anh\n\n🎓 HỆ CHÍNH QUY:\n• Theo tháng: 1.690.000 VNĐ/tháng (× 10 tháng = 16.900.000 VNĐ/năm)\n• Theo tín chỉ:\n  - Khóa 21-22: 545.100 VNĐ/tín chỉ\n  - Khóa 23-24: 520.000 VNĐ/tín chỉ\n\n👨‍💼 HỆ VỪA LÀM VỪA HỌC:\n• Theo tháng: 2.535.000 VNĐ/tháng\n• Theo tín chỉ:\n  - Khóa 21-22: 817.000 VNĐ/tín chỉ\n  - Khóa 23-24: 780.000 VNĐ/tín chỉ\n\n🎬 Ngành Truyền thông đa phương tiện đặc biệt phù hợp với xu hướng Content Creator, Digital Marketing!"]},
+    {"tag": "tuition_international", "patterns": ["Học phí quốc tế", "Học phí liên kết quốc tế", "Học phí Hàn Quốc", "Học phí CNTT quốc tế", "Học phí chương trình quốc tế"], "responses": ["🌏 HỌC PHÍ CHƯƠNG TRÌNH QUỐC TẾ (Năm 2025-2026):\n\n🇰🇷 CHƯƠNG TRÌNH LIÊN KẾT ĐÀO TẠO QUỐC TẾ:\n• Ngành: Kỹ thuật phần mềm\n• Đối tác: Trường ĐH Quốc gia Kyungpook, Hàn Quốc\n• Học phí: 2.000 USD/năm học\n• Quy đổi: 49.946.000 VNĐ/năm (tỷ giá: 1 USD = 24.973 VNĐ theo TB 151/TB-NHNN ngày 14/5/2025)\n\n🌐 CHƯƠNG TRÌNH CNTT QUỐC TẾ:\n📚 Lớp chuyên ngành:\n  - Khóa 22: 13.000.000 VNĐ/kỳ\n  - Khóa 23-24: 14.500.000 VNĐ/kỳ\n\n📖 Lớp tiếng Anh dự bị:\n  - Tất cả khóa: 7.000.000 VNĐ/kỳ\n\n💡 Ưu điểm: Môi trường học tập quốc tế, cơ hội du học, việc làm tại các tập đoàn đa quốc gia!"]},
+    {"tag": "tuition_postgraduate", "patterns": ["Học phí thạc sĩ", "Học phí sau đại học", "Học phí tiến sĩ", "Học phí cao học"], "responses": ["🎓 HỌC PHÍ SAU ĐẠI HỌC (Năm 2025-2026):\n\n📚 THẠC SĨ (= 1.5 lần Đại học chính quy):\n\n💼 Khối III - Hệ thống thông tin quản lý:\n• Theo tháng: 2.385.000 VNĐ/tháng\n• Theo tín chỉ: 795.000 VNĐ/tín chỉ\n\n💻 Khối V - CNTT & Kỹ thuật:\n  Các ngành: Khoa học máy tính, Kỹ thuật viễn thông, Kỹ thuật điều khiển & TĐH, Quản lý CNTT\n• Theo tháng: 2.775.000 VNĐ/tháng\n• Theo tín chỉ: 925.000 VNĐ/tín chỉ\n\n🔬 TIẾN SĨ (= 2.5 lần Đại học chính quy):\n\n💻 Khoa học máy tính:\n• Theo tháng: 4.625.000 VNĐ/tháng\n• Theo năm học: 46.250.000 VNĐ/năm\n\n📌 Liên hệ phòng Đào tạo sau đại học để biết thêm chi tiết về chương trình và hồ sơ!"]}
   ]
 }

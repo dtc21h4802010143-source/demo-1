@@ -166,20 +166,25 @@ env_health = _compute_env_health()
 if env_health['issues']:
     print(f"[config] Warnings: {', '.join(env_health['issues'])} configuration incomplete. Check .env or environment variables.")
 
-# Initialize chatbot với RAG + LLM (fallback to TF-IDF nếu không có dependencies)
+# Initialize chatbot với RAG + LLM (fallback TF-IDF). Ưu tiên dùng biến CHATBOT_KNOWLEDGE_BASE nếu được cấu hình.
 USE_RAG = os.getenv('USE_RAG_CHATBOT', 'true').lower() == 'true'
+KB_ENV = os.getenv('CHATBOT_KNOWLEDGE_BASE')
+KB_DEFAULT = os.path.join(app.root_path, '..', 'data', 'chatbot_knowledge_new.json')
+KB_PATH = KB_ENV if KB_ENV else KB_DEFAULT
 if USE_RAG:
     try:
         from .chatbot_engine_v2 import ChatbotEngine as RAGChatbotEngine
-        # Sử dụng file chatbot_knowledge_new.json cho RAG
-        chatbot = RAGChatbotEngine(os.path.join(app.root_path, '..', 'data', 'chatbot_knowledge_new.json'), use_rag=True)
+        chatbot = RAGChatbotEngine(KB_PATH, use_rag=True)
+        print(f"[chatbot] RAG mode active | KB={KB_PATH}")
     except Exception as e:
-        print(f"[chatbot] RAG initialization failed or unavailable, falling back: {e}")
-        from .chatbot_engine import ChatbotEngine
-        chatbot = ChatbotEngine(os.path.join(app.root_path, '..', 'data', 'chatbot_knowledge_new.json'))
+        print(f"[chatbot] RAG initialization failed, fallback TF-IDF: {e}")
+        from .chatbot_engine import ChatbotEngine as FallbackChatbotEngine
+        chatbot = FallbackChatbotEngine(KB_PATH)
+        print(f"[chatbot] Fallback TF-IDF active | KB={KB_PATH}")
 else:
-    from .chatbot_engine import ChatbotEngine
-    chatbot = ChatbotEngine(os.path.join(app.root_path, '..', 'data', 'chatbot_knowledge_new.json'))
+    from .chatbot_engine import ChatbotEngine as FallbackChatbotEngine
+    chatbot = FallbackChatbotEngine(KB_PATH)
+    print(f"[chatbot] RAG disabled via USE_RAG_CHATBOT | KB={KB_PATH}")
 
 # Ensure data directory exists (for SQLite file and exports)
 DATA_DIR = os.path.join(app.root_path, '..', 'data')
@@ -485,23 +490,80 @@ def verify_email(token):
 @app.route('/api/chat', methods=['POST'])
 @rate_limit("10/minute")
 def chat():
-    data = request.get_json()
-    user_message = data.get('message')
+    data = request.get_json() or {}
+    user_message = (data.get('message') or '').strip()
     if not user_message:
         return jsonify({'error': 'No message provided'}), 400
     # Optionally check reCAPTCHA for API if desired
     # token = data.get('recaptcha_token')
     # if not verify_recaptcha(token):
     #     return jsonify({'error': 'reCAPTCHA verification failed'}), 400
-    response = chatbot.get_response(user_message)
-    interaction = ChatbotInteraction(
-        user_input=user_message,
-        bot_response=response,
-        user_id=current_user.id if current_user.is_authenticated else None
-    )
-    db.session.add(interaction)
-    db.session.commit()
-    return jsonify({'response': response})
+    try:
+        # Prefer structured response (with sources) if supported
+        if hasattr(chatbot, 'get_response_with_sources'):
+            data_resp = chatbot.get_response_with_sources(user_message)
+            response_text = data_resp.get('response') or ''
+            # Persist main response
+            interaction = ChatbotInteraction(
+                user_input=user_message,
+                bot_response=response_text,
+                user_id=current_user.id if current_user.is_authenticated else None
+            )
+            db.session.add(interaction)
+            db.session.commit()
+            return jsonify({
+                'response': response_text,
+                'sources': data_resp.get('sources', []),
+                'rag': bool(data_resp.get('rag')),
+                'provider': data_resp.get('provider')
+            })
+        else:
+            response_text = chatbot.get_response(user_message)
+            interaction = ChatbotInteraction(
+                user_input=user_message,
+                bot_response=response_text,
+                user_id=current_user.id if current_user.is_authenticated else None
+            )
+            db.session.add(interaction)
+            db.session.commit()
+            return jsonify({'response': response_text})
+    except Exception as e:
+        # Ensure API still returns 200 with a friendly message; log error
+        print(f"[/api/chat] error: {e}")
+        return jsonify({'response': 'Xin lỗi, đã có lỗi xảy ra. Vui lòng thử lại sau.'}), 200
+
+# Lightweight status endpoint for Chatbot/RAG/LLM health
+@app.route('/api/chat/status', methods=['GET'])
+def chat_status():
+    try:
+        info = {
+            'rag': bool(getattr(chatbot, 'use_rag', False)),
+            'provider': None,
+            'llm_available': False,
+            'documents': None,
+            'knowledge_base': getattr(chatbot, 'knowledge_base_path', None),
+            'embedding_model': None,
+            'cache_dir': None
+        }
+        prov = getattr(chatbot, 'llm_provider', None)
+        if prov is not None:
+            info['provider'] = prov.__class__.__name__
+            info['llm_available'] = bool(getattr(prov, 'available', False))
+        rag = getattr(chatbot, 'rag_engine', None)
+        if rag is not None:
+            info['documents'] = len(getattr(rag, 'documents', []) or [])
+            info['embedding_model'] = getattr(rag, 'model_name', None)
+            info['cache_dir'] = getattr(rag, 'cache_dir', None)
+        # Fallback to Config knowledge base if not on chatbot
+        if not info['knowledge_base']:
+            try:
+                from .config import Config as _Cfg
+                info['knowledge_base'] = _Cfg.CHATBOT_KNOWLEDGE_BASE
+            except Exception:
+                pass
+        return jsonify({'ok': True, **info})
+    except Exception as e:
+        return jsonify({'ok': False, 'error': str(e)}), 500
 
 # Admin routes
 @app.route('/admin')

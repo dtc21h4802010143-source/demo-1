@@ -24,6 +24,17 @@
         <label for="description" class="block text-sm font-medium mb-1">Mô tả</label>
         <textarea id="description" name="description" class="w-full border rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-emerald-400 outline-none" rows="3"></textarea>
       </div>
+      <!-- Auto-save indicator -->
+      <div class="flex items-center justify-between mt-4 mb-2">
+        <div id="autoSaveIndicator" class="text-sm text-gray-500 flex items-center gap-2">
+          <i class="fas fa-save"></i>
+          <span id="saveStatus">Tự động lưu nháp</span>
+        </div>
+        <button type="button" id="clearDraft" class="text-sm text-red-500 hover:text-red-700">
+          <i class="fas fa-trash-alt mr-1"></i>Xóa nháp
+        </button>
+      </div>
+      
       <div class="flex gap-3 mt-6">
         <button type="submit" class="px-4 py-2 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition flex items-center gap-2"><i class="fa-solid fa-plus"></i> Thêm khoa/viện</button>
         <a href="{{ url_for('admin_departments') }}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition flex items-center gap-2"><i class="fa-solid fa-xmark"></i> Hủy</a>
@@ -31,4 +42,82 @@
     </form>
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.querySelector('form');
+  const saveStatus = document.getElementById('saveStatus');
+  const clearDraftBtn = document.getElementById('clearDraft');
+  const storageKey = 'admin_add_dept_draft';
+  let autoSaveTimer = null;
+
+  function loadDraft() {
+    try {
+      const draft = localStorage.getItem(storageKey);
+      if (draft) {
+        const data = JSON.parse(draft);
+        Object.entries(data).forEach(([name, value]) => {
+          const input = form.querySelector(`[name="${name}"]`);
+          if (input && value) input.value = value;
+        });
+        updateStatus('Đã khôi phục nháp', 'success');
+      }
+    } catch (err) {
+      console.error('Load draft error:', err);
+    }
+  }
+
+  function saveDraft() {
+    const formData = new FormData(form);
+    const data = {};
+    for (let [key, value] of formData.entries()) {
+      data[key] = value;
+    }
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(data));
+      updateStatus('Đã lưu nháp', 'success');
+    } catch (err) {
+      updateStatus('Lỗi lưu', 'error');
+    }
+  }
+
+  function updateStatus(text, type) {
+    saveStatus.textContent = text;
+    const indicator = saveStatus.parentElement;
+    indicator.classList.remove('text-gray-500', 'text-green-600', 'text-red-600');
+    if (type === 'success') indicator.classList.add('text-green-600');
+    else if (type === 'error') indicator.classList.add('text-red-600');
+    else indicator.classList.add('text-gray-500');
+    setTimeout(() => {
+      saveStatus.textContent = 'Tự động lưu nháp';
+      indicator.classList.remove('text-green-600', 'text-red-600');
+      indicator.classList.add('text-gray-500');
+    }, 2000);
+  }
+
+  function scheduleAutoSave() {
+    clearTimeout(autoSaveTimer);
+    updateStatus('Đang lưu...', 'info');
+    autoSaveTimer = setTimeout(saveDraft, 1000);
+  }
+
+  clearDraftBtn.addEventListener('click', function() {
+    if (confirm('Xóa bản nháp đã lưu?')) {
+      localStorage.removeItem(storageKey);
+      form.reset();
+      updateStatus('Đã xóa nháp', 'success');
+    }
+  });
+
+  form.querySelectorAll('input, textarea').forEach(el => {
+    el.addEventListener('input', scheduleAutoSave);
+  });
+
+  form.addEventListener('submit', function() {
+    localStorage.removeItem(storageKey);
+  });
+
+  loadDraft();
+});
+</script>
 {% endblock %}
