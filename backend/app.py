@@ -1483,6 +1483,24 @@ def delete_document(doc_id):
 # END NOTIFICATION ROUTES
 # ============================================================================
 
+# ----------------------------------------------------------------------------
+# Deploy/version helper
+# ----------------------------------------------------------------------------
+@app.route('/api/version')
+def api_version():
+    """Return app version string from VERSION file (if present)."""
+    try:
+        project_root = os.path.abspath(os.path.join(app.root_path, '..'))
+        version_file = os.path.join(project_root, 'VERSION')
+        if os.path.exists(version_file):
+            with open(version_file, 'r', encoding='utf-8') as f:
+                ver = f.read().strip()
+        else:
+            ver = 'dev'
+        return jsonify({'version': ver})
+    except Exception as e:
+        return jsonify({'version': 'dev', 'error': str(e)}), 200
+
 # ============================================================================
 # AI ADVISOR ROUTES - Tư vấn ngành học thông minh
 # ============================================================================

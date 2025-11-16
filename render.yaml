@@ -4,7 +4,7 @@ services:
     env: python
     region: singapore
     plan: free
-    buildCommand: "pip install -r requirements.txt"
+    buildCommand: "pip install -r requirements.txt && python download_nltk_data.py"
     startCommand: "gunicorn backend.app:app --workers 4 --bind 0.0.0.0:$PORT"
     envVars:
       - key: PYTHON_VERSION
